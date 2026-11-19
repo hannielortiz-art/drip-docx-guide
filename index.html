@@ -84,7 +84,35 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .chips { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
 .chip { font: inherit; font-size: 13px; font-weight: 500; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
 .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
-.count { font-size: 12px; color: var(--muted); margin: 6px 2px 10px; }
+.count { font-size: 12px; color: var(--muted); margin: 0 2px; }
+.tabs { display: flex; gap: 4px; margin-top: 8px; padding: 4px; background: var(--accent-soft); border-radius: 12px; }
+.tab { flex: 1; min-width: 0; font: inherit; font-size: 14px; font-weight: 600; padding: 9px 6px; border: 0; border-radius: 9px; background: transparent; color: var(--muted); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.tab[aria-selected="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12); }
+.tab .n { font-size: 12px; color: var(--muted); }
+.tabs.searching .tab { opacity: 0.55; }
+.tab:focus-visible, .field input:focus-visible, .field select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.subbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 8px; flex-wrap: wrap; min-height: 32px; }
+.calc { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.panel h2 { font-family: var(--font-display); font-weight: 600; font-size: 20px; line-height: 1.2; margin: 0; }
+.sub { font-size: 13px; color: var(--muted); margin: 0; }
+.fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+.field { display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); min-width: 0; }
+.field input, .field select { font: inherit; font-family: var(--font-num); font-size: 17px; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; width: 100%; min-width: 0; }
+.presets { display: flex; flex-wrap: wrap; gap: 6px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+.stat { background: var(--bg); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.stat.key { background: var(--accent-soft); }
+.stat .lbl { font-size: 11.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+.stat .val { font-size: 24px; font-weight: 600; line-height: 1.15; }
+.stat .s { font-size: 12.5px; color: var(--muted); }
+.flag { border-radius: 8px; padding: 9px 11px; margin-top: 10px; font-size: 14px; }
+.flag.fast { background: var(--stop-soft); color: var(--stop); }
+.flag.slow { background: var(--warn-soft); color: var(--warn); }
+.qc td b { font-size: 17px; }
+.qc th, .qc td { white-space: nowrap; }
+.stat .val small { font-size: 14px; font-weight: 500; color: var(--muted); }
+.qc td span { display: block; font-size: 12px; color: var(--muted); }
 .list { display: flex; flex-direction: column; gap: 10px; }
 details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
 summary { list-style: none; cursor: pointer; padding: 13px 14px; display: flex; flex-direction: column; gap: 4px; }
@@ -96,6 +124,7 @@ details[open] .chev { transform: rotate(-135deg); }
 .quick { font-size: 13px; color: var(--muted); }
 .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 2px; }
 .tag { font-size: 11.5px; font-weight: 600; letter-spacing: 0.03em; padding: 2px 8px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); text-transform: uppercase; }
+.tag.price { background: var(--ink); color: var(--bg); }
 .tag.fridge { background: var(--fridge-soft); color: var(--fridge); }
 .body { padding: 2px 14px 14px; display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--line); margin-top: 0; }
 .row { padding-top: 10px; }
@@ -112,6 +141,7 @@ table { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-nu
 th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); }
 th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
 .scroll { overflow-x: auto; max-width: 100%; }
+.screen { margin-bottom: 14px; }
 .empty { padding: 24px 8px; text-align: center; color: var(--muted); }
 footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { .chev { transition: none; } }
@@ -136,20 +166,101 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
     </ul>
   </div>
 
+  <details class="screen" id="screening">
+    <summary>
+      <div class="top"><span class="name">Screening before every treatment</span><span class="chev"></span></div>
+      <div class="quick">Standing rules, and who should not get what</div>
+    </summary>
+    <div class="body">
+      <div class="row"><h3>Standing rules</h3>
+        <ul>
+          <li>Patients 18 and over.</li>
+          <li>No more than 3 IVs per week for any patient.</li>
+          <li>Advise plenty of water and something to eat beforehand.</li>
+          <li>Take vitals before and after every infusion, and chart them.</li>
+        </ul>
+      </div>
+      <div class="row"><h3>Ask before you draw anything up</h3>
+        <ul>
+          <li>Pregnant or breastfeeding: confirm which treatments are excluded.</li>
+          <li>Kidney disease: no Toradol, in any drip.</li>
+          <li>NSAID allergy, ulcer or GI bleed: no Toradol.</li>
+          <li>On warfarin or Coumadin: no Ultimate Drip (vitamin K interferes with INR).</li>
+          <li>Arrhythmia or heart problems: no Pepcid as a routine add-on.</li>
+          <li>G6PD deficiency: raise with Narges before high-dose vitamin C or glutathione.</li>
+        </ul>
+      </div>
+      <div class="caution stop row"><h3>Stop</h3><p>If anything is unclear, or the patient’s history does not fit the treatment they booked, stop and call Narges before you start.</p></div>
+    </div>
+  </details>
+
   <div class="bar">
     <input id="q" type="search" placeholder="Search drips, ingredients, add-ons" aria-label="Search" autocomplete="off">
-    <div class="chips" role="group" aria-label="Filter">
-      <button class="chip" data-f="all" aria-pressed="true">All</button>
-      <button class="chip" data-f="iv" aria-pressed="false">IV drips</button>
-      <button class="chip" data-f="inj" aria-pressed="false">Injections and pushes</button>
-      <button class="chip" data-f="fridge" aria-pressed="false">Refrigerated</button>
+    <div class="tabs" id="tabs" role="tablist" aria-label="Sections">
+      <button class="tab" role="tab" id="tab-iv" data-tab="iv" aria-selected="true">IV drips <span class="n" id="n-iv"></span></button>
+      <button class="tab" role="tab" id="tab-inj" data-tab="inj" aria-selected="false">Injections <span class="n" id="n-inj"></span></button>
+      <button class="tab" role="tab" id="tab-calc" data-tab="calc" aria-selected="false">Calculator</button>
+    </div>
+    <div class="subbar" id="subbar">
+      <button class="chip" id="fridge" aria-pressed="false">Refrigerated only</button>
+      <span class="count" id="count"></span>
     </div>
   </div>
-  <div class="count" id="count"></div>
   <div class="list" id="list"></div>
 
+  <section class="calc" id="calc" hidden aria-label="Drip calculator">
+    <p class="sub">This only does the math. The rate comes from the order. For older or cardiac patients, call Narges first.</p>
+
+    <div class="panel">
+      <h2>Set a rate</h2>
+      <div class="fields">
+        <label class="field" for="c-vol"><span>Bag size (mL)</span><input id="c-vol" type="number" inputmode="decimal" min="1" value="500"></label>
+        <label class="field" for="c-min"><span>Run time (minutes)</span><input id="c-min" type="number" inputmode="decimal" min="1" value="45"></label>
+        <label class="field" for="c-df"><span>Drop factor (gtt/mL)</span><select id="c-df"><option value="10">10</option><option value="15">15</option><option value="20" selected>20</option><option value="60">60</option></select></label>
+      </div>
+      <div class="presets" aria-label="Quick picks">
+        <button class="chip" data-vol="250">250 mL</button>
+        <button class="chip" data-vol="500">500 mL</button>
+        <button class="chip" data-vol="1000">1 L</button>
+        <button class="chip" data-min="30">30 min</button>
+        <button class="chip" data-min="45">45 min</button>
+        <button class="chip" data-min="60">60 min</button>
+        <button class="chip" data-min="90">90 min</button>
+        <button class="chip" data-min="120">120 min</button>
+      </div>
+      <div class="stats" id="c-out"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Check a running drip</h2>
+      <p class="sub">Uses the drop factor set above.</p>
+      <div class="fields">
+        <label class="field" for="r-vol"><span>Bag size (mL)</span><input id="r-vol" type="number" inputmode="decimal" min="1" value="500"></label>
+        <label class="field" for="r-in"><span>Infused so far (mL)</span><input id="r-in" type="number" inputmode="decimal" min="0" placeholder="200"></label>
+        <label class="field" for="r-start"><span>Started at</span><input id="r-start" type="time"></label>
+        <label class="field" for="r-now"><span>Time now</span><input id="r-now" type="time"></label>
+        <label class="field" for="r-set"><span>Set rate (mL/hr), optional</span><input id="r-set" type="number" inputmode="decimal" min="1" placeholder="500"></label>
+      </div>
+      <div class="presets"><button class="chip" id="r-nowbtn">Use the current time</button></div>
+      <div id="r-out"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Quick chart</h2>
+      <p class="sub">Drops per 10 seconds, with mL/hr underneath, on a <span id="q-df">20</span> gtt/mL set.</p>
+      <div class="scroll"><table id="q-table"></table></div>
+    </div>
+
+    <div class="panel">
+      <h2>IV push times</h2>
+      <div class="scroll"><table id="push-table"></table></div>
+      <p class="sub">From the manufacturer labels, not the Drip Docx guide. Confirm with Narges. Flush before and after every push.</p>
+    </div>
+  </section>
+
   <footer>
-    Source: the Drip Docx Nurse Reference Guide by Narges Najmyar. Myers and Tri-Immune strengths are from the Olympia vial labels. Items marked "Check" are things the guide leaves unclear or that differ from a label. For internal reference only: confirm doses and orders with Narges.
+    Prices match dripdocx.com as of August 2026. Add-ons are charged on top of the drip price.<br>
+    Source: the Drip Docx Nurse Reference Guide by Narges Najmyar, second edition (August 2026). Myers and Tri-Immune strengths are from the Olympia vial labels. Items marked "Check" are things the guide leaves unclear or that differ from a label. For internal reference only: confirm doses and orders with Narges.
   </footer>
 </div>
 
@@ -199,16 +310,16 @@ const D = [
   bag:"Add ondansetron, Vita Complex and mineral blend to a 500 mL bag once IV access is obtained. Give Toradol as a 1 cc IV push before starting the IV: saline flush first, then flush again before attaching the extension.",
   addons:["1 L fluid","Glutathione"],
   cautions:["Kidney issues: no Toradol at all.","Give Toradol slowly. It can burn.","More than 2 ingredients in the bag: multi-vial adapter."],
-  notes:["Check: the ondansetron card says 1 to 4 cc, this drip says 5 cc (2 cc if not nauseous). Confirm with Narges."] },
+  notes:[] },
 
 { id:"iron", kind:"iv", name:"Iron IV (Venofer)", quick:"200 mg elemental iron · 250 mL bag", fridge:false,
   does:"Raises iron levels quickly. Helpful in severe anemia or before surgery; supports energy and breathing.",
   ingredients:["200 mg elemental iron (1 vial of Venofer)"],
   draw:["Wipe the Venofer vial with alcohol.","Draw up 10 cc with a 20 gauge needle."],
-  bag:"Add the 10 mL to a 250 mL bag once IV access is obtained. (The guide says “250 MG bag”; it means 250 mL.)",
+  bag:"Add the 10 mL to a 250 mL bag once IV access is obtained.",
   addons:["Vitamin C (guide suggestion; see note)"],
   cautions:["Administer slowly.","Poor access: if iron leaks out of the vein it can permanently stain the skin."],
-  notes:["Added note: the Venofer label allows 200 mg in up to 100 mL normal saline over about 15 minutes, or as an undiluted slow push over 2 to 5 minutes. Do not mix it with other medications, and observe at least 30 minutes afterward.","Added note: vitamin C should not go in the same bag as Venofer. If the patient wants it, give it separately."] },
+  notes:["Confirm with Narges whether a provider order or recent labs are required before an iron infusion, and how long to observe afterward.","Do not start this drip on a questionable IV.","Added note: the Venofer label allows 200 mg in up to 100 mL normal saline over about 15 minutes, or as an undiluted slow push over 2 to 5 minutes. Do not mix it with other medications, and observe at least 30 minutes afterward.","Added note: vitamin C should not go in the same bag as Venofer. If the patient wants it, give it separately."] },
 
 { id:"myers", kind:"iv", name:"Myers Cocktail", quick:"10 cc vial · 500 mL bag", fridge:true,
   does:"The “gold standard” wellness IV. Replenishes vitamins and nutrients; used for fatigue, fibromyalgia, anxiety and depression, migraines and respiratory problems.",
@@ -252,25 +363,25 @@ const D = [
   does:"A broad vitamin blend for overall wellness, hair and nails, energy, mental clarity and post-op or trauma healing.",
   ingredients:["Vitamin C","Vitamins A, D3, E, K","B vitamins (B1, B2, B6, B12), niacinamide, dexpanthenol","Folic acid","Biotin"],
   draw:["Two 5 cc vials in the fridge labeled Infuvite (one white top, one blue top).","Draw each into its own 5 cc syringe."],
-  bag:"Check: the guide does not state the bag size.",
+  bag:"Add both to a 500 mL bag once IV access is obtained.",
   addons:["Glutathione"],
   cautions:["Start very, very slow. The mix of vitamins can trigger a vasovagal response.","Do not give to patients on Coumadin or warfarin. Vitamin K can interfere with INR."],
   notes:["Most people feel energized the same day. Great for post-op recovery."] },
 
-{ id:"covid", kind:"iv", name:"COVID Package", quick:"Immunity IV + Tri-Immune + Vitamin D", fridge:true,
-  does:"Immunity IV for immune support, plus a Tri-Immune shot and a Vitamin D shot.",
+{ id:"covid", kind:"iv", name:"COVID Recovery IV", quick:"Immunity IV + Tri-Immune + Vitamin D", fridge:true,
+  does:"The Immunity IV supports the immune system, helps prevent illness and speeds recovery. Tri-Immune increases immune response and decreases inflammation. Vitamin D supports bone and muscle strength.",
   ingredients:["Immunity IV (vitamin C, zinc, Vita Complex)","Tri-Immune injection","Vitamin D injection"],
-  draw:["Immunity IV: Vitamin C 5 cc, Vita Complex 5 cc, zinc 1 cc, into a 500 mL bag.","Vitamin D: 1 cc in a 3 cc syringe with a 20 gauge needle, then switch to a 21 gauge needle for the injection.","Tri-Immune: see its card."],
-  bag:"500 mL bag for the Immunity IV once access is obtained. Vitamin D goes in the deltoid or dorsolateral glute.",
+  draw:["Immunity IV: Vitamin C 5 cc, Vita Complex 5 cc, zinc 1 cc, each with a 20 gauge needle.","Tri-Immune: 1 cc IM in the dorsolateral glute. See its card.","Vitamin D: 1 cc in a 3 cc syringe with a 20 gauge needle, then transfer to a 21 gauge needle and give IM."],
+  bag:"Add the three Immunity IV ingredients to a 500 mL bag once IV access is obtained. Tri-Immune and Vitamin D are given IM, not in the bag.",
   addons:["Glutathione","Toradol (if pain)"],
-  cautions:["Vitamin D is very oily. A 21 gauge is needed, since a 23 gauge or smaller makes it harder and slower to push.","More than 2 ingredients in the bag: multi-vial adapter."],
-  notes:[] },
+  cautions:["Tri-Immune cannot go in this bag. It only goes in a 500 mL bag when nothing else is in it, and this bag already holds three ingredients.","Vitamin D is very oily. The 21 gauge is not optional, since a smaller needle makes it much harder and slower to push.","More than 2 ingredients in the bag: multi-vial adapter."],
+  notes:["Listed in the original deck as the Covid Package."] },
 
 /* ---------- INJECTIONS AND PUSHES ---------- */
 { id:"biotin", kind:"inj", name:"Biotin", quick:"1 cc IM · once a week", fridge:false,
   does:"B7. Converts fat and glucose to energy; supports hair, nails, sweat glands and nerve tissue.",
   ingredients:["Biotin"],
-  draw:["Draw up 1 cc in a 3 cc syringe with a 20 gauge needle.","Change to a 25 gauge needle for the injection. (The guide writes “25 CC”.)"],
+  draw:["Draw up 1 cc in a 3 cc syringe with a 20 gauge needle.","Change to a 25 gauge needle for the injection."],
   bag:"Deltoid or dorsolateral glute.",
   addons:[],
   cautions:["Dose: 1 cc once a week."],
@@ -303,20 +414,29 @@ const D = [
   cautions:["Vitamin D is very oily. Use a 21 gauge, since a 23 gauge or smaller makes it harder and slower to push.","Dose: 1 cc once a week for the first month, then every 1 to 2 months as needed."],
   notes:[] },
 
-{ id:"lipomino", kind:"inj", name:"Lipo-Mino", quick:"1 cc IM · once a week", fridge:false,
+{ id:"lipomino", kind:"inj", name:"Lipo-Mino", quick:"1 cc IM · once a week", fridge:true,
   does:"Fat-burning, energy and appetite-suppressing mix: methionine, inositol, choline, carnitine, B1, B2, B6 and B12.",
   ingredients:["Methionine","Inositol","Choline","Carnitine","B1, B2, B6, B12"],
   draw:["Draw up 1 cc in a 3 cc syringe with a 20 gauge needle.","Change to a 25 gauge needle for the injection."],
   bag:"Deltoid or dorsolateral glute.",
   addons:[],
   cautions:["Dose: 1 cc once a week."],
-  notes:[] },
+  notes:["Refrigerated, per Narges. The reference guide does not say this."] },
+
+{ id:"nad", kind:"inj", name:"NAD+", quick:"100 mg IM \u00B7 inject slowly", fridge:false,
+  does:"A 100 mg intramuscular injection to support cellular energy, mental clarity, metabolism, recovery from fatigue or stress, healthy aging and cellular repair. It complements a healthy lifestyle and medical care and does not replace them.",
+  ingredients:["NAD+ 100 mg"],
+  draw:["Draw up with a 20 gauge needle, then change to a 25 gauge needle to inject.","Check: the guide does not give the draw-up volume. When I checked the Wesley vial label earlier it read 100 mg/mL, which would make 100 mg equal 1 mL. Read your vial and confirm with Narges before the first dose."],
+  bag:"IM, deltoid or dorsolateral glute. Chart the site, volume and lot number. IM only for now; it is not offered as an IV drip.",
+  addons:[],
+  cautions:["NAD+ stings and can cause brief flushing or chest tightness if given too fast. Inject slowly and tell the patient to expect it.","Dose: 100 mg IM. How often is set by the provider, based on the patient\u2019s goals, history and response."],
+  notes:["Added to the menu after the original guide. Storage is not stated, so check the vial label."] },
 
 { id:"triimmune", kind:"inj", name:"Tri-Immune Boost", quick:"1 cc IM or 3 cc in a bag", fridge:true,
   does:"Triple defense immunity formula (glutathione, ascorbic acid, zinc). May raise immune response, lower inflammation and aid wound healing.",
   ingredients:["Glutathione","Ascorbic acid (vitamin C)","Zinc"],
   draw:["IM: draw up 1 cc in a 3 cc syringe with a 20 gauge needle, change to a 25 gauge, and give in the dorsolateral glute.","IV: draw up 3 cc and add it to a 500 mL bag once IV access is obtained."],
-  bag:"Guide: deltoid or dorsogluteal, but it burns badly, so Narges only suggests the glute (1 cc) or the 500 mL bag with 3 cc.",
+  bag:"Dorsolateral glute (1 cc), or 3 cc alone in a 500 mL bag. The deltoid really burns, so use the glute or the IV bag.",
   addons:[],
   cautions:["This medication burns, burns, burns.","If given in a 500 mL bag, do not add any other ingredients.","Dose: 1 cc once a week, as needed."],
   table:{ title:"Strengths on the Olympia label", rows:[["Glutathione","200 mg/mL",""],["Ascorbic acid","200 mg/mL",""],["Zinc sulfate","2.5 mg/mL",""]] },
@@ -325,20 +445,20 @@ const D = [
 { id:"glutathione", kind:"inj", name:"Glutathione", quick:"5 cc vial · slow IV push", fridge:true,
   does:"Energy, sleep, aging, muscle and joint discomfort, immune support, liver and cell detox, brighter skin, mental clarity.",
   ingredients:["Glutathione (5 cc vial, refrigerated)"],
-  draw:["Draw up the 5 cc vial in a 5 cc syringe with a 20 gauge needle. (The guide writes “55 CC”, which looks like a typo.)"],
+  draw:["Draw up the 5 cc vial in a 5 cc syringe with a 20 gauge needle."],
   bag:"IV push. Flush before and after.",
   addons:[],
-  cautions:["Push slowly. It can burn.","Dose: up to 5 cc once a week."],
+  cautions:["Push slowly. It can burn.","Dose: up to 5 cc once a week.","G6PD deficiency: raise with Narges before giving."],
   notes:["Check: the guide does not give the strength. Read it off the vial and chart it."] },
 
-{ id:"famotidine", kind:"inj", name:"Famotidine (Pepcid)", quick:"1 cc IV push · once a week max", fridge:true,
+{ id:"famotidine", kind:"inj", name:"Famotidine (Pepcid)", quick:"1 cc IV push · once a week max", fridge:false,
   does:"Antihistamine and antacid for allergic reactions, stomach ulcers, erosive esophagitis, heartburn and GERD.",
-  ingredients:["Famotidine (refrigerated)"],
-  draw:["Draw up the 1 cc vial from the fridge in a 3 cc syringe with a 20 gauge needle."],
+  ingredients:["Famotidine"],
+  draw:["Draw up the 1 cc vial in a 3 cc syringe with a 20 gauge needle."],
   bag:"IV push before the IV. Flush before and after.",
   addons:[],
   cautions:["Do not give to people with arrhythmia or heart problems.","Dose: 1 cc as needed, no more than once a week.","Also used for anaphylactic reactions."],
-  notes:[] },
+  notes:["Not refrigerated, per Narges. The reference guide slide still says refrigerated.","Check: the guide pushes 1 cc straight from the vial, while the label says to dilute first. Standard famotidine injection is 10 mg/mL, so 1 cc would be 10 mg and the 20 mg anaphylaxis dose would be 2 mL. Read your vial and confirm with Narges."] },
 
 { id:"toradol", kind:"inj", name:"Ketorolac (Toradol)", quick:"1 cc IV push · once a week max", fridge:false,
   does:"Non-opioid NSAID for short-term management of moderate to severe acute pain.",
@@ -346,7 +466,7 @@ const D = [
   draw:["Draw up 1 cc in a 3 cc syringe with a 20 gauge needle."],
   bag:"IV push before the IV. Flush before and after.",
   addons:[],
-  cautions:["Push slowly. It can burn.","Kidney issues: do not give.","Dose: 1 cc as needed, no more than once a week and not chronically."],
+  cautions:["Push slowly. It can burn.","Kidney issues: no Toradol at all. Also screen for NSAID allergy, active ulcer or GI bleed, and pregnancy.","Dose: 1 cc as needed, no more than once a week and not chronically."],
   notes:[] },
 
 { id:"zofran", kind:"inj", name:"Ondansetron (Zofran)", quick:"1 to 4 cc IV push", fridge:false,
@@ -356,23 +476,54 @@ const D = [
   bag:"IV push before the IV. Flush before and after.",
   addons:[],
   cautions:["Dose: 1 cc can be given as needed.","Hangover IV: 5 cc if nauseous, 2 cc if not."],
-  notes:["Check: the dose range here (1 to 4 cc) differs from the Hangover IV instructions (5 cc). Confirm with Narges."] }
+  notes:["In the Hangover Cure IV it goes into the bag at 5 cc instead, or 2 cc if the patient is not nauseous.","Check: standard ondansetron injection is 2 mg/mL, so 1 cc would be 2 mg and 4 cc would be 8 mg. Read your vial."] }
 ];
 
+/* Menu prices from the guide (match dripdocx.com as of August 2026). Add-ons are charged on top of the drip price. */
+const PRICE = {
+  beauty: 250, covid: 400, fatburn: 250, hangover: 225, immunity: 225, iron: 350, morelife: 275, myers: 275,
+  recharge: 225, rehydrate: 199, sports: 250, ultimate: 275,
+  biotin: 50, famotidine: 50, glutathione: 60, toradol: 50, lipomino: 50, nad: 80, zofran: 50, triimmune: 50,
+  b12: 50, vitc: 50, vitd: 50
+};
+
 const els = { list: document.getElementById("list"), q: document.getElementById("q"), count: document.getElementById("count") };
-let filter = "all";
+const PUSH = {
+  zofran: "Over 2 to 5 minutes. The label minimum is 30 seconds.",
+  toradol: "Over at least 1 minute, because it burns. The label minimum is 15 seconds.",
+  famotidine: "Over at least 2 minutes. The label says to dilute to 5 or 10 mL with normal saline before pushing.",
+  glutathione: "About 5 minutes, roughly 1 mL per minute. It is compounded, so there is no FDA label time.",
+  hangover: "Toradol push, if given: over at least 1 minute, because it burns. The label minimum is 15 seconds."
+};
+D.forEach(d => { if (PUSH[d.id]) d.push = PUSH[d.id]; });
+
+const PUSH_TABLE = [
+  ["Ondansetron (Zofran)", "2 to 5 minutes", "At least 30 seconds"],
+  ["Ketorolac (Toradol)", "At least 1 minute (it burns)", "At least 15 seconds"],
+  ["Famotidine (Pepcid)", "At least 2 minutes", "At least 2 minutes, diluted to 5 or 10 mL"],
+  ["Glutathione", "About 5 minutes", "No FDA label (compounded)"],
+  ["Benadryl 25 mg (emergency)", "At least 1 minute", "No faster than 25 mg per minute"]
+];
+
+function store(key, val) { try { if (val === undefined) return localStorage.getItem(key); localStorage.setItem(key, val); } catch (e) { return null; } }
+let tab = store("ddx-tab") || "iv";
+if (!["iv", "inj", "calc"].includes(tab)) tab = "iv";
+let fridgeOnly = false;
 
 function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
 function ul(arr) { return "<ul>" + arr.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul>"; }
 
 function card(d) {
-  const tags = [`<span class="tag">${d.kind === "iv" ? "IV drip" : "Injection / push"}</span>`];
+  const tags = [];
+  if (PRICE[d.id] != null) tags.push(`<span class="tag price">$${PRICE[d.id]}</span>`);
+  tags.push(`<span class="tag">${d.kind === "iv" ? "IV drip" : "Injection / push"}</span>`);
   if (d.fridge) tags.push('<span class="tag fridge">Refrigerated</span>');
   let h = `<details id="${d.id}"><summary><div class="top"><span class="name">${esc(d.name)}</span><span class="chev"></span></div><div class="quick">${esc(d.quick)}</div><div class="tags">${tags.join("")}</div></summary><div class="body">`;
   h += `<div class="row"><h3>What it does</h3><p>${esc(d.does)}</p></div>`;
   h += `<div class="row"><h3>Ingredients</h3>${ul(d.ingredients)}</div>`;
   h += `<div class="row"><h3>Draw-up</h3>${ul(d.draw)}</div>`;
   h += `<div class="row"><h3>${d.kind === "iv" ? "Bag and administration" : "Route and administration"}</h3><p>${esc(d.bag)}</p></div>`;
+  if (d.push) h += `<div class="row"><h3>Push time</h3><p>${esc(d.push)}</p></div>`;
   if (d.table) {
     const three = d.table.rows[0][2] !== "";
     h += `<div class="row"><h3>${esc(d.table.title)}</h3><div class="scroll"><table><thead><tr><th>Ingredient</th><th>Per mL</th>${three ? "<th>Per vial</th>" : ""}</tr></thead><tbody>` +
@@ -385,7 +536,7 @@ function card(d) {
 }
 
 function haystack(d) {
-  return [d.name, d.quick, d.does, d.ingredients.join(" "), d.draw.join(" "), d.addons.join(" "), d.cautions.join(" "), d.notes.join(" ")].join(" ").toLowerCase();
+  return [d.name, "$" + (PRICE[d.id] || ""), d.quick, d.does, d.ingredients.join(" "), d.draw.join(" "), d.addons.join(" "), d.cautions.join(" "), d.notes.join(" ")].join(" ").toLowerCase();
 }
 
 /* Numbers and numerical values use the Atkinson font. Digits inside names like B12 or D3 are left alone. */
@@ -424,25 +575,126 @@ function wrapNums(root) {
 
 function render() {
   const q = els.q.value.trim().toLowerCase();
+  const searching = q.length > 0;
+  const calc = document.getElementById("calc");
+  const fridgeBtn = document.getElementById("fridge");
+  document.getElementById("tabs").classList.toggle("searching", searching);
+  document.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-selected", String(!searching && b.dataset.tab === tab)));
+
+  if (!searching && tab === "calc") {
+    els.list.hidden = true; calc.hidden = false; $("subbar").hidden = true; els.count.textContent = "";
+    return;
+  }
+  calc.hidden = true; els.list.hidden = false; $("subbar").hidden = false; fridgeBtn.hidden = searching;
   const rows = D.filter(d => {
-    if (filter === "iv" && d.kind !== "iv") return false;
-    if (filter === "inj" && d.kind !== "inj") return false;
-    if (filter === "fridge" && !d.fridge) return false;
-    return !q || haystack(d).includes(q);
+    if (!searching) {
+      if (d.kind !== tab) return false;
+      if (fridgeOnly && !d.fridge) return false;
+    }
+    return !searching || haystack(d).includes(q);
   });
-  els.count.textContent = rows.length + " of " + D.length + " shown";
-  els.list.innerHTML = rows.length ? rows.map(card).join("") : '<div class="empty">Nothing matches. Try a shorter search or clear the filter.</div>';
-  if (q && rows.length === 1) { const el = els.list.querySelector("details"); if (el) el.open = true; }
+  els.count.textContent = searching ? rows.length + " found in all sections" : rows.length + " shown";
+  els.list.innerHTML = rows.length ? rows.map(card).join("") : '<div class="empty">Nothing matches. Try a shorter search.</div>';
+  if (searching && rows.length === 1) { const el = els.list.querySelector("details"); if (el) el.open = true; }
   wrapNums(els.count);
   wrapNums(els.list);
 }
 
+/* ---------- Calculator ---------- */
+const $ = id => document.getElementById(id);
+function num(id) { const v = parseFloat($(id).value); return isFinite(v) && v > 0 ? v : null; }
+function dropFactor() { return parseFloat($("c-df").value) || 20; }
+function clock(d) { return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }); }
+function stat(label, value, sub, key) {
+  return `<div class="stat${key ? " key" : ""}"><span class="lbl">${label}</span><span class="val">${value}</span>${sub ? `<span class="s">${sub}</span>` : ""}</div>`;
+}
+function hhmm(d) { return String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0"); }
+function toMin(v) { if (!v) return null; const [h, m] = v.split(":").map(Number); return h * 60 + m; }
+
+function calcRate() {
+  const vol = num("c-vol"), min = num("c-min"), df = dropFactor(), out = $("c-out");
+  if (!vol || !min) { out.innerHTML = '<p class="sub">Enter a bag size and a run time.</p>'; return; }
+  const mlhr = vol / min * 60, gttmin = vol * df / min;
+  const finish = new Date(Date.now() + min * 60000);
+  out.innerHTML =
+    stat("Drops per 10 sec", Math.round(gttmin / 6), "Count the chamber for 10 seconds", true) +
+    stat("Drops per 15 sec", Math.round(gttmin / 4)) +
+    stat("Drops per minute", Math.round(gttmin)) +
+    stat("Rate", Math.round(mlhr) + " <small>mL/hr</small>") +
+    stat("Done by", clock(finish), "If started now");
+  wrapNums(out);
+}
+
+function quickChart() {
+  const df = dropFactor();
+  $("q-df").textContent = df;
+  const times = [30, 45, 60, 90, 120];
+  const cell = (vol, t) => `<td><b>${Math.round(vol * df / t / 6)}</b><span>${Math.round(vol / t * 60)} mL/hr</span></td>`;
+  $("q-table").className = "qc";
+  $("q-table").innerHTML = "<thead><tr><th>Time</th><th>250 mL</th><th>500 mL</th><th>1 L</th></tr></thead><tbody>" +
+    times.map(t => `<tr><td>${t} min</td>${cell(250, t)}${cell(500, t)}${cell(1000, t)}</tr>`).join("") + "</tbody>";
+  wrapNums($("q-table"));
+}
+
+function calcRunning() {
+  const out = $("r-out"), df = dropFactor();
+  const vol = num("r-vol"), inf = parseFloat($("r-in").value), set = num("r-set");
+  const start = toMin($("r-start").value), now = toMin($("r-now").value);
+  if (!vol || !isFinite(inf) || inf <= 0 || start == null || now == null) {
+    out.innerHTML = '<p class="sub">Enter how much has gone in, the start time and the time now.</p>'; return;
+  }
+  let elapsed = now - start; if (elapsed <= 0) elapsed += 1440;
+  if (inf > vol) { out.innerHTML = '<p class="sub">The amount infused is more than the bag size. Check the numbers.</p>'; return; }
+  const perMin = inf / elapsed, mlhr = perMin * 60, left = vol - inf;
+  const minsLeft = left / perMin;
+  const base = new Date(); base.setHours(0, 0, 0, 0);
+  const finish = new Date(base.getTime() + (now + minsLeft) * 60000);
+  let html = '<div class="stats">' +
+    stat("Actual rate", Math.round(mlhr) + " <small>mL/hr</small>", "Over " + Math.round(elapsed) + " min", true) +
+    stat("Drops per 10 sec", Math.round(mlhr * df / 60 / 6), "At this rate") +
+    stat("Left in bag", Math.round(left) + " <small>mL</small>") +
+    stat("Done about", left > 0 ? clock(finish) : "Now", left > 0 ? "In " + Math.round(minsLeft) + " min at this rate" : "") +
+    "</div>";
+  if (set) {
+    const diff = Math.round((mlhr / set - 1) * 100);
+    if (diff >= 15) html += `<div class="flag fast">Running about ${diff}% faster than the set rate of ${Math.round(set)} mL/hr. Recount the drops and slow it down.</div>`;
+    else if (diff <= -15) html += `<div class="flag slow">Running about ${Math.abs(diff)}% slower than the set rate of ${Math.round(set)} mL/hr. Check the clamp, the site and the bag height.</div>`;
+  }
+  out.innerHTML = html;
+  wrapNums(out);
+}
+
+function pushTable() {
+  $("push-table").innerHTML = "<thead><tr><th>Medication</th><th>Push over</th><th>Label says</th></tr></thead><tbody>" +
+    PUSH_TABLE.map(r => `<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join("") + "</tbody>";
+  wrapNums($("push-table"));
+}
+
+function calcAll() { calcRate(); quickChart(); calcRunning(); }
+
+["c-vol", "c-min", "c-df"].forEach(id => $(id).addEventListener("input", calcAll));
+["r-vol", "r-in", "r-start", "r-now", "r-set"].forEach(id => $(id).addEventListener("input", calcRunning));
+document.querySelectorAll("[data-vol]").forEach(b => b.addEventListener("click", () => { $("c-vol").value = b.dataset.vol; calcAll(); }));
+document.querySelectorAll("[data-min]").forEach(b => b.addEventListener("click", () => { $("c-min").value = b.dataset.min; calcAll(); }));
+$("r-nowbtn").addEventListener("click", () => { $("r-now").value = hhmm(new Date()); calcRunning(); });
+$("r-now").value = hhmm(new Date());
+
+/* ---------- Tabs, search and filter ---------- */
+$("n-iv").textContent = D.filter(d => d.kind === "iv").length;
+$("n-inj").textContent = D.filter(d => d.kind === "inj").length;
 els.q.addEventListener("input", render);
-document.querySelectorAll(".chip").forEach(b => b.addEventListener("click", () => {
-  filter = b.dataset.f;
-  document.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+document.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => {
+  tab = b.dataset.tab; store("ddx-tab", tab);
+  if (els.q.value) els.q.value = "";
   render();
 }));
+$("fridge").addEventListener("click", () => {
+  fridgeOnly = !fridgeOnly;
+  $("fridge").setAttribute("aria-pressed", String(fridgeOnly));
+  render();
+});
+pushTable();
+calcAll();
 render();
 wrapNums(document.querySelector(".wrap"));
 </script>
