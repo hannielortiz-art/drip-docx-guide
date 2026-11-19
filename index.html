@@ -8,66 +8,72 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#1C1C1C">
 <meta name="apple-mobile-web-app-title" content="Drip Docx">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap">
 <style>
-/* Brand: black and warm tan taken from the Drip Docx logo. Dark is the default look. */
+/* Brand: colors sampled from dripdocx.com. Light is the default: warm gray page, cream cards,
+   charcoal text, taupe accent, dark header band. A black-and-tan dark theme follows the phone setting. */
 :root {
-  --bg: #000000;
-  --surface: #121010;
-  --ink: #F2EAE2;
-  --muted: #A9998A;
-  --line: #2B2520;
-  --accent: #CCB094;
-  --accent-soft: #2A2119;
-  --on-accent: #000000;
-  --fridge: #9CC8EC;
-  --fridge-soft: #14222E;
-  --warn: #E8C98C;
-  --warn-soft: #2B2210;
-  --stop: #F2A8A8;
-  --stop-soft: #3F1616;
-  --font-display: "Space Grotesk", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
-  --font-brand: "Cormorant Garamond", Georgia, serif;
-  color-scheme: dark;
-}
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --bg: #F7F2EC; --surface: #FFFFFF; --ink: #1A1511; --muted: #675A4E; --line: #E1D7CC;
-    --accent: #7A5B3C; --accent-soft: #F0E5D9; --on-accent: #FFFFFF;
-    --fridge: #0D4A73; --fridge-soft: #DCEBF8; --warn: #6B4300; --warn-soft: #FFF0D2;
-    --stop: #7A1F1F; --stop-soft: #FBE1E1;
-    color-scheme: light;
-  }
-}
-:root[data-theme="light"] {
-  --bg: #F7F2EC; --surface: #FFFFFF; --ink: #1A1511; --muted: #675A4E; --line: #E1D7CC;
-  --accent: #7A5B3C; --accent-soft: #F0E5D9; --on-accent: #FFFFFF;
-  --fridge: #0D4A73; --fridge-soft: #DCEBF8; --warn: #6B4300; --warn-soft: #FFF0D2;
-  --stop: #7A1F1F; --stop-soft: #FBE1E1;
+  --bg: #F2F1EF;
+  --surface: #F7F2ED;
+  --ink: #1C1C1C;
+  --muted: #5C544E;
+  --line: #E3DAD1;
+  --accent: #7D6E63;
+  --accent-soft: #EAE1D8;
+  --on-accent: #FFFFFF;
+  --taupe: #9B8B7F;
+  --band: #1C1C1C;
+  --band-ink: #F2EAE2;
+  --fridge: #0D4A73;
+  --fridge-soft: #DCEBF8;
+  --warn: #6B4300;
+  --warn-soft: #FFF0D2;
+  --stop: #7A1F1F;
+  --stop-soft: #FBE1E1;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Montserrat", system-ui, sans-serif;
+  --font-num: "Atkinson Hyperlegible", "Montserrat", system-ui, sans-serif;
   color-scheme: light;
 }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #000000; --surface: #121010; --ink: #F2EAE2; --muted: #A9998A; --line: #2B2520;
+    --accent: #CCB094; --accent-soft: #2A2119; --on-accent: #000000; --taupe: #B8A594;
+    --fridge: #9CC8EC; --fridge-soft: #14222E; --warn: #E8C98C; --warn-soft: #2B2210;
+    --stop: #F2A8A8; --stop-soft: #3F1616;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #000000; --surface: #121010; --ink: #F2EAE2; --muted: #A9998A; --line: #2B2520;
+  --accent: #CCB094; --accent-soft: #2A2119; --on-accent: #000000; --taupe: #B8A594;
+  --fridge: #9CC8EC; --fridge-soft: #14222E; --warn: #E8C98C; --warn-soft: #2B2210;
+  --stop: #F2A8A8; --stop-soft: #3F1616;
+  color-scheme: dark;
+}
 html { -webkit-text-size-adjust: 100%; background: var(--bg); }
-.brand { display: flex; align-items: center; gap: 14px; }
-.brand img { width: 72px; height: 72px; border-radius: 12px; flex: none; }
-header h1 { font-family: var(--font-brand) !important; font-weight: 600 !important; font-size: 32px !important; letter-spacing: 0.01em; }
+.num { font-family: var(--font-num); font-variant-numeric: lining-nums tabular-nums; }
+.topbar { background: var(--band); padding: 12px max(16px, env(safe-area-inset-right, 0px)) 12px max(16px, env(safe-area-inset-left, 0px)); }
+.topbar-in { max-width: 720px; margin: 0 auto; }
+.logo-crop { position: relative; width: 150px; height: 46px; overflow: hidden; }
+.logo-crop img { position: absolute; width: 175px; max-width: none; left: -14px; top: -53px; mix-blend-mode: lighten; }
 * { box-sizing: border-box; }
 body {
   background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 20px 40px;
+  margin: 0;
+  padding: 0 0 40px;
 }
-.wrap { max-width: 720px; margin: 0 auto; }
-header h1 { font-family: var(--font-display); font-size: 28px; line-height: 1.15; margin: 0 0 4px; letter-spacing: -0.01em; text-wrap: balance; }
+.wrap { max-width: 720px; margin: 0 auto; padding: 24px max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px)); }
+header h1 { font-family: var(--font-display); font-weight: 500; font-size: 36px; line-height: 1.1; margin: 0 0 8px; letter-spacing: -0.01em; text-wrap: balance; }
+header h1 em { color: var(--taupe); font-style: italic; }
 header p { margin: 0; color: var(--muted); font-size: 14px; }
 .before { margin: 16px 0; padding: 12px 14px; background: var(--warn-soft); color: var(--warn); border-radius: 10px; font-size: 14px; }
-.before b { font-family: var(--font-display); letter-spacing: 0.04em; text-transform: uppercase; font-size: 12px; display: block; margin-bottom: 4px; }
+.before b { font-family: var(--font-body); letter-spacing: 0.04em; text-transform: uppercase; font-size: 12px; display: block; margin-bottom: 4px; }
 .before ul { margin: 0; padding-left: 18px; }
 .bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding: 8px 0 10px; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
@@ -91,7 +97,7 @@ details[open] .chev { transform: rotate(-135deg); }
 .tag.fridge { background: var(--fridge-soft); color: var(--fridge); }
 .body { padding: 2px 14px 14px; display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--line); margin-top: 0; }
 .row { padding-top: 10px; }
-.row h3 { font-family: var(--font-display); font-size: 12px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin: 0 0 4px; font-weight: 600; }
+.row h3 { font-family: var(--font-body); font-size: 12px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin: 0 0 4px; font-weight: 600; }
 .row p, .row ul { margin: 0; }
 .row ul { padding-left: 18px; }
 .row li + li { margin-top: 3px; }
@@ -110,15 +116,12 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
 </style>
 </head>
 <body>
+<div class="topbar"><div class="topbar-in"><div class="logo-crop"><img src="logo.jpg" alt="Drip Docx Wellness and Aesthetics" width="175" height="175"></div></div></div>
+
 <div class="wrap">
   <header>
-    <div class="brand">
-      <img src="logo.jpg" alt="Drip Docx Wellness and Aesthetics logo" width="72" height="72">
-      <div>
-        <h1>Drip Docx Nurse Guide</h1>
-        <p>IV drips and injections: draw-up, bag, add-ons, cautions.</p>
-      </div>
-    </div>
+    <h1>Nurse <em>Guide</em></h1>
+    <p>IV drips and injections: draw-up, bag, add-ons, cautions.</p>
   </header>
 
   <div class="before">
@@ -383,6 +386,40 @@ function haystack(d) {
   return [d.name, d.quick, d.does, d.ingredients.join(" "), d.draw.join(" "), d.addons.join(" "), d.cautions.join(" "), d.notes.join(" ")].join(" ").toLowerCase();
 }
 
+/* Numbers and numerical values use the Atkinson font. Digits inside names like B12 or D3 are left alone. */
+function wrapNums(root) {
+  const re = /(^|[^A-Za-z0-9])(\d[\d.,]*\d|\d)/g;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(n) {
+      if (!/\d/.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
+      if (n.parentElement && n.parentElement.closest(".num, script, style, textarea, input")) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(n => {
+    const text = n.nodeValue;
+    const frag = document.createDocumentFragment();
+    let last = 0, m, found = false;
+    re.lastIndex = 0;
+    while ((m = re.exec(text))) {
+      found = true;
+      const start = m.index + m[1].length;
+      frag.appendChild(document.createTextNode(text.slice(last, start)));
+      const sp = document.createElement("span");
+      sp.className = "num";
+      sp.textContent = m[2];
+      frag.appendChild(sp);
+      last = start + m[2].length;
+    }
+    if (found) {
+      frag.appendChild(document.createTextNode(text.slice(last)));
+      n.parentNode.replaceChild(frag, n);
+    }
+  });
+}
+
 function render() {
   const q = els.q.value.trim().toLowerCase();
   const rows = D.filter(d => {
@@ -394,6 +431,8 @@ function render() {
   els.count.textContent = rows.length + " of " + D.length + " shown";
   els.list.innerHTML = rows.length ? rows.map(card).join("") : '<div class="empty">Nothing matches. Try a shorter search or clear the filter.</div>';
   if (q && rows.length === 1) { const el = els.list.querySelector("details"); if (el) el.open = true; }
+  wrapNums(els.count);
+  wrapNums(els.list);
 }
 
 els.q.addEventListener("input", render);
@@ -403,6 +442,7 @@ document.querySelectorAll(".chip").forEach(b => b.addEventListener("click", () =
   render();
 }));
 render();
+wrapNums(document.querySelector(".wrap"));
 </script>
 </body>
 </html>
