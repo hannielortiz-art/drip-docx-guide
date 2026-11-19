@@ -65,6 +65,7 @@ html { -webkit-text-size-adjust: 100%; background: var(--bg); }
 .logo-crop { position: relative; width: 150px; height: 46px; overflow: hidden; }
 .logo-crop img { position: absolute; width: 175px; max-width: none; left: -14px; top: -53px; mix-blend-mode: lighten; }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 body {
   background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5;
   margin: 0;
@@ -156,7 +157,7 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
     <p>IV drips and injections: draw-up, bag, add-ons, cautions.</p>
   </header>
 
-  <div class="before">
+  <div class="before" id="before">
     <b>Before every IV</b>
     <ul>
       <li>Check vitals before and after.</li>
@@ -194,6 +195,7 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
     </div>
   </details>
 
+  <div id="bar-anchor"></div>
   <div class="bar">
     <input id="q" type="search" placeholder="Search drips, ingredients, add-ons" aria-label="Search" autocomplete="off">
     <div class="tabs" id="tabs" role="tablist" aria-label="Sections">
@@ -209,14 +211,13 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
   <div class="list" id="list"></div>
 
   <section class="calc" id="calc" hidden aria-label="Drip calculator">
-    <p class="sub">This only does the math. The rate comes from the order. For older or cardiac patients, call Narges first.</p>
+    <p class="sub">All drop counts are for our 20 gtt/mL tubing. This only does the math. The rate comes from the order. For older or cardiac patients, call Narges first.</p>
 
     <div class="panel">
       <h2>Set a rate</h2>
       <div class="fields">
         <label class="field" for="c-vol"><span>Bag size (mL)</span><input id="c-vol" type="number" inputmode="decimal" min="1" value="500"></label>
         <label class="field" for="c-min"><span>Run time (minutes)</span><input id="c-min" type="number" inputmode="decimal" min="1" value="45"></label>
-        <label class="field" for="c-df"><span>Drop factor (gtt/mL)</span><select id="c-df"><option value="10">10</option><option value="15">15</option><option value="20" selected>20</option><option value="60">60</option></select></label>
       </div>
       <div class="presets" aria-label="Quick picks">
         <button class="chip" data-vol="250">250 mL</button>
@@ -233,7 +234,6 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
 
     <div class="panel">
       <h2>Check a running drip</h2>
-      <p class="sub">Uses the drop factor set above.</p>
       <div class="fields">
         <label class="field" for="r-vol"><span>Bag size (mL)</span><input id="r-vol" type="number" inputmode="decimal" min="1" value="500"></label>
         <label class="field" for="r-in"><span>Infused so far (mL)</span><input id="r-in" type="number" inputmode="decimal" min="0" placeholder="200"></label>
@@ -247,7 +247,7 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
 
     <div class="panel">
       <h2>Quick chart</h2>
-      <p class="sub">Drops per 10 seconds, with mL/hr underneath, on a <span id="q-df">20</span> gtt/mL set.</p>
+      <p class="sub">Drops per 10 seconds, with mL/hr underneath.</p>
       <div class="scroll"><table id="q-table"></table></div>
     </div>
 
@@ -580,6 +580,9 @@ function render() {
   const fridgeBtn = document.getElementById("fridge");
   document.getElementById("tabs").classList.toggle("searching", searching);
   document.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-selected", String(!searching && b.dataset.tab === tab)));
+  const onCalc = !searching && tab === "calc";
+  document.getElementById("before").hidden = onCalc;
+  document.getElementById("screening").hidden = onCalc;
 
   if (!searching && tab === "calc") {
     els.list.hidden = true; calc.hidden = false; $("subbar").hidden = true; els.count.textContent = "";
@@ -603,7 +606,7 @@ function render() {
 /* ---------- Calculator ---------- */
 const $ = id => document.getElementById(id);
 function num(id) { const v = parseFloat($(id).value); return isFinite(v) && v > 0 ? v : null; }
-function dropFactor() { return parseFloat($("c-df").value) || 20; }
+function dropFactor() { return 20; } /* Drip Docx uses 20 gtt/mL tubing only */
 function clock(d) { return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }); }
 function stat(label, value, sub, key) {
   return `<div class="stat${key ? " key" : ""}"><span class="lbl">${label}</span><span class="val">${value}</span>${sub ? `<span class="s">${sub}</span>` : ""}</div>`;
@@ -627,7 +630,6 @@ function calcRate() {
 
 function quickChart() {
   const df = dropFactor();
-  $("q-df").textContent = df;
   const times = [30, 45, 60, 90, 120];
   const cell = (vol, t) => `<td><b>${Math.round(vol * df / t / 6)}</b><span>${Math.round(vol / t * 60)} mL/hr</span></td>`;
   $("q-table").className = "qc";
@@ -672,7 +674,7 @@ function pushTable() {
 
 function calcAll() { calcRate(); quickChart(); calcRunning(); }
 
-["c-vol", "c-min", "c-df"].forEach(id => $(id).addEventListener("input", calcAll));
+["c-vol", "c-min"].forEach(id => $(id).addEventListener("input", calcAll));
 ["r-vol", "r-in", "r-start", "r-now", "r-set"].forEach(id => $(id).addEventListener("input", calcRunning));
 document.querySelectorAll("[data-vol]").forEach(b => b.addEventListener("click", () => { $("c-vol").value = b.dataset.vol; calcAll(); }));
 document.querySelectorAll("[data-min]").forEach(b => b.addEventListener("click", () => { $("c-min").value = b.dataset.min; calcAll(); }));
@@ -687,6 +689,8 @@ document.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () =>
   tab = b.dataset.tab; store("ddx-tab", tab);
   if (els.q.value) els.q.value = "";
   render();
+  const top = document.getElementById("bar-anchor").getBoundingClientRect().top + window.scrollY;
+  if (tab === "calc" || window.scrollY > top) window.scrollTo(0, Math.max(0, top));
 }));
 $("fridge").addEventListener("click", () => {
   fridgeOnly = !fridgeOnly;
