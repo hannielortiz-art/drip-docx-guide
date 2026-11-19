@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Drip Docx Nurse Guide</title>
+<link rel="icon" href="logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+/* Brand: black and warm tan taken from the Drip Docx logo. Dark is the default look. */
+:root {
+  --bg: #000000;
+  --surface: #121010;
+  --ink: #F2EAE2;
+  --muted: #A9998A;
+  --line: #2B2520;
+  --accent: #CCB094;
+  --accent-soft: #2A2119;
+  --on-accent: #000000;
+  --fridge: #9CC8EC;
+  --fridge-soft: #14222E;
+  --warn: #E8C98C;
+  --warn-soft: #2B2210;
+  --stop: #F2A8A8;
+  --stop-soft: #3F1616;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-brand: "Cormorant Garamond", Georgia, serif;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #F7F2EC; --surface: #FFFFFF; --ink: #1A1511; --muted: #675A4E; --line: #E1D7CC;
+    --accent: #7A5B3C; --accent-soft: #F0E5D9; --on-accent: #FFFFFF;
+    --fridge: #0D4A73; --fridge-soft: #DCEBF8; --warn: #6B4300; --warn-soft: #FFF0D2;
+    --stop: #7A1F1F; --stop-soft: #FBE1E1;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #F7F2EC; --surface: #FFFFFF; --ink: #1A1511; --muted: #675A4E; --line: #E1D7CC;
+  --accent: #7A5B3C; --accent-soft: #F0E5D9; --on-accent: #FFFFFF;
+  --fridge: #0D4A73; --fridge-soft: #DCEBF8; --warn: #6B4300; --warn-soft: #FFF0D2;
+  --stop: #7A1F1F; --stop-soft: #FBE1E1;
+  color-scheme: light;
+}
+html { -webkit-text-size-adjust: 100%; background: var(--bg); }
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand img { width: 72px; height: 72px; border-radius: 12px; flex: none; }
+header h1 { font-family: var(--font-brand) !important; font-weight: 600 !important; font-size: 32px !important; letter-spacing: 0.01em; }
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 40px;
+}
+.wrap { max-width: 720px; margin: 0 auto; }
+header h1 { font-family: var(--font-display); font-size: 28px; line-height: 1.15; margin: 0 0 4px; letter-spacing: -0.01em; text-wrap: balance; }
+header p { margin: 0; color: var(--muted); font-size: 14px; }
+.before { margin: 16px 0; padding: 12px 14px; background: var(--warn-soft); color: var(--warn); border-radius: 10px; font-size: 14px; }
+.before b { font-family: var(--font-display); letter-spacing: 0.04em; text-transform: uppercase; font-size: 12px; display: block; margin-bottom: 4px; }
+.before ul { margin: 0; padding-left: 18px; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding: 8px 0 10px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+#q { width: 100%; font: inherit; padding: 11px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+#q:focus-visible, .chip:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.chips { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.chip { font: inherit; font-size: 13px; font-weight: 500; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.count { font-size: 12px; color: var(--muted); margin: 6px 2px 10px; }
+.list { display: flex; flex-direction: column; gap: 10px; }
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+summary { list-style: none; cursor: pointer; padding: 13px 14px; display: flex; flex-direction: column; gap: 4px; }
+summary::-webkit-details-marker { display: none; }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.name { font-family: var(--font-display); font-weight: 600; font-size: 17px; line-height: 1.25; min-width: 0; overflow-wrap: anywhere; }
+.chev { flex: none; width: 10px; height: 10px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); transition: transform .15s; margin-right: 4px; }
+details[open] .chev { transform: rotate(-135deg); }
+.quick { font-size: 13px; color: var(--muted); }
+.tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 2px; }
+.tag { font-size: 11.5px; font-weight: 600; letter-spacing: 0.03em; padding: 2px 8px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); text-transform: uppercase; }
+.tag.fridge { background: var(--fridge-soft); color: var(--fridge); }
+.body { padding: 2px 14px 14px; display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--line); margin-top: 0; }
+.row { padding-top: 10px; }
+.row h3 { font-family: var(--font-display); font-size: 12px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin: 0 0 4px; font-weight: 600; }
+.row p, .row ul { margin: 0; }
+.row ul { padding-left: 18px; }
+.row li + li { margin-top: 3px; }
+.caution { background: var(--warn-soft); color: var(--warn); border-radius: 8px; padding: 9px 11px; margin-top: 10px; }
+.caution h3 { color: inherit; }
+.stop { background: var(--stop-soft); color: var(--stop); }
+.note { border-left: 3px solid var(--accent); padding-left: 10px; margin-top: 10px; color: var(--muted); font-size: 14px; }
+.note b { color: var(--ink); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+.scroll { overflow-x: auto; max-width: 100%; }
+.empty { padding: 24px 8px; text-align: center; color: var(--muted); }
+footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .chev { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <img src="logo.jpg" alt="Drip Docx Wellness and Aesthetics logo" width="72" height="72">
+      <div>
+        <h1>Drip Docx Nurse Guide</h1>
+        <p>IV drips and injections: draw-up, bag, add-ons, cautions.</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="before">
+    <b>Before every IV</b>
+    <ul>
+      <li>Check vitals before and after.</li>
+      <li>Ask if they have eaten. If not, give juice first.</li>
+      <li>Ask if they are nervous about needles (vasovagal risk).</li>
+      <li>More than 2 ingredients in one bag: use a multi-vial adapter.</li>
+    </ul>
+  </div>
+
+  <div class="bar">
+    <input id="q" type="search" placeholder="Search drips, ingredients, add-ons" aria-label="Search" autocomplete="off">
+    <div class="chips" role="group" aria-label="Filter">
+      <button class="chip" data-f="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="iv" aria-pressed="false">IV drips</button>
+      <button class="chip" data-f="inj" aria-pressed="false">Injections and pushes</button>
+      <button class="chip" data-f="fridge" aria-pressed="false">Refrigerated</button>
+    </div>
+  </div>
+  <div class="count" id="count"></div>
+  <div class="list" id="list"></div>
+
+  <footer>
+    Source: the Drip Docx Nurse Reference Guide by Narges Najmyar. Myers and Tri-Immune strengths are from the Olympia vial labels. Items marked "Check" are things the guide leaves unclear or that differ from a label. For internal reference only: confirm doses and orders with Narges.
+  </footer>
+</div>
+
+<script>
+const D = [
+/* ---------- IV DRIPS ---------- */
+{ id:"beauty", kind:"iv", name:"Beauty and Anti-Aging IV", quick:"500 mL bag", fridge:false,
+  does:"Radiance and glow; supports hair, skin and nails.",
+  ingredients:["Vitamin C","B complex (Vita Complex)","Biotin"],
+  draw:["Vitamin C: 5 cc","Vita Complex: 5 cc","Biotin: 5 cc","Each with a 20 gauge needle and alcohol wipe."],
+  bag:"Add all three to a 500 mL bag once IV access is obtained.",
+  addons:["Glutathione"],
+  cautions:["More than 2 ingredients in the bag: multi-vial adapter."],
+  notes:["The standalone biotin shot is 1 cc IM. The 5 cc is only for this bag."] },
+
+{ id:"immunity", kind:"iv", name:"Immunity IV", quick:"500 mL bag", fridge:false,
+  does:"Immune support; helps you feel better faster after getting sick.",
+  ingredients:["Vitamin C","B complex (Vita Complex)","Zinc"],
+  draw:["Vitamin C: 5 cc","Vita Complex: 5 cc","Zinc: 1 cc","Each with a 20 gauge needle and alcohol wipe."],
+  bag:"Add all three to a 500 mL bag once IV access is obtained.",
+  addons:["Glutathione","Vitamin D"],
+  cautions:["More than 2 ingredients in the bag: multi-vial adapter."],
+  notes:[] },
+
+{ id:"morelife", kind:"iv", name:"“More Life” IV", quick:"500 mL bag · go slow", fridge:true,
+  does:"Fluids, electrolytes and vitamins for energy, fatigue and immune support.",
+  ingredients:["Vita Complex","Ascorbic acid (vitamin C)","Taurine","Vitamin B12 (methylcobalamin)"],
+  draw:["Each drawn up in a 5 cc syringe with a 20 gauge needle.","Check: the guide gives no volume per vial for this drip."],
+  bag:"Add all four to a 500 mL bag once IV access is obtained.",
+  addons:["Glutathione"],
+  cautions:["Administer slowly.","B12 (methylcobalamin) is in the fridge."],
+  notes:[] },
+
+{ id:"fatburn", kind:"iv", name:"Fat Burn and Metabolism Boost IV", quick:"500 mL bag", fridge:false,
+  does:"Energy and metabolism support for weight loss.",
+  ingredients:["B complex (Vita Complex)","Methylcobalamin (B12)","L-taurine"],
+  draw:["Vita Complex: 5 cc","L-taurine: 5 cc","Methylcobalamin (B12): 5 cc","Each with a 20 gauge needle and alcohol wipe."],
+  bag:"Add all three to a 500 mL bag once IV access is obtained.",
+  addons:["Lipo-Mino","Vitamin D"],
+  cautions:["Remind the patient to drink water. They may go through a detox, and water reduces side effects."],
+  notes:[] },
+
+{ id:"hangover", kind:"iv", name:"Hangover “Cure” IV", quick:"500 mL bag · optional Toradol push", fridge:false,
+  does:"Rehydration plus vitamins and nausea relief for dehydration, headache, body aches and nausea.",
+  ingredients:["Mineral blend","B complex (Vita Complex)","Ondansetron (Zofran)","Toradol (optional, only for headache or pain)"],
+  draw:["Ondansetron: 5 cc. If not nauseous, only 2 cc.","Vita Complex: 5 cc","Mineral blend: 5 cc","Toradol: 1 cc in a 3 cc syringe, only if headache or pain.","All with a 20 gauge needle and alcohol wipe."],
+  bag:"Add ondansetron, Vita Complex and mineral blend to a 500 mL bag once IV access is obtained. Give Toradol as a 1 cc IV push before starting the IV: saline flush first, then flush again before attaching the extension.",
+  addons:["1 L fluid","Glutathione"],
+  cautions:["Kidney issues: no Toradol at all.","Give Toradol slowly. It can burn.","More than 2 ingredients in the bag: multi-vial adapter."],
+  notes:["Check: the ondansetron card says 1 to 4 cc, this drip says 5 cc (2 cc if not nauseous). Confirm with Narges."] },
+
+{ id:"iron", kind:"iv", name:"Iron IV (Venofer)", quick:"200 mg elemental iron · 250 mL bag", fridge:false,
+  does:"Raises iron levels quickly. Helpful in severe anemia or before surgery; supports energy and breathing.",
+  ingredients:["200 mg elemental iron (1 vial of Venofer)"],
+  draw:["Wipe the Venofer vial with alcohol.","Draw up 10 cc with a 20 gauge needle."],
+  bag:"Add the 10 mL to a 250 mL bag once IV access is obtained. (The guide says “250 MG bag”; it means 250 mL.)",
+  addons:["Vitamin C (guide suggestion; see note)"],
+  cautions:["Administer slowly.","Poor access: if iron leaks out of the vein it can permanently stain the skin."],
+  notes:["Added note: the Venofer label allows 200 mg in up to 100 mL normal saline over about 15 minutes, or as an undiluted slow push over 2 to 5 minutes. Do not mix it with other medications, and observe at least 30 minutes afterward.","Added note: vitamin C should not go in the same bag as Venofer. If the patient wants it, give it separately."] },
+
+{ id:"myers", kind:"iv", name:"Myers Cocktail", quick:"10 cc vial · 500 mL bag", fridge:true,
+  does:"The “gold standard” wellness IV. Replenishes vitamins and nutrients; used for fatigue, fibromyalgia, anxiety and depression, migraines and respiratory problems.",
+  ingredients:["Magnesium chloride","Dexpanthenol (B5)","Thiamine (B1)","Riboflavin (B2)","Pyridoxine (B6)","Niacinamide","Calcium","Hydroxocobalamin (B12)","Ascorbic acid (vitamin C)"],
+  draw:["Draw up the entire 10 cc vial in a 10 cc syringe with a 20 gauge needle.","Single-dose vial: discard what is left."],
+  bag:"Add to a 500 mL bag once IV access is obtained.",
+  addons:["Glutathione"],
+  cautions:["Go slowly at first. Magnesium pushed or run fast can cause a vasovagal drop in blood pressure.","Screen for G6PD deficiency, kidney disease or stones, and heart medications.","Contains benzyl alcohol. Protect from light."],
+  table:{ title:"Strengths on the Olympia label (per mL → whole 10 mL vial)", rows:[
+    ["Ascorbic acid","200 mg","2,000 mg"],["Magnesium chloride hexahydrate","10 mg","100 mg"],["Riboflavin 5’-phosphate sodium","3 mg","30 mg"],["Thiamine HCl","2 mg","20 mg"],["Pyridoxine HCl","2 mg","20 mg"],["Niacinamide","2 mg","20 mg"],["Dexpanthenol","4 mg","40 mg"],["Calcium chloride dihydrate","1.3 mg","13 mg"]] },
+  notes:["Check: the label lists calcium chloride dihydrate, while the guide says calcium gluconate.","Check: hydroxocobalamin was not readable in the label photos, so its strength is not listed here. Read it off the vial.","Also on the label: 1% benzyl alcohol, 0.02% edetate disodium. Store 2 to 8 °C. NDC 73198-0178-10."] },
+
+{ id:"recharge", kind:"iv", name:"Recharge IV", quick:"500 mL bag", fridge:false,
+  does:"Replenishes fluids and electrolytes; supports hydration, immunity and energy.",
+  ingredients:["Vitamin C","B complex (Vita Complex)","Mineral blend"],
+  draw:["Vitamin C: 5 cc","Vita Complex: 5 cc","Mineral blend: 5 cc","Each with a 20 gauge needle and alcohol wipe."],
+  bag:"Add all three to a 500 mL bag once IV access is obtained.",
+  addons:["Vitamin B12"],
+  cautions:["More than 2 ingredients in the bag: multi-vial adapter."],
+  notes:[] },
+
+{ id:"rehydrate", kind:"iv", name:"Rehydrate IV", quick:"1 L normal saline", fridge:false,
+  does:"Quickly replenishes fluids and electrolytes.",
+  ingredients:["1 L normal saline"],
+  draw:["Nothing to draw up."],
+  bag:"Administer one 1 L normal saline bag.",
+  addons:["Vitamin B12"],
+  cautions:[],
+  notes:["If the patient wants 1 L plus a few add-ons, the 1 L can be split into two 500 mL bags with the ingredients separated, to stay within the osmolarity range for each bag. Call Narges before doing this."] },
+
+{ id:"sports", kind:"iv", name:"Sports Recovery and Performance IV", quick:"500 mL bag", fridge:false,
+  does:"Shortens recovery after injury, activity or hard training; supports athletic performance.",
+  ingredients:["Vitamin C","B complex (Vita Complex)","Amino acids","Mineral blend"],
+  draw:["Vitamin C: 5 cc","Vita Complex: 5 cc","Amino acids: 5 cc","Mineral blend: 5 cc","Each with a 20 gauge needle and alcohol wipe."],
+  bag:"Add all four to a 500 mL bag once IV access is obtained.",
+  addons:["Toradol (if pain or injury)"],
+  cautions:["Tell the patient to drink a lot of water. The amino acids cause a detox response.","More than 2 ingredients in the bag: multi-vial adapter."],
+  notes:["Good for muscle recovery: athletes, frequent exercisers, marathon training."] },
+
+{ id:"ultimate", kind:"iv", name:"Ultimate Drip IV", quick:"2 Infuvite vials · start very slow", fridge:true,
+  does:"A broad vitamin blend for overall wellness, hair and nails, energy, mental clarity and post-op or trauma healing.",
+  ingredients:["Vitamin C","Vitamins A, D3, E, K","B vitamins (B1, B2, B6, B12), niacinamide, dexpanthenol","Folic acid","Biotin"],
+  draw:["Two 5 cc vials in the fridge labeled Infuvite (one white top, one blue top).","Draw each into its own 5 cc syringe."],
+  bag:"Check: the guide does not state the bag size.",
+  addons:["Glutathione"],
+  cautions:["Start very, very slow. The mix of vitamins can trigger a vasovagal response.","Do not give to patients on Coumadin or warfarin. Vitamin K can interfere with INR."],
+  notes:["Most people feel energized the same day. Great for post-op recovery."] },
+
+{ id:"covid", kind:"iv", name:"COVID Package", quick:"Immunity IV + Tri-Immune + Vitamin D", fridge:true,
+  does:"Immunity IV for immune support, plus a Tri-Immune shot and a Vitamin D shot.",
+  ingredients:["Immunity IV (vitamin C, zinc, Vita Complex)","Tri-Immune injection","Vitamin D injection"],
+  draw:["Immunity IV: Vitamin C 5 cc, Vita Complex 5 cc, zinc 1 cc, into a 500 mL bag.","Vitamin D: 1 cc in a 3 cc syringe with a 20 gauge needle, then switch to a 21 gauge needle for the injection.","Tri-Immune: see its card."],
+  bag:"500 mL bag for the Immunity IV once access is obtained. Vitamin D goes in the deltoid or dorsolateral glute.",
+  addons:["Glutathione","Toradol (if pain)"],
+  cautions:["Vitamin D is very oily. A 21 gauge is needed, since a 23 gauge or smaller makes it harder and slower to push.","More than 2 ingredients in the bag: multi-vial adapter."],
+  notes:[] },
+
+/* ---------- INJECTIONS AND PUSHES ---------- */
+{ id:"biotin", kind:"inj", name:"Biotin", quick:"1 cc IM · once a week", fridge:false,
+  does:"B7. Converts fat and glucose to energy; supports hair, nails, sweat glands and nerve tissue.",
+  ingredients:["Biotin"],
+  draw:["Draw up 1 cc in a 3 cc syringe with a 20 gauge needle.","Change to a 25 gauge needle for the injection. (The guide writes “25 CC”.)"],
+  bag:"Deltoid or dorsolateral glute.",
+  addons:[],
+  cautions:["Dose: 1 cc once a week."],
+  notes:[] },
+
+{ id:"b12", kind:"inj", name:"Vitamin B12 (methylcobalamin)", quick:"1 cc IM · once a week", fridge:true,
+  does:"Energy, balance and mood; sleep, mental clarity and metabolism.",
+  ingredients:["Methylcobalamin (B12)"],
+  draw:["Draw up 1 cc in a 3 cc syringe with a 20 gauge needle.","Change to a 25 gauge needle for the injection."],
+  bag:"Deltoid or dorsolateral glute.",
+  addons:[],
+  cautions:["Dose: 1 cc once a week.","Tell the patient their urine may be pink or red the first time. That is normal."],
+  notes:["The guide says methylcobalamin is kept in the fridge (stated on the More Life card)."] },
+
+{ id:"vitc", kind:"inj", name:"Vitamin C (injection)", quick:"1 cc IM · once a week as needed", fridge:false,
+  does:"Antioxidant for immune response; supports skin, bone, cartilage and blood vessels.",
+  ingredients:["Ascorbic acid (vitamin C)"],
+  draw:["Draw up 1 cc in a 3 cc syringe with a 20 gauge needle.","Change to a 25 gauge needle for the injection."],
+  bag:"Deltoid or dorsolateral glute.",
+  addons:[],
+  cautions:["Dose: 1 cc once a week, as needed."],
+  notes:[] },
+
+{ id:"vitd", kind:"inj", name:"Vitamin D", quick:"1 cc IM · 21 gauge", fridge:false,
+  does:"Supports bone and muscle strength and mineral balance; helps fight disease.",
+  ingredients:["Vitamin D"],
+  draw:["Draw up 1 cc in a 3 cc syringe with a 20 gauge needle.","Change to a 21 gauge needle for the injection."],
+  bag:"Deltoid or dorsolateral glute.",
+  addons:[],
+  cautions:["Vitamin D is very oily. Use a 21 gauge, since a 23 gauge or smaller makes it harder and slower to push.","Dose: 1 cc once a week for the first month, then every 1 to 2 months as needed."],
+  notes:[] },
+
+{ id:"lipomino", kind:"inj", name:"Lipo-Mino", quick:"1 cc IM · once a week", fridge:false,
+  does:"Fat-burning, energy and appetite-suppressing mix: methionine, inositol, choline, carnitine, B1, B2, B6 and B12.",
+  ingredients:["Methionine","Inositol","Choline","Carnitine","B1, B2, B6, B12"],
+  draw:["Draw up 1 cc in a 3 cc syringe with a 20 gauge needle.","Change to a 25 gauge needle for the injection."],
+  bag:"Deltoid or dorsolateral glute.",
+  addons:[],
+  cautions:["Dose: 1 cc once a week."],
+  notes:[] },
+
+{ id:"triimmune", kind:"inj", name:"Tri-Immune Boost", quick:"1 cc IM or 3 cc in a bag", fridge:true,
+  does:"Triple defense immunity formula (glutathione, ascorbic acid, zinc). May raise immune response, lower inflammation and aid wound healing.",
+  ingredients:["Glutathione","Ascorbic acid (vitamin C)","Zinc"],
+  draw:["IM: draw up 1 cc in a 3 cc syringe with a 20 gauge needle, change to a 25 gauge, and give in the dorsolateral glute.","IV: draw up 3 cc and add it to a 500 mL bag once IV access is obtained."],
+  bag:"Guide: deltoid or dorsogluteal, but it burns badly, so Narges only suggests the glute (1 cc) or the 500 mL bag with 3 cc.",
+  addons:[],
+  cautions:["This medication burns, burns, burns.","If given in a 500 mL bag, do not add any other ingredients.","Dose: 1 cc once a week, as needed."],
+  table:{ title:"Strengths on the Olympia label", rows:[["Glutathione","200 mg/mL",""],["Ascorbic acid","200 mg/mL",""],["Zinc sulfate","2.5 mg/mL",""]] },
+  notes:["Refrigerated."] },
+
+{ id:"glutathione", kind:"inj", name:"Glutathione", quick:"5 cc vial · slow IV push", fridge:true,
+  does:"Energy, sleep, aging, muscle and joint discomfort, immune support, liver and cell detox, brighter skin, mental clarity.",
+  ingredients:["Glutathione (5 cc vial, refrigerated)"],
+  draw:["Draw up the 5 cc vial in a 5 cc syringe with a 20 gauge needle. (The guide writes “55 CC”, which looks like a typo.)"],
+  bag:"IV push. Flush before and after.",
+  addons:[],
+  cautions:["Push slowly. It can burn.","Dose: up to 5 cc once a week."],
+  notes:["Check: the guide does not give the strength. Read it off the vial and chart it."] },
+
+{ id:"famotidine", kind:"inj", name:"Famotidine (Pepcid)", quick:"1 cc IV push · once a week max", fridge:true,
+  does:"Antihistamine and antacid for allergic reactions, stomach ulcers, erosive esophagitis, heartburn and GERD.",
+  ingredients:["Famotidine (refrigerated)"],
+  draw:["Draw up the 1 cc vial from the fridge in a 3 cc syringe with a 20 gauge needle."],
+  bag:"IV push before the IV. Flush before and after.",
+  addons:[],
+  cautions:["Do not give to people with arrhythmia or heart problems.","Dose: 1 cc as needed, no more than once a week.","Also used for anaphylactic reactions."],
+  notes:[] },
+
+{ id:"toradol", kind:"inj", name:"Ketorolac (Toradol)", quick:"1 cc IV push · once a week max", fridge:false,
+  does:"Non-opioid NSAID for short-term management of moderate to severe acute pain.",
+  ingredients:["Ketorolac 1 cc vial"],
+  draw:["Draw up 1 cc in a 3 cc syringe with a 20 gauge needle."],
+  bag:"IV push before the IV. Flush before and after.",
+  addons:[],
+  cautions:["Push slowly. It can burn.","Kidney issues: do not give.","Dose: 1 cc as needed, no more than once a week and not chronically."],
+  notes:[] },
+
+{ id:"zofran", kind:"inj", name:"Ondansetron (Zofran)", quick:"1 to 4 cc IV push", fridge:false,
+  does:"Prevents and treats nausea and vomiting by blocking serotonin.",
+  ingredients:["Ondansetron"],
+  draw:["Draw up 1 to 4 cc in a 3 to 5 cc syringe with a 20 gauge needle."],
+  bag:"IV push before the IV. Flush before and after.",
+  addons:[],
+  cautions:["Dose: 1 cc can be given as needed.","Hangover IV: 5 cc if nauseous, 2 cc if not."],
+  notes:["Check: the dose range here (1 to 4 cc) differs from the Hangover IV instructions (5 cc). Confirm with Narges."] }
+];
+
+const els = { list: document.getElementById("list"), q: document.getElementById("q"), count: document.getElementById("count") };
+let filter = "all";
+
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+function ul(arr) { return "<ul>" + arr.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul>"; }
+
+function card(d) {
+  const tags = [`<span class="tag">${d.kind === "iv" ? "IV drip" : "Injection / push"}</span>`];
+  if (d.fridge) tags.push('<span class="tag fridge">Refrigerated</span>');
+  let h = `<details id="${d.id}"><summary><div class="top"><span class="name">${esc(d.name)}</span><span class="chev"></span></div><div class="quick">${esc(d.quick)}</div><div class="tags">${tags.join("")}</div></summary><div class="body">`;
+  h += `<div class="row"><h3>What it does</h3><p>${esc(d.does)}</p></div>`;
+  h += `<div class="row"><h3>Ingredients</h3>${ul(d.ingredients)}</div>`;
+  h += `<div class="row"><h3>Draw-up</h3>${ul(d.draw)}</div>`;
+  h += `<div class="row"><h3>${d.kind === "iv" ? "Bag and administration" : "Route and administration"}</h3><p>${esc(d.bag)}</p></div>`;
+  if (d.table) {
+    const three = d.table.rows[0][2] !== "";
+    h += `<div class="row"><h3>${esc(d.table.title)}</h3><div class="scroll"><table><thead><tr><th>Ingredient</th><th>Per mL</th>${three ? "<th>Per vial</th>" : ""}</tr></thead><tbody>` +
+      d.table.rows.map(r => `<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td>${three ? `<td>${esc(r[2])}</td>` : ""}</tr>`).join("") + "</tbody></table></div></div>";
+  }
+  if (d.addons.length) h += `<div class="row"><h3>Suggested add-ons</h3>${ul(d.addons)}</div>`;
+  if (d.cautions.length) h += `<div class="caution row"><h3>Cautions</h3>${ul(d.cautions)}</div>`;
+  d.notes.forEach(n => { h += `<div class="note">${esc(n)}</div>`; });
+  return h + "</div></details>";
+}
+
+function haystack(d) {
+  return [d.name, d.quick, d.does, d.ingredients.join(" "), d.draw.join(" "), d.addons.join(" "), d.cautions.join(" "), d.notes.join(" ")].join(" ").toLowerCase();
+}
+
+function render() {
+  const q = els.q.value.trim().toLowerCase();
+  const rows = D.filter(d => {
+    if (filter === "iv" && d.kind !== "iv") return false;
+    if (filter === "inj" && d.kind !== "inj") return false;
+    if (filter === "fridge" && !d.fridge) return false;
+    return !q || haystack(d).includes(q);
+  });
+  els.count.textContent = rows.length + " of " + D.length + " shown";
+  els.list.innerHTML = rows.length ? rows.map(card).join("") : '<div class="empty">Nothing matches. Try a shorter search or clear the filter.</div>';
+  if (q && rows.length === 1) { const el = els.list.querySelector("details"); if (el) el.open = true; }
+}
+
+els.q.addEventListener("input", render);
+document.querySelectorAll(".chip").forEach(b => b.addEventListener("click", () => {
+  filter = b.dataset.f;
+  document.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  render();
+}));
+render();
+</script>
+</body>
+</html>
