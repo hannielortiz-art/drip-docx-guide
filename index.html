@@ -97,8 +97,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .panel h2 { font-family: var(--font-display); font-weight: 600; font-size: 20px; line-height: 1.2; margin: 0; }
 .sub { font-size: 13px; color: var(--muted); margin: 0; }
-.fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+.fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .field { display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); min-width: 0; }
+.field input[type="time"] { -webkit-appearance: none; appearance: none; display: block; height: 46px; line-height: 1.2; text-align: left; box-sizing: border-box; }
+.field input[type="time"]::-webkit-date-and-time-value { text-align: left; min-height: 1.2em; margin: 0; }
 .field input, .field select { font: inherit; font-family: var(--font-num); font-size: 17px; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; width: 100%; min-width: 0; }
 .presets { display: flex; flex-wrap: wrap; gap: 6px; }
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
@@ -245,11 +247,6 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
       <div id="r-out"></div>
     </div>
 
-    <div class="panel">
-      <h2>Quick chart</h2>
-      <p class="sub">Drops per 10 seconds, with mL/hr underneath.</p>
-      <div class="scroll"><table id="q-table"></table></div>
-    </div>
 
     <div class="panel">
       <h2>IV push times</h2>
@@ -627,16 +624,6 @@ function calcRate() {
   wrapNums(out);
 }
 
-function quickChart() {
-  const df = dropFactor();
-  const times = [30, 45, 60, 90, 120];
-  const cell = (vol, t) => `<td><b>${Math.round(vol * df / t / 6)}</b><span>${Math.round(vol / t * 60)} mL/hr</span></td>`;
-  $("q-table").className = "qc";
-  $("q-table").innerHTML = "<thead><tr><th>Time</th><th>250 mL</th><th>500 mL</th><th>1 L</th></tr></thead><tbody>" +
-    times.map(t => `<tr><td>${t} min</td>${cell(250, t)}${cell(500, t)}${cell(1000, t)}</tr>`).join("") + "</tbody>";
-  wrapNums($("q-table"));
-}
-
 function calcRunning() {
   const out = $("r-out"), df = dropFactor();
   const vol = num("r-vol"), inf = parseFloat($("r-in").value), set = num("r-set");
@@ -671,7 +658,7 @@ function pushTable() {
   wrapNums($("push-table"));
 }
 
-function calcAll() { calcRate(); quickChart(); calcRunning(); }
+function calcAll() { calcRate(); calcRunning(); }
 
 ["c-vol", "c-min"].forEach(id => $(id).addEventListener("input", calcAll));
 ["r-vol", "r-in", "r-start", "r-now", "r-set"].forEach(id => $(id).addEventListener("input", calcRunning));
