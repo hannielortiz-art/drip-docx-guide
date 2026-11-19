@@ -34,13 +34,13 @@ All drug data lives in the `D` array in the `<script>` block of `index.html`. Ea
 | `fridge` | `true` shows the Refrigerated tag |
 | `does`, `ingredients`, `draw`, `bag`, `addons`, `cautions` | The card sections |
 | `table` | Optional label strengths table |
-| `notes` | Extra notes. Items starting with "Check:" flag something to confirm with Narges |
+| `notes` | Not shown in the app. Leave it empty and put anything important in `cautions` |
 
 Prices live in the `PRICE` list and IV push times in the `PUSH` and `PUSH_TABLE` lists, just below the drug data. The push times come from the manufacturer labels, not the guide, and should be approved by Narges.
 
 Copy an existing entry, change the text, and reload the page.
 
-## Open items marked "Check"
+## Open items to confirm with Narges
 
 Based on the second edition of the guide (August 2026) and what Narges has said since.
 

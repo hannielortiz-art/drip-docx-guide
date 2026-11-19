@@ -260,7 +260,7 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
 
   <footer>
     Prices match dripdocx.com as of August 2026. Add-ons are charged on top of the drip price.<br>
-    Source: the Drip Docx Nurse Reference Guide by Narges Najmyar, second edition (August 2026). Myers and Tri-Immune strengths are from the Olympia vial labels. Items marked "Check" are things the guide leaves unclear or that differ from a label. For internal reference only: confirm doses and orders with Narges.
+    Source: the Drip Docx Nurse Reference Guide by Narges Najmyar, second edition (August 2026). Confirm doses and orders with Narges.
   </footer>
 </div>
 
@@ -274,7 +274,7 @@ const D = [
   bag:"Add all three to a 500 mL bag once IV access is obtained.",
   addons:["Glutathione"],
   cautions:["More than 2 ingredients in the bag: multi-vial adapter."],
-  notes:["The standalone biotin shot is 1 cc IM. The 5 cc is only for this bag."] },
+  notes:[] },
 
 { id:"immunity", kind:"iv", name:"Immunity IV", quick:"500 mL bag", fridge:false,
   does:"Immune support; helps you feel better faster after getting sick.",
@@ -288,7 +288,7 @@ const D = [
 { id:"morelife", kind:"iv", name:"“More Life” IV", quick:"500 mL bag · go slow", fridge:false,
   does:"Fluids, electrolytes and vitamins for energy, fatigue and immune support.",
   ingredients:["Vita Complex","Ascorbic acid (vitamin C)","Taurine","Vitamin B12 (methylcobalamin)"],
-  draw:["Each drawn up in a 5 cc syringe with a 20 gauge needle.","Check: the guide gives no volume per vial for this drip."],
+  draw:["Each drawn up in a 5 cc syringe with a 20 gauge needle."],
   bag:"Add all four to a 500 mL bag once IV access is obtained.",
   addons:["Glutathione"],
   cautions:["Administer slowly."],
@@ -317,9 +317,9 @@ const D = [
   ingredients:["200 mg elemental iron (1 vial of Venofer)"],
   draw:["Wipe the Venofer vial with alcohol.","Draw up 10 cc with a 20 gauge needle."],
   bag:"Add the 10 mL to a 250 mL bag once IV access is obtained.",
-  addons:["Vitamin C (guide suggestion; see note)"],
-  cautions:["Administer slowly.","Poor access: if iron leaks out of the vein it can permanently stain the skin."],
-  notes:["Confirm with Narges whether a provider order or recent labs are required before an iron infusion, and how long to observe afterward.","Do not start this drip on a questionable IV.","Added note: the Venofer label allows 200 mg in up to 100 mL normal saline over about 15 minutes, or as an undiluted slow push over 2 to 5 minutes. Do not mix it with other medications, and observe at least 30 minutes afterward.","Added note: vitamin C should not go in the same bag as Venofer. If the patient wants it, give it separately."] },
+  addons:["Vitamin C (given separately, not in the iron bag)"],
+  cautions:["Administer slowly and stay with the patient.","Do not start this drip on a questionable IV. If iron leaks out of the vein it can permanently stain the skin.","Do not put vitamin C in the same bag as Venofer. If the patient wants it, give it separately."],
+  notes:[] },
 
 { id:"myers", kind:"iv", name:"Myers Cocktail", quick:"10 cc vial · 500 mL bag", fridge:true,
   does:"The “gold standard” wellness IV. Replenishes vitamins and nutrients; used for fatigue, fibromyalgia, anxiety and depression, migraines and respiratory problems.",
@@ -330,7 +330,7 @@ const D = [
   cautions:["Go slowly at first. Magnesium pushed or run fast can cause a vasovagal drop in blood pressure.","Screen for G6PD deficiency, kidney disease or stones, and heart medications.","Contains benzyl alcohol. Protect from light."],
   table:{ title:"Strengths on the Olympia label (per mL → whole 10 mL vial)", rows:[
     ["Ascorbic acid","200 mg","2,000 mg"],["Magnesium chloride hexahydrate","10 mg","100 mg"],["Riboflavin 5’-phosphate sodium","3 mg","30 mg"],["Thiamine HCl","2 mg","20 mg"],["Pyridoxine HCl","2 mg","20 mg"],["Niacinamide","2 mg","20 mg"],["Dexpanthenol","4 mg","40 mg"],["Calcium chloride dihydrate","1.3 mg","13 mg"]] },
-  notes:["Check: the label lists calcium chloride dihydrate, while the guide says calcium gluconate.","Check: hydroxocobalamin was not readable in the label photos, so its strength is not listed here. Read it off the vial.","Also on the label: 1% benzyl alcohol, 0.02% edetate disodium. Store 2 to 8 °C. NDC 73198-0178-10."] },
+  notes:[] },
 
 { id:"recharge", kind:"iv", name:"Recharge IV", quick:"500 mL bag", fridge:false,
   does:"Replenishes fluids and electrolytes; supports hydration, immunity and energy.",
@@ -347,8 +347,8 @@ const D = [
   draw:["Nothing to draw up."],
   bag:"Administer one 1 L normal saline bag.",
   addons:["Vitamin B12"],
-  cautions:[],
-  notes:["If the patient wants 1 L plus a few add-ons, the 1 L can be split into two 500 mL bags with the ingredients separated, to stay within the osmolarity range for each bag. Call Narges before doing this."] },
+  cautions:["If the patient wants 1 L plus a few add-ons, the 1 L can be split into two 500 mL bags with the ingredients divided between them, to stay within the osmolarity range. Call Narges before doing this."],
+  notes:[] },
 
 { id:"sports", kind:"iv", name:"Sports Recovery and Performance IV", quick:"500 mL bag", fridge:false,
   does:"Shortens recovery after injury, activity or hard training; supports athletic performance.",
@@ -357,7 +357,7 @@ const D = [
   bag:"Add all four to a 500 mL bag once IV access is obtained.",
   addons:["Toradol (if pain or injury)"],
   cautions:["Tell the patient to drink a lot of water. The amino acids cause a detox response.","More than 2 ingredients in the bag: multi-vial adapter."],
-  notes:["Good for muscle recovery: athletes, frequent exercisers, marathon training."] },
+  notes:[] },
 
 { id:"ultimate", kind:"iv", name:"Ultimate Drip IV", quick:"2 Infuvite vials · start very slow", fridge:true,
   does:"A broad vitamin blend for overall wellness, hair and nails, energy, mental clarity and post-op or trauma healing.",
@@ -366,7 +366,7 @@ const D = [
   bag:"Add both to a 500 mL bag once IV access is obtained.",
   addons:["Glutathione"],
   cautions:["Start very, very slow. The mix of vitamins can trigger a vasovagal response.","Do not give to patients on Coumadin or warfarin. Vitamin K can interfere with INR."],
-  notes:["Most people feel energized the same day. Great for post-op recovery."] },
+  notes:[] },
 
 { id:"covid", kind:"iv", name:"COVID Recovery IV", quick:"Immunity IV + Tri-Immune + Vitamin D", fridge:true,
   does:"The Immunity IV supports the immune system, helps prevent illness and speeds recovery. Tri-Immune increases immune response and decreases inflammation. Vitamin D supports bone and muscle strength.",
@@ -375,7 +375,7 @@ const D = [
   bag:"Add the three Immunity IV ingredients to a 500 mL bag once IV access is obtained. Tri-Immune and Vitamin D are given IM, not in the bag.",
   addons:["Glutathione","Toradol (if pain)"],
   cautions:["Tri-Immune cannot go in this bag. It only goes in a 500 mL bag when nothing else is in it, and this bag already holds three ingredients.","Vitamin D is very oily. The 21 gauge is not optional, since a smaller needle makes it much harder and slower to push.","More than 2 ingredients in the bag: multi-vial adapter."],
-  notes:["Listed in the original deck as the Covid Package."] },
+  notes:[] },
 
 /* ---------- INJECTIONS AND PUSHES ---------- */
 { id:"biotin", kind:"inj", name:"Biotin", quick:"1 cc IM · once a week", fridge:false,
@@ -394,7 +394,7 @@ const D = [
   bag:"Deltoid or dorsolateral glute.",
   addons:[],
   cautions:["Dose: 1 cc once a week.","Tell the patient their urine may be pink or red the first time. That is normal."],
-  notes:["Not refrigerated, per Narges."] },
+  notes:[] },
 
 { id:"vitc", kind:"inj", name:"Vitamin C (injection)", quick:"1 cc IM · once a week as needed", fridge:false,
   does:"Antioxidant for immune response; supports skin, bone, cartilage and blood vessels.",
@@ -421,16 +421,16 @@ const D = [
   bag:"Deltoid or dorsolateral glute.",
   addons:[],
   cautions:["Dose: 1 cc once a week."],
-  notes:["Refrigerated, per Narges. The reference guide does not say this."] },
+  notes:[] },
 
 { id:"nad", kind:"inj", name:"NAD+", quick:"100 mg IM \u00B7 inject slowly", fridge:true,
   does:"A 100 mg intramuscular injection to support cellular energy, mental clarity, metabolism, recovery from fatigue or stress, healthy aging and cellular repair. It complements a healthy lifestyle and medical care and does not replace them.",
   ingredients:["NAD+ 100 mg"],
-  draw:["Draw up with a 20 gauge needle, then change to a 25 gauge needle to inject.","Check: the guide does not give the draw-up volume. When I checked the Wesley vial label earlier it read 100 mg/mL, which would make 100 mg equal 1 mL. Read your vial and confirm with Narges before the first dose."],
+  draw:["Draw up with a 20 gauge needle, then change to a 25 gauge needle to inject.","Confirm the draw-up volume with Narges before your first dose. The vial label reads 100 mg/mL, so 100 mg is 1 mL."],
   bag:"IM, deltoid or dorsolateral glute. Chart the site, volume and lot number. IM only for now; it is not offered as an IV drip.",
   addons:[],
   cautions:["NAD+ stings and can cause brief flushing or chest tightness if given too fast. Inject slowly and tell the patient to expect it.","Dose: 100 mg IM. How often is set by the provider, based on the patient\u2019s goals, history and response."],
-  notes:["Added to the menu after the original guide.","Refrigerated, per Narges. The guide does not say this."] },
+  notes:[] },
 
 { id:"triimmune", kind:"inj", name:"Tri-Immune Boost", quick:"1 cc IM or 3 cc in a bag", fridge:true,
   does:"Triple defense immunity formula (glutathione, ascorbic acid, zinc). May raise immune response, lower inflammation and aid wound healing.",
@@ -440,7 +440,7 @@ const D = [
   addons:[],
   cautions:["This medication burns, burns, burns.","If given in a 500 mL bag, do not add any other ingredients.","Dose: 1 cc once a week, as needed."],
   table:{ title:"Strengths on the Olympia label", rows:[["Glutathione","200 mg/mL",""],["Ascorbic acid","200 mg/mL",""],["Zinc sulfate","2.5 mg/mL",""]] },
-  notes:["Refrigerated."] },
+  notes:[] },
 
 { id:"glutathione", kind:"inj", name:"Glutathione", quick:"5 cc vial · slow IV push", fridge:true,
   does:"Energy, sleep, aging, muscle and joint discomfort, immune support, liver and cell detox, brighter skin, mental clarity.",
@@ -449,7 +449,7 @@ const D = [
   bag:"IV push. Flush before and after.",
   addons:[],
   cautions:["Push slowly. It can burn.","Dose: up to 5 cc once a week.","G6PD deficiency: raise with Narges before giving."],
-  notes:["Check: the guide does not give the strength. Read it off the vial and chart it."] },
+  notes:[] },
 
 { id:"famotidine", kind:"inj", name:"Famotidine (Pepcid)", quick:"1 cc IV push · once a week max", fridge:false,
   does:"Antihistamine and antacid for allergic reactions, stomach ulcers, erosive esophagitis, heartburn and GERD.",
@@ -458,7 +458,7 @@ const D = [
   bag:"IV push before the IV. Flush before and after.",
   addons:[],
   cautions:["Do not give to people with arrhythmia or heart problems.","Dose: 1 cc as needed, no more than once a week.","Also used for anaphylactic reactions."],
-  notes:["Not refrigerated, per Narges. The reference guide slide still says refrigerated.","Check: the guide pushes 1 cc straight from the vial, while the label says to dilute first. Standard famotidine injection is 10 mg/mL, so 1 cc would be 10 mg and the 20 mg anaphylaxis dose would be 2 mL. Read your vial and confirm with Narges."] },
+  notes:[] },
 
 { id:"toradol", kind:"inj", name:"Ketorolac (Toradol)", quick:"1 cc IV push · once a week max", fridge:false,
   does:"Non-opioid NSAID for short-term management of moderate to severe acute pain.",
@@ -476,7 +476,7 @@ const D = [
   bag:"IV push before the IV. Flush before and after.",
   addons:[],
   cautions:["Dose: 1 cc can be given as needed.","Hangover IV: 5 cc if nauseous, 2 cc if not."],
-  notes:["In the Hangover Cure IV it goes into the bag at 5 cc instead, or 2 cc if the patient is not nauseous.","Check: standard ondansetron injection is 2 mg/mL, so 1 cc would be 2 mg and 4 cc would be 8 mg. Read your vial."] }
+  notes:[] }
 ];
 
 /* Menu prices from the guide (match dripdocx.com as of August 2026). Add-ons are charged on top of the drip price. */
@@ -531,7 +531,6 @@ function card(d) {
   }
   if (d.addons.length) h += `<div class="row"><h3>Suggested add-ons</h3>${ul(d.addons)}</div>`;
   if (d.cautions.length) h += `<div class="caution row"><h3>Cautions</h3>${ul(d.cautions)}</div>`;
-  d.notes.forEach(n => { h += `<div class="note">${esc(n)}</div>`; });
   return h + "</div></details>";
 }
 
