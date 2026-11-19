@@ -1,6 +1,6 @@
 # Drip Docx Nurse Guide
 
-A phone-friendly reference for every Drip Docx IV drip and injection: ingredients, draw-up volumes and needles, bag or route, IV push times, prices, suggested add-ons, and cautions. It has three tabs: IV drips, Injections, and a drip Calculator (set a rate, check a running drip, and IV push times). Search looks across both drug tabs, and a toggle shows refrigerated items only.
+A phone-friendly reference for every Drip Docx IV drip and injection: ingredients, draw-up volumes and needles, bag or route, IV push times, prices, suggested add-ons, and cautions. It has three tabs: IV drips, Injections, and a drip Calculator (set a rate, check a running drip, and IV push times). Search looks across both drug tabs.
 
 It is one static page with no build step and no dependencies other than Google Fonts.
 

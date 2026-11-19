@@ -203,7 +203,6 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
       <button class="tab" role="tab" id="tab-calc" data-tab="calc" aria-selected="false">Calculator</button>
     </div>
     <div class="subbar" id="subbar">
-      <button class="chip" id="fridge" aria-pressed="false">Refrigerated only</button>
       <span class="count" id="count"></span>
     </div>
   </div>
@@ -502,7 +501,6 @@ const PUSH_TABLE = [
 function store(key, val) { try { if (val === undefined) return localStorage.getItem(key); localStorage.setItem(key, val); } catch (e) { return null; } }
 let tab = store("ddx-tab") || "iv";
 if (!["iv", "inj", "calc"].includes(tab)) tab = "iv";
-let fridgeOnly = false;
 
 function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
 function ul(arr) { return "<ul>" + arr.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul>"; }
@@ -570,7 +568,6 @@ function render() {
   const q = els.q.value.trim().toLowerCase();
   const searching = q.length > 0;
   const calc = document.getElementById("calc");
-  const fridgeBtn = document.getElementById("fridge");
   document.getElementById("tabs").classList.toggle("searching", searching);
   document.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-selected", String(!searching && b.dataset.tab === tab)));
   const onCalc = !searching && tab === "calc";
@@ -581,11 +578,10 @@ function render() {
     els.list.hidden = true; calc.hidden = false; $("subbar").hidden = true; els.count.textContent = "";
     return;
   }
-  calc.hidden = true; els.list.hidden = false; $("subbar").hidden = false; fridgeBtn.hidden = searching;
+  calc.hidden = true; els.list.hidden = false; $("subbar").hidden = false;
   const rows = D.filter(d => {
     if (!searching) {
       if (d.kind !== tab) return false;
-      if (fridgeOnly && !d.fridge) return false;
     }
     return !searching || haystack(d).includes(q);
   });
@@ -675,11 +671,6 @@ document.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () =>
   const top = document.getElementById("bar-anchor").getBoundingClientRect().top + window.scrollY;
   if (tab === "calc" || window.scrollY > top) window.scrollTo(0, Math.max(0, top));
 }));
-$("fridge").addEventListener("click", () => {
-  fridgeOnly = !fridgeOnly;
-  $("fridge").setAttribute("aria-pressed", String(fridgeOnly));
-  render();
-});
 pushTable();
 calcAll();
 render();
