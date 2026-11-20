@@ -29,7 +29,7 @@ Open `index.html` in a browser. Nothing else is needed.
 
 This repository is public and published with GitHub Pages, with Narges Najmyar's approval. Share the Pages link with the Drip Docx nurses. The page asks search engines not to list it, but anyone who has the link can open it.
 
-The content comes from Narges's Drip Docx Nurse Reference Guide plus details from the Olympia vial labels. Menu prices are included. Pay rates, door codes, passwords and payment handles are intentionally not in this app. Do not add them.
+The content comes from Narges's Drip Docx Nurse Reference Guide plus details from the vial labels. Menu prices are included. Pay rates, door codes, passwords and payment handles are intentionally not in this app. Do not add them.
 
 ## Edit the content
 

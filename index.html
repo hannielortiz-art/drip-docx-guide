@@ -387,7 +387,7 @@ const D = [
   bag:"Add to a 500 mL bag once IV access is obtained.",
   addons:["Glutathione"],
   cautions:["Go slowly at first. Magnesium pushed or run fast can cause a vasovagal drop in blood pressure.","Screen for G6PD deficiency, kidney disease or stones, and heart medications.","Contains benzyl alcohol. Protect from light."],
-  table:{ title:"Strengths on the Olympia label (per mL → whole 10 mL vial)", rows:[
+  table:{ title:"Strengths on the label (per mL → whole 10 mL vial)", rows:[
     ["Ascorbic acid","200 mg","2,000 mg"],["Magnesium chloride hexahydrate","10 mg","100 mg"],["Riboflavin 5’-phosphate sodium","3 mg","30 mg"],["Thiamine HCl","2 mg","20 mg"],["Pyridoxine HCl","2 mg","20 mg"],["Niacinamide","2 mg","20 mg"],["Dexpanthenol","4 mg","40 mg"],["Calcium chloride dihydrate","1.3 mg","13 mg"]] },
   notes:[] },
 
@@ -498,7 +498,7 @@ const D = [
   bag:"Dorsolateral glute (1 cc), or 3 cc alone in a 500 mL bag. The deltoid really burns, so use the glute or the IV bag.",
   addons:[],
   cautions:["This medication burns, burns, burns.","If given in a 500 mL bag, do not add any other ingredients.","Dose: 1 cc once a week, as needed."],
-  table:{ title:"Strengths on the Olympia label", rows:[["Glutathione","200 mg/mL",""],["Ascorbic acid","200 mg/mL",""],["Zinc sulfate","2.5 mg/mL",""]] },
+  table:{ title:"Strengths on the label", rows:[["Glutathione","200 mg/mL",""],["Ascorbic acid","200 mg/mL",""],["Zinc sulfate","2.5 mg/mL",""]] },
   notes:[] },
 
 { id:"glutathione", kind:"inj", name:"Glutathione", quick:"5 cc vial · slow IV push", fridge:true,
@@ -557,25 +557,25 @@ const PUSH = {
 D.forEach(d => { if (PUSH[d.id]) d.push = PUSH[d.id]; });
 
 /* Vial strengths and sources, as confirmed by the clinic. Add more drugs here as they are confirmed. */
-const MINERAL = "Mineral blend (Wesley or Olympia), 30 mL vial, per mL: magnesium chloride 80 mg, zinc sulfate 1 mg, copper gluconate 0.2 mg, manganese 20 mcg.";
+const MINERAL = "Mineral blend, 30 mL vial, per mL: magnesium chloride 80 mg, zinc sulfate 1 mg, copper gluconate 0.2 mg, manganese 20 mcg.";
 const VIAL = {
-  beauty: ["Biotin (Olympia): 10 mg/mL, 10 mL vial. 5 cc is 50 mg."],
-  immunity: ["Zinc sulfate (Wesley): 10 mg/mL, 1 mL vial. 1 cc is 10 mg."],
-  covid: ["Zinc sulfate (Wesley): 10 mg/mL, 1 mL vial. 1 cc is 10 mg.", "Vitamin D3 (Olympia): 50,000 IU/mL (1.25 mg/mL), 30 mL vial. 1 cc is 50,000 IU."],
-  morelife: ["Taurine (Wesley): 50 mg/mL, 30 mL vial.", "Methylcobalamin B12 (Wesley or Olympia): 5 mg/mL, 30 mL vial."],
-  fatburn: ["Taurine (Wesley): 50 mg/mL, 30 mL vial. 5 cc is 250 mg.", "Methylcobalamin B12 (Wesley or Olympia): 5 mg/mL, 30 mL vial. 5 cc is 25 mg."],
-  hangover: ["Ondansetron (Olympia): 1 mg/mL, 30 mL vial. 5 cc is 5 mg, 2 cc is 2 mg.", MINERAL + " 5 cc is magnesium chloride 400 mg, zinc 5 mg, copper 1 mg, manganese 100 mcg.", "Ketorolac (Fosun Pharma): 30 mg/mL, 1 mL vial. 1 cc is 30 mg."],
+  beauty: ["Biotin: 10 mg/mL, 10 mL vial. 5 cc is 50 mg."],
+  immunity: ["Zinc sulfate: 10 mg/mL, 1 mL vial. 1 cc is 10 mg."],
+  covid: ["Zinc sulfate: 10 mg/mL, 1 mL vial. 1 cc is 10 mg.", "Vitamin D3: 50,000 IU/mL (1.25 mg/mL), 30 mL vial. 1 cc is 50,000 IU."],
+  morelife: ["Taurine: 50 mg/mL, 30 mL vial.", "Methylcobalamin B12: 5 mg/mL, 30 mL vial."],
+  fatburn: ["Taurine: 50 mg/mL, 30 mL vial. 5 cc is 250 mg.", "Methylcobalamin B12: 5 mg/mL, 30 mL vial. 5 cc is 25 mg."],
+  hangover: ["Ondansetron: 1 mg/mL, 30 mL vial. 5 cc is 5 mg, 2 cc is 2 mg.", MINERAL + " 5 cc is magnesium chloride 400 mg, zinc 5 mg, copper 1 mg, manganese 100 mcg.", "Ketorolac: 30 mg/mL, 1 mL vial. 1 cc is 30 mg."],
   recharge: [MINERAL + " 5 cc is magnesium chloride 400 mg, zinc 5 mg, copper 1 mg, manganese 100 mcg."],
   sports: [MINERAL + " 5 cc is magnesium chloride 400 mg, zinc 5 mg, copper 1 mg, manganese 100 mcg."],
-  biotin: ["Biotin (Olympia): 10 mg/mL, 10 mL vial. 1 cc is 10 mg."],
-  b12: ["Methylcobalamin B12 (Wesley or Olympia): 5 mg/mL, 30 mL vial. 1 cc is 5 mg."],
-  vitd: ["Vitamin D3 (Olympia): 50,000 IU/mL (1.25 mg/mL), 30 mL vial. 1 cc is 50,000 IU."],
-  toradol: ["Ketorolac tromethamine (Fosun Pharma): 30 mg/mL, 1 mL vial. 1 cc is 30 mg."],
-  iron: ["Venofer (American Regent): 20 mg/mL, 5 mL single-dose vial. Each vial is 100 mg elemental iron."],
-  vitc: ["Preserved ascorbic acid (Olympia): 500 mg/mL, 30 mL vial. 1 cc is 500 mg."],
-  nad: ["NAD+ (Wesley): 100 mg/mL, 10 mL multi-dose vial. 1 mL is 100 mg."],
+  biotin: ["Biotin: 10 mg/mL, 10 mL vial. 1 cc is 10 mg."],
+  b12: ["Methylcobalamin B12: 5 mg/mL, 30 mL vial. 1 cc is 5 mg."],
+  vitd: ["Vitamin D3: 50,000 IU/mL (1.25 mg/mL), 30 mL vial. 1 cc is 50,000 IU."],
+  toradol: ["Ketorolac tromethamine: 30 mg/mL, 1 mL vial. 1 cc is 30 mg."],
+  iron: ["Venofer: 20 mg/mL, 5 mL single-dose vial. Each vial is 100 mg elemental iron."],
+  vitc: ["Preserved ascorbic acid: 500 mg/mL, 30 mL vial. 1 cc is 500 mg."],
+  nad: ["NAD+: 100 mg/mL, 10 mL multi-dose vial. 1 mL is 100 mg."],
   famotidine: ["Famotidine: 10 mg/mL, 2 mL vial. 1 cc is 10 mg."],
-  zofran: ["Ondansetron (Olympia): 1 mg/mL, 30 mL vial. 1 to 4 cc is 1 to 4 mg."]
+  zofran: ["Ondansetron: 1 mg/mL, 30 mL vial. 1 to 4 cc is 1 to 4 mg."]
 };
 D.forEach(d => { d.vial = VIAL[d.id] || []; });
 
@@ -875,7 +875,7 @@ document.querySelectorAll('.seg[data-set="theme"] button').forEach(b => b.addEve
 setTheme(store("ddx-theme"), false);
 /* ---------- Version check ----------
    Bump VERSION here and in version.json together (same text) on every release. */
-const VERSION = "2026-11-20.16";
+const VERSION = "2026-11-20.17";
 $("ver").textContent = "Version " + VERSION;
 let newVer = null;
 function checkVersion() {
