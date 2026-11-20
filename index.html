@@ -91,6 +91,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .theme button { font: inherit; font-size: 12px; font-weight: 600; padding: 6px 12px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; }
 .theme button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,0.25); }
 .theme button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.update { position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 50; max-width: 696px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border-radius: 14px; background: var(--band); color: var(--band-ink); box-shadow: 0 6px 20px rgba(0,0,0,0.35); font-size: 14px; font-weight: 600; }
+.update button { font: inherit; font-size: 14px; font-weight: 700; padding: 8px 14px; border: 0; border-radius: 999px; background: #CCB094; color: #000; cursor: pointer; white-space: nowrap; }
 .theme-row { display: flex; justify-content: flex-end; margin-top: 10px; }
 .tabs { display: flex; gap: 4px; margin-top: 8px; padding: 4px; background: var(--accent-soft); border-radius: 12px; }
 .tab { flex: 1; min-width: 0; font: inherit; font-size: 14px; font-weight: 600; padding: 9px 6px; border: 0; border-radius: 9px; background: transparent; color: var(--muted); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
@@ -265,9 +267,11 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
   <footer>
     Prices match dripdocx.com as of August 2026. Add-ons are charged on top of the drip price.<br>
     Source: the Drip Docx Nurse Reference Guide by Narges Najmyar, second edition (August 2026). Confirm doses and orders with Narges.<br>
-    &copy; 2026 Drip Docx, PLLC. All rights reserved.
+    &copy; 2026 Drip Docx, PLLC. All rights reserved.<br>
+    <span id="ver"></span>
   </footer>
 </div>
+<div class="update" id="update" hidden><span>A new version is available.</span><button type="button" id="update-btn">Update</button></div>
 
 <script>
 const D = [
@@ -691,6 +695,21 @@ function setTheme(m, save) {
 }
 document.querySelectorAll("#theme button").forEach(b => b.addEventListener("click", () => setTheme(b.dataset.theme, true)));
 setTheme(store("ddx-theme"), false);
+/* ---------- Version check ----------
+   Bump VERSION here and in version.json together (same text) on every release. */
+const VERSION = "2026-11-20.1";
+$("ver").textContent = "Version " + VERSION;
+let newVer = null;
+function checkVersion() {
+  if (!/^https?:/.test(location.protocol)) return;
+  fetch("version.json?t=" + Date.now(), { cache: "no-store" })
+    .then(r => r.ok ? r.json() : null)
+    .then(j => { if (j && j.version && j.version !== VERSION) { newVer = j.version; $("update").hidden = false; } })
+    .catch(() => {});
+}
+$("update-btn").addEventListener("click", () => { location.replace(location.pathname + "?v=" + encodeURIComponent(newVer || Date.now())); });
+document.addEventListener("visibilitychange", () => { if (!document.hidden) checkVersion(); });
+checkVersion();
 pushTable();
 calcAll();
 render();

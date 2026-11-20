@@ -10,6 +10,7 @@ It is one static page with no build step and no dependencies other than Google F
 |---|---|
 | `index.html` | The whole app: styles, data and script |
 | `logo.jpg` | Drip Docx logo, used in the header and as the favicon |
+| `version.json` | The current version number, checked by the app so phones can offer an update |
 | `README.md` | This file |
 
 ## Run it
@@ -69,3 +70,11 @@ Fonts: Playfair Display for headings, Montserrat for body text, and Atkinson Hyp
 ## Disclaimer
 
 For internal reference only. Always confirm doses and orders with Narges and follow the order and protocols in place for each patient.
+
+## Releasing an update
+
+1. Change `VERSION` in `index.html` (search for `const VERSION`) to a new value, for example `2026-12-01.1`.
+2. Put the same text in `version.json`, like `{"version":"2026-12-01.1"}`.
+3. Upload both files to GitHub.
+
+Phones that open the app check `version.json`. If it differs from the version they are running, a banner appears with an Update button. The version also shows at the bottom of the page.
