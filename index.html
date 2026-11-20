@@ -242,9 +242,9 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
   <section class="calc" id="calc" hidden aria-label="Drip calculator">
     <p class="sub">All drop counts are for our 20 gtt/mL tubing. This only does the math. The rate comes from the order. For older or cardiac patients, call Narges first.</p>
 
-    <details class="cdrop" open><summary><div class="top"><span class="name">Set a rate</span><span class="chev"></span></div></summary><div class="body cbody">
+    <details class="cdrop" open><summary><div class="top"><span class="name">Set a rate</span><span class="chev"></span></div><div class="quick">Enter the volume and run time to get the drops to count.</div></summary><div class="body cbody">
       <div class="fields">
-        <label class="field" for="c-vol"><span>Bag size (mL)</span><input id="c-vol" type="number" inputmode="decimal" min="1" value="500"></label>
+        <label class="field" for="c-vol"><span>Volume (mL)</span><input id="c-vol" type="number" inputmode="decimal" min="1" value="500"></label>
         <label class="field" for="c-min"><span>Run time (minutes)</span><input id="c-min" type="number" inputmode="decimal" min="1" value="45"></label>
       </div>
       <div class="presets" aria-label="Quick picks">
@@ -260,9 +260,9 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
       <div class="stats" id="c-out"></div>
     </div></details>
 
-    <details class="cdrop"><summary><div class="top"><span class="name">Check a running drip</span><span class="chev"></span></div></summary><div class="body cbody">
+    <details class="cdrop"><summary><div class="top"><span class="name">Check a running drip</span><span class="chev"></span></div><div class="quick">See the real rate from how much has gone in so far.</div></summary><div class="body cbody">
       <div class="fields">
-        <label class="field" for="r-vol"><span>Bag size (mL)</span><input id="r-vol" type="number" inputmode="decimal" min="1" value="500"></label>
+        <label class="field" for="r-vol"><span>Volume (mL)</span><input id="r-vol" type="number" inputmode="decimal" min="1" value="500"></label>
         <label class="field" for="r-in"><span>Infused so far (mL)</span><input id="r-in" type="number" inputmode="decimal" min="0" placeholder="200"></label>
         <label class="field" for="r-start"><span>Started at</span><input id="r-start" type="time"></label>
         <label class="field" for="r-now"><span>Time now</span><input id="r-now" type="time"></label>
@@ -273,14 +273,14 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
     </div></details>
 
 
-    <details class="cdrop"><summary><div class="top"><span class="name">Count the drops</span><span class="chev"></span></div></summary><div class="body cbody">
+    <details class="cdrop"><summary><div class="top"><span class="name">Count the drops</span><span class="chev"></span></div><div class="quick">Tap each drop for 10 seconds to check the rate.</div></summary><div class="body cbody">
       <p class="sub" id="dc-target">Set a rate above first.</p>
       <button class="tap" id="dc-tap" type="button"><span id="dc-num">Tap</span><small id="dc-hint">Tap once for each drop</small></button>
       <div id="dc-out"></div>
       <div class="presets"><button class="chip" id="dc-reset">Start over</button></div>
     </div></details>
 
-    <details class="cdrop"><summary><div class="top"><span class="name">IV push times</span><span class="chev"></span></div></summary><div class="body cbody">
+    <details class="cdrop"><summary><div class="top"><span class="name">IV push times</span><span class="chev"></span></div><div class="quick">How slowly to push each medication.</div></summary><div class="body cbody">
       <div class="scroll"><table id="push-table"></table></div>
       <p class="sub">From the manufacturer labels, not the Drip Docx guide. Confirm with Narges. Flush before and after every push.</p>
     </div></details>
@@ -291,7 +291,7 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
     <div class="panel" id="t-form">
       <h2>Start the infusion</h2>
       <div class="fields">
-        <label class="field" for="t-vol"><span>Bag size (mL)</span><input id="t-vol" type="number" inputmode="decimal" min="1" value="500"></label>
+        <label class="field" for="t-vol"><span>Volume (mL)</span><input id="t-vol" type="number" inputmode="decimal" min="1" value="500"></label>
         <label class="field" for="t-min"><span>Run time (minutes)</span><input id="t-min" type="number" inputmode="decimal" min="1" value="45"></label>
       </div>
       <div class="presets">
@@ -679,7 +679,7 @@ function toMin(v) { if (!v) return null; const [h, m] = v.split(":").map(Number)
 
 function calcRate() {
   const vol = num("c-vol"), min = num("c-min"), df = dropFactor(), out = $("c-out");
-  if (!vol || !min) { out.innerHTML = '<p class="sub">Enter a bag size and a run time.</p>'; return; }
+  if (!vol || !min) { out.innerHTML = '<p class="sub">Enter a volume and a run time.</p>'; return; }
   const mlhr = vol / min * 60, gttmin = vol * df / min;
   const finish = new Date(Date.now() + min * 60000);
   out.innerHTML =
@@ -699,7 +699,7 @@ function calcRunning() {
     out.innerHTML = '<p class="sub">Enter how much has gone in, the start time and the time now.</p>'; return;
   }
   let elapsed = now - start; if (elapsed <= 0) elapsed += 1440;
-  if (inf > vol) { out.innerHTML = '<p class="sub">The amount infused is more than the bag size. Check the numbers.</p>'; return; }
+  if (inf > vol) { out.innerHTML = '<p class="sub">The amount infused is more than the volume. Check the numbers.</p>'; return; }
   const perMin = inf / elapsed, mlhr = perMin * 60, left = vol - inf;
   const minsLeft = left / perMin;
   const base = new Date(); base.setHours(0, 0, 0, 0);
@@ -760,7 +760,7 @@ const DC = { taps: 0, t0: 0, running: false, done: false, iv: null };
 function dcTarget() { const v = num("c-vol"), m = num("c-min"); return v && m ? v * 20 / m / 6 : null; }
 function dcRefresh() {
   const t = dcTarget();
-  $("dc-target").innerHTML = t ? "Target from Set a rate: <b>" + Math.round(t) + "</b> drops in 10 seconds. Tap once for each drop. It counts for 10 seconds from your first tap." : "Enter a bag size and run time in Set a rate first.";
+  $("dc-target").innerHTML = t ? "Target from Set a rate: <b>" + Math.round(t) + "</b> drops in 10 seconds. Tap once for each drop. It counts for 10 seconds from your first tap." : "Enter a volume and run time in Set a rate first.";
   wrapNums($("dc-target"));
 }
 function dcShow() {
@@ -848,7 +848,7 @@ document.querySelectorAll('.seg[data-set="theme"] button').forEach(b => b.addEve
 setTheme(store("ddx-theme"), false);
 /* ---------- Version check ----------
    Bump VERSION here and in version.json together (same text) on every release. */
-const VERSION = "2026-11-20.8";
+const VERSION = "2026-11-20.10";
 $("ver").textContent = "Version " + VERSION;
 let newVer = null;
 function checkVersion() {
