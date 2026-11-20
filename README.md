@@ -29,14 +29,14 @@ All drug data lives in the `D` array in the `<script>` block of `index.html`. Ea
 | Field | Meaning |
 |---|---|
 | `id` | Short unique name, used as the card's anchor and to look up the price in the `PRICE` list |
-| `kind` | `"iv"` for drips, `"inj"` for injections and pushes |
+| `kind` | `"iv"` for drips, `"inj"` for injections (the four with a push time show an IV push tag) |
 | `name`, `quick` | Card title and the one-line summary under it |
 | `fridge` | `true` shows the Refrigerated tag |
 | `does`, `ingredients`, `draw`, `bag`, `addons`, `cautions` | The card sections |
 | `table` | Optional label strengths table |
 | `notes` | Not shown in the app. Leave it empty and put anything important in `cautions` |
 
-Prices live in the `PRICE` list and IV push times in the `PUSH` and `PUSH_TABLE` lists, just below the drug data. The push times come from the manufacturer labels, not the guide, and should be approved by Narges.
+Prices live in the `PRICE` list and IV push times in the `PUSH` and `PUSH_TABLE` lists, just below the drug data. The push times come from the manufacturer labels, not the guide, and should be approved by Narges. Glutathione is 1 to 5 minutes and the slower the better, per Narges. Only glutathione, famotidine, Toradol and Zofran are IV pushes; the other injections are IM.
 
 Copy an existing entry, change the text, and reload the page.
 

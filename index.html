@@ -264,7 +264,8 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
 
   <footer>
     Prices match dripdocx.com as of August 2026. Add-ons are charged on top of the drip price.<br>
-    Source: the Drip Docx Nurse Reference Guide by Narges Najmyar, second edition (August 2026). Confirm doses and orders with Narges.
+    Source: the Drip Docx Nurse Reference Guide by Narges Najmyar, second edition (August 2026). Confirm doses and orders with Narges.<br>
+    &copy; 2026 Drip Docx, PLLC. All rights reserved.
   </footer>
 </div>
 
@@ -415,7 +416,7 @@ const D = [
   draw:["Draw up 1 cc in a 3 cc syringe with a 20 gauge needle.","Change to a 21 gauge needle for the injection."],
   bag:"Deltoid or dorsolateral glute.",
   addons:[],
-  cautions:["Vitamin D is very oily. Use a 21 gauge, since a 23 gauge or smaller makes it harder and slower to push.","Dose: 1 cc once a week for the first month, then every 1 to 2 months as needed."],
+  cautions:["Vitamin D is very oily. Use a 21 gauge, since a 23 gauge or smaller makes it harder and slower to inject.","Dose: 1 cc once a week for the first month, then every 1 to 2 months as needed."],
   notes:[] },
 
 { id:"lipomino", kind:"inj", name:"Lipo-Mino", quick:"1 cc IM · once a week", fridge:true,
@@ -496,7 +497,7 @@ const PUSH = {
   zofran: "Over 2 to 5 minutes. The label minimum is 30 seconds.",
   toradol: "Over at least 1 minute, because it burns. The label minimum is 15 seconds.",
   famotidine: "Over at least 2 minutes. The label says to dilute to 5 or 10 mL with normal saline before pushing.",
-  glutathione: "About 5 minutes, roughly 1 mL per minute. It is compounded, so there is no FDA label time.",
+  glutathione: "Over 1 to 5 minutes. The slower the better, per Narges. It is compounded, so there is no FDA label time.",
   hangover: "Toradol push, if given: over at least 1 minute, because it burns. The label minimum is 15 seconds."
 };
 D.forEach(d => { if (PUSH[d.id]) d.push = PUSH[d.id]; });
@@ -505,7 +506,7 @@ const PUSH_TABLE = [
   ["Ondansetron (Zofran)", "2 to 5 minutes", "At least 30 seconds"],
   ["Ketorolac (Toradol)", "At least 1 minute (it burns)", "At least 15 seconds"],
   ["Famotidine (Pepcid)", "At least 2 minutes", "At least 2 minutes, diluted to 5 or 10 mL"],
-  ["Glutathione", "About 5 minutes", "No FDA label (compounded)"],
+  ["Glutathione", "1 to 5 minutes, slower is better", "No FDA label (compounded)"],
   ["Benadryl 25 mg (emergency)", "At least 1 minute", "No faster than 25 mg per minute"]
 ];
 
@@ -519,7 +520,7 @@ function ul(arr) { return "<ul>" + arr.map(x => "<li>" + esc(x) + "</li>").join(
 function card(d) {
   const tags = [];
   if (PRICE[d.id] != null) tags.push(`<span class="tag price">$${PRICE[d.id]}</span>`);
-  tags.push(`<span class="tag">${d.kind === "iv" ? "IV drip" : "Injection / push"}</span>`);
+  tags.push(`<span class="tag">${d.kind === "iv" ? "IV drip" : (d.push ? "IV push" : "Injection")}</span>`);
   if (d.fridge) tags.push('<span class="tag fridge">Refrigerated</span>');
   let h = `<details id="${d.id}"><summary><div class="top"><span class="name">${esc(d.name)}</span><span class="chev"></span></div><div class="quick">${esc(d.quick)}</div><div class="tags">${tags.join("")}</div></summary><div class="body">`;
   h += `<div class="row"><h3>What it does</h3><p>${esc(d.does)}</p></div>`;
