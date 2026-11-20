@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Drip Docx Nurse Guide</title>
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=2">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=3">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
 <link rel="manifest" href="manifest.webmanifest">
 <script>try{var t=localStorage.getItem("ddx-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <meta name="theme-color" content="#1C1C1C">
@@ -556,6 +556,25 @@ const PUSH = {
 };
 D.forEach(d => { if (PUSH[d.id]) d.push = PUSH[d.id]; });
 
+/* Vial strengths and sources, as confirmed by the clinic. Add more drugs here as they are confirmed. */
+const MINERAL = "Mineral blend (Olympia), 30 mL vial, per mL: magnesium chloride 80 mg, zinc sulfate 1 mg, copper gluconate 0.2 mg, manganese 20 mcg.";
+const VIAL = {
+  beauty: ["Biotin (Olympia): 10 mg/mL, 10 mL vial. 5 cc is 50 mg."],
+  immunity: ["Zinc sulfate (Wesley): 10 mg/mL, 1 mL vial. 1 cc is 10 mg."],
+  covid: ["Zinc sulfate (Wesley): 10 mg/mL, 1 mL vial. 1 cc is 10 mg.", "Vitamin D3 (Olympia): 50,000 IU/mL, 30 mL vial. 1 cc is 50,000 IU."],
+  morelife: ["Taurine (Wesley): 50 mg/mL, 30 mL vial.", "Methylcobalamin B12 (Wesley): 5 mg/mL, 30 mL vial."],
+  fatburn: ["Taurine (Wesley): 50 mg/mL, 30 mL vial. 5 cc is 250 mg.", "Methylcobalamin B12 (Wesley): 5 mg/mL, 30 mL vial. 5 cc is 25 mg."],
+  hangover: ["Ondansetron (Olympia): 1 mg/mL, 30 mL vial. 5 cc is 5 mg, 2 cc is 2 mg.", MINERAL + " 5 cc is magnesium chloride 400 mg, zinc 5 mg, copper 1 mg, manganese 100 mcg.", "Ketorolac (Fosun Pharma): 30 mg/mL, 1 mL vial. 1 cc is 30 mg."],
+  recharge: [MINERAL + " 5 cc is magnesium chloride 400 mg, zinc 5 mg, copper 1 mg, manganese 100 mcg."],
+  sports: [MINERAL + " 5 cc is magnesium chloride 400 mg, zinc 5 mg, copper 1 mg, manganese 100 mcg."],
+  biotin: ["Biotin (Olympia): 10 mg/mL, 10 mL vial. 1 cc is 10 mg."],
+  b12: ["Methylcobalamin B12 (Wesley): 5 mg/mL, 30 mL vial. 1 cc is 5 mg."],
+  vitd: ["Vitamin D3 (Olympia): 50,000 IU/mL, 30 mL vial. 1 cc is 50,000 IU."],
+  toradol: ["Ketorolac tromethamine (Fosun Pharma): 30 mg/mL, 1 mL vial. 1 cc is 30 mg."],
+  zofran: ["Ondansetron (Olympia): 1 mg/mL, 30 mL vial. 1 to 4 cc is 1 to 4 mg."]
+};
+D.forEach(d => { d.vial = VIAL[d.id] || []; });
+
 const PUSH_TABLE = [
   ["Ondansetron (Zofran)", "2 to 5 minutes", "At least 30 seconds"],
   ["Ketorolac (Toradol)", "At least 1 minute (it burns)", "At least 15 seconds"],
@@ -582,6 +601,7 @@ function card(d) {
   let h = `<details id="${d.id}"><summary><div class="top"><span class="name">${esc(d.name)}</span><span class="right"><button class="star" type="button" data-star="${d.id}" aria-pressed="${stars.includes(d.id)}" aria-label="Star ${esc(d.name)}"><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z"/></svg></button><span class="chev"></span></span></div><div class="quick">${esc(d.quick)}</div><div class="tags">${tags.join("")}</div></summary><div class="body">`;
   h += `<div class="row"><h3>What it does</h3><p>${esc(d.does)}</p></div>`;
   h += `<div class="row"><h3>Ingredients</h3>${ul(d.ingredients)}</div>`;
+  if (d.vial.length) h += `<div class="row"><h3>Vial strength</h3>${ul(d.vial)}</div>`;
   h += `<div class="row"><h3>Draw-up</h3>${ul(d.draw)}</div>`;
   h += `<div class="row"><h3>${d.kind === "iv" ? "Bag and administration" : "Route and administration"}</h3><p>${esc(d.bag)}</p></div>`;
   if (d.push) h += `<div class="row"><h3>Push time</h3><p>${esc(d.push)}</p></div>`;
@@ -596,7 +616,7 @@ function card(d) {
 }
 
 function haystack(d) {
-  return [d.name, "$" + (PRICE[d.id] || ""), d.quick, d.does, d.ingredients.join(" "), d.draw.join(" "), d.addons.join(" "), d.cautions.join(" "), d.notes.join(" ")].join(" ").toLowerCase();
+  return [d.name, "$" + (PRICE[d.id] || ""), d.quick, d.does, d.ingredients.join(" "), d.vial.join(" "), d.draw.join(" "), d.addons.join(" "), d.cautions.join(" "), d.notes.join(" ")].join(" ").toLowerCase();
 }
 
 /* Numbers and numerical values use the Atkinson font. Digits inside names like B12 or D3 are left alone. */
@@ -851,7 +871,7 @@ document.querySelectorAll('.seg[data-set="theme"] button').forEach(b => b.addEve
 setTheme(store("ddx-theme"), false);
 /* ---------- Version check ----------
    Bump VERSION here and in version.json together (same text) on every release. */
-const VERSION = "2026-11-20.12";
+const VERSION = "2026-11-20.15";
 $("ver").textContent = "Version " + VERSION;
 let newVer = null;
 function checkVersion() {
