@@ -21,13 +21,13 @@
 /* Brand: colors sampled from dripdocx.com. Light is the default: warm gray page, cream cards,
    charcoal text, taupe accent, dark header band. A black-and-tan dark theme follows the phone setting. */
 :root {
-  --bg: #F2F1EF;
-  --surface: #F7F2ED;
+  --bg: #E5DED5;
+  --surface: #FFFFFF;
   --ink: #1C1C1C;
   --muted: #5C544E;
-  --line: #E3DAD1;
+  --line: #C4B6A6;
   --accent: #7D6E63;
-  --accent-soft: #EAE1D8;
+  --accent-soft: #E7DCCF;
   --on-accent: #FFFFFF;
   --taupe: #9B8B7F;
   --band: #1C1C1C;
@@ -45,7 +45,7 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #000000; --surface: #121010; --ink: #F2EAE2; --muted: #A9998A; --line: #2B2520;
+    --bg: #000000; --surface: #1B1816; --ink: #F2EAE2; --muted: #B3A394; --line: #4A4037;
     --accent: #CCB094; --accent-soft: #2A2119; --on-accent: #000000; --taupe: #B8A594;
     --fridge: #9CC8EC; --fridge-soft: #14222E; --warn: #E8C98C; --warn-soft: #2B2210;
     --stop: #F2A8A8; --stop-soft: #3F1616;
@@ -53,7 +53,7 @@
   }
 }
 :root[data-theme="dark"] {
-  --bg: #000000; --surface: #121010; --ink: #F2EAE2; --muted: #A9998A; --line: #2B2520;
+  --bg: #000000; --surface: #1B1816; --ink: #F2EAE2; --muted: #B3A394; --line: #4A4037;
   --accent: #CCB094; --accent-soft: #2A2119; --on-accent: #000000; --taupe: #B8A594;
   --fridge: #9CC8EC; --fridge-soft: #14222E; --warn: #E8C98C; --warn-soft: #2B2210;
   --stop: #F2A8A8; --stop-soft: #3F1616;
@@ -72,7 +72,7 @@ html { -webkit-text-size-adjust: 100%; background: var(--bg); }
 body {
   background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5;
   margin: 0;
-  padding: 0 0 calc(96px + env(safe-area-inset-bottom, 0px));
+  padding: 0 0 calc(120px + env(safe-area-inset-bottom, 0px));
 }
 .wrap { max-width: 720px; margin: 0 auto; padding: 24px max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px)); }
 header h1 { font-family: var(--font-display); font-weight: 500; font-size: 36px; line-height: 1.1; margin: 0 0 8px; letter-spacing: -0.01em; text-wrap: balance; }
@@ -83,7 +83,7 @@ header p { margin: 0; color: var(--muted); font-size: 14px; }
 .before ul { margin: 0; padding-left: 18px; }
 .bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding: 8px 0 10px; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--band); }
-#q { width: 100%; font: inherit; padding: 11px 14px; border-radius: 10px; border: var(--bw) solid var(--line); background: var(--surface); color: var(--ink); }
+#q { box-shadow: 0 1px 3px rgba(40, 25, 10, 0.10); width: 100%; font: inherit; padding: 11px 14px; border-radius: 10px; border: var(--bw) solid var(--line); background: var(--surface); color: var(--ink); }
 #q:focus-visible, .chip:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .chips { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
 .chip { font: inherit; font-size: 13px; font-weight: 500; padding: 6px 12px; border-radius: 999px; border: var(--bw) solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
@@ -93,12 +93,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .seg button { font: inherit; font-size: 12px; font-weight: 600; padding: 6px 12px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; }
 .seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,0.25); }
 .seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.update { position: fixed; left: 12px; right: 12px; bottom: calc(84px + env(safe-area-inset-bottom, 0px)); z-index: 50; max-width: 696px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border-radius: 14px; background: var(--band); color: var(--band-ink); box-shadow: 0 6px 20px rgba(0,0,0,0.35); font-size: 14px; font-weight: 600; }
+.update { position: fixed; left: 12px; right: 12px; bottom: calc(112px + env(safe-area-inset-bottom, 0px)); z-index: 50; max-width: 696px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border-radius: 14px; background: var(--band); color: var(--band-ink); box-shadow: 0 6px 20px rgba(0,0,0,0.35); font-size: 14px; font-weight: 600; }
 .update button { font: inherit; font-size: 14px; font-weight: 700; padding: 8px 14px; border: 0; border-radius: 999px; background: #CCB094; color: #000; cursor: pointer; white-space: nowrap; }
-.nav-btn:focus-visible, .star:focus-visible, .field input:focus-visible, .field select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.nav-btn:focus-visible, .cdrop summary:focus-visible, .star:focus-visible, .field input:focus-visible, .field select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .subbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 8px; flex-wrap: wrap; min-height: 32px; }
 .calc { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
-.panel { background: var(--surface); border: var(--bw) solid var(--line); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.panel { box-shadow: 0 1px 3px rgba(40, 25, 10, 0.10); background: var(--surface); border: var(--bw) solid var(--line); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .panel h2 { font-family: var(--font-display); font-weight: 600; font-size: 20px; line-height: 1.2; margin: 0; }
 .sub { font-size: 13px; color: var(--muted); margin: 0; }
 .fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -118,7 +118,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .flag.slow { background: var(--warn-soft); color: var(--warn); }
 .stat .val small { font-size: 14px; font-weight: 500; color: var(--muted); }
 .list { display: flex; flex-direction: column; gap: 10px; }
-details { background: var(--surface); border: var(--bw) solid var(--line); border-radius: 12px; }
+details { box-shadow: 0 1px 3px rgba(40, 25, 10, 0.10); background: var(--surface); border: var(--bw) solid var(--line); border-radius: 12px; }
 summary { list-style: none; cursor: pointer; padding: 13px 14px; display: flex; flex-direction: column; gap: 4px; }
 summary::-webkit-details-marker { display: none; }
 .top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
@@ -148,13 +148,13 @@ th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: 
 .screen { margin-bottom: 14px; }
 .empty { padding: 24px 8px; text-align: center; color: var(--muted); }
 footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
-.nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: var(--surface); border-top: var(--bw) solid var(--line); padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px)); }
-.nav-in { max-width: 720px; margin: 0 auto; display: flex; gap: 2px; }
-.nav-btn { flex: 1; min-width: 0; font: inherit; font-size: 11px; font-weight: 600; border: 0; background: transparent; color: var(--muted); padding: 6px 2px; border-radius: 10px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; position: relative; }
-.nav-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-.nav-btn[aria-selected="true"] { color: var(--ink); background: var(--accent-soft); }
+.nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: var(--band); border-top: 2px solid #CCB094; padding: 14px max(10px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px) * 0.5) max(10px, env(safe-area-inset-left, 0px)); }
+.nav-in { max-width: 720px; margin: 0 auto; display: flex; gap: 4px; }
+.nav-btn { flex: 1; min-width: 0; font: inherit; font-size: 12.5px; font-weight: 600; border: 0; background: transparent; color: #BCAA97; padding: 9px 2px 8px; border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; position: relative; }
+.nav-btn svg { width: 30px; height: 30px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.nav-btn[aria-selected="true"] { color: #1C1C1C; background: #CCB094; }
 .nav.searching .nav-btn[data-tab] { opacity: 0.55; }
-.badge { position: absolute; top: 5px; left: calc(50% + 8px); width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+.badge { position: absolute; top: 5px; left: calc(50% + 8px); width: 9px; height: 9px; border-radius: 50%; background: #CCB094; box-shadow: 0 0 0 2px var(--band); }
 .bigchip { font-size: 15px; padding: 10px 16px; }
 .right { display: flex; align-items: center; gap: 8px; flex: none; }
 .star { flex: none; border: 0; background: transparent; padding: 4px; margin: -4px 0; cursor: pointer; color: var(--muted); line-height: 0; border-radius: 8px; }
@@ -170,6 +170,8 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
 .tap.live { background: var(--accent-soft); }
 .tap:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .good { background: var(--accent-soft); color: var(--ink); }
+.cdrop .name { font-size: 20px; }
+.cbody { padding-top: 12px; }
 .theme-row { display: flex; justify-content: flex-end; margin-top: 10px; }
 @media (prefers-reduced-motion: reduce) { .chev { transition: none; } }
 </style>
@@ -239,8 +241,7 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
   <section class="calc" id="calc" hidden aria-label="Drip calculator">
     <p class="sub">All drop counts are for our 20 gtt/mL tubing. This only does the math. The rate comes from the order. For older or cardiac patients, call Narges first.</p>
 
-    <div class="panel">
-      <h2>Set a rate</h2>
+    <details class="cdrop" open><summary><div class="top"><span class="name">Set a rate</span><span class="chev"></span></div></summary><div class="body cbody">
       <div class="fields">
         <label class="field" for="c-vol"><span>Bag size (mL)</span><input id="c-vol" type="number" inputmode="decimal" min="1" value="500"></label>
         <label class="field" for="c-min"><span>Run time (minutes)</span><input id="c-min" type="number" inputmode="decimal" min="1" value="45"></label>
@@ -256,10 +257,9 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
         <button class="chip" data-min="120">120 min</button>
       </div>
       <div class="stats" id="c-out"></div>
-    </div>
+    </div></details>
 
-    <div class="panel">
-      <h2>Check a running drip</h2>
+    <details class="cdrop"><summary><div class="top"><span class="name">Check a running drip</span><span class="chev"></span></div></summary><div class="body cbody">
       <div class="fields">
         <label class="field" for="r-vol"><span>Bag size (mL)</span><input id="r-vol" type="number" inputmode="decimal" min="1" value="500"></label>
         <label class="field" for="r-in"><span>Infused so far (mL)</span><input id="r-in" type="number" inputmode="decimal" min="0" placeholder="200"></label>
@@ -269,22 +269,20 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
       </div>
       <div class="presets"><button class="chip" id="r-nowbtn">Use the current time</button></div>
       <div id="r-out"></div>
-    </div>
+    </div></details>
 
 
-    <div class="panel">
-      <h2>Count the drops</h2>
+    <details class="cdrop"><summary><div class="top"><span class="name">Count the drops</span><span class="chev"></span></div></summary><div class="body cbody">
       <p class="sub" id="dc-target">Set a rate above first.</p>
       <button class="tap" id="dc-tap" type="button"><span id="dc-num">Tap</span><small id="dc-hint">Tap once for each drop</small></button>
       <div id="dc-out"></div>
       <div class="presets"><button class="chip" id="dc-reset">Start over</button></div>
-    </div>
+    </div></details>
 
-    <div class="panel">
-      <h2>IV push times</h2>
+    <details class="cdrop"><summary><div class="top"><span class="name">IV push times</span><span class="chev"></span></div></summary><div class="body cbody">
       <div class="scroll"><table id="push-table"></table></div>
       <p class="sub">From the manufacturer labels, not the Drip Docx guide. Confirm with Narges. Flush before and after every push.</p>
-    </div>
+    </div></details>
   </section>
 
   <section class="calc" id="timers" hidden aria-label="Infusion timer">
@@ -310,8 +308,7 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
   </section>
 
   <footer>
-    Prices match dripdocx.com as of August 2026. Add-ons are charged on top of the drip price.<br>
-    Source: the Drip Docx Nurse Reference Guide by Narges Najmyar, second edition (August 2026). Confirm doses and orders with Narges.<br>
+    Add-ons are charged on top of the drip price. Confirm doses and orders with Narges.<br>
     &copy; 2026 Drip Docx, PLLC. All rights reserved.<br>
     <span id="ver"></span>
   </footer>
@@ -851,7 +848,7 @@ document.querySelectorAll('.seg[data-set="theme"] button').forEach(b => b.addEve
 setTheme(store("ddx-theme"), false);
 /* ---------- Version check ----------
    Bump VERSION here and in version.json together (same text) on every release. */
-const VERSION = "2026-11-20.6";
+const VERSION = "2026-11-20.7";
 $("ver").textContent = "Version " + VERSION;
 let newVer = null;
 function checkVersion() {

@@ -29,7 +29,7 @@ Open `index.html` in a browser. Nothing else is needed.
 
 This repository is public and published with GitHub Pages, with Narges Najmyar's approval. Share the Pages link with the Drip Docx nurses. The page asks search engines not to list it, but anyone who has the link can open it.
 
-The content comes from Narges's Drip Docx Nurse Reference Guide plus details from the Olympia vial labels. Menu prices are included and match dripdocx.com as of August 2026. Pay rates, door codes, passwords and payment handles are intentionally not in this app. Do not add them.
+The content comes from Narges's Drip Docx Nurse Reference Guide plus details from the Olympia vial labels. Menu prices are included. Pay rates, door codes, passwords and payment handles are intentionally not in this app. Do not add them.
 
 ## Edit the content
 
@@ -51,7 +51,7 @@ Copy an existing entry, change the text, and reload the page.
 
 ## Open items to confirm with Narges
 
-Based on the second edition of the guide (August 2026) and what Narges has said since.
+Based on the guide and what Narges has said since.
 
 - Refrigeration: Narges says B12 and Famotidine are not refrigerated and Lipo-Mino is. The guide still says the opposite on those slides.
 - NAD+: the guide gives the 100 mg dose but not the draw-up volume. The vial label read 100 mg/mL when checked earlier, so confirm with Narges before the first dose.
@@ -67,11 +67,11 @@ Sampled from dripdocx.com. The page is light by default and follows the phone's 
 
 | Token | Light (default) | Dark |
 |---|---|---|
-| Background | `#F2F1EF` | `#000000` |
-| Cards | `#F7F2ED` | `#121010` |
+| Background | `#E5DED5` | `#000000` |
+| Cards | `#FFFFFF` | `#1B1816` |
 | Text | `#1C1C1C` | `#F2EAE2` |
 | Accent | `#7D6E63` | `#CCB094` |
-| Header band | `#1C1C1C` | `#1C1C1C` |
+| Header band and tab bar | `#1C1C1C` | `#1C1C1C` |
 
 Fonts: Playfair Display for headings, Montserrat for body text, and Atkinson Hyperlegible for numbers. All three load from Google Fonts.
 
