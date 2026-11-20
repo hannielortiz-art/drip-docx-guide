@@ -309,7 +309,6 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
   </section>
 
   <footer>
-    Add-ons are charged on top of the drip price. Confirm doses and orders with Narges.<br>
     &copy; 2026 Drip Docx, PLLC. All rights reserved.<br>
     <span id="ver"></span>
   </footer>
@@ -848,7 +847,7 @@ document.querySelectorAll('.seg[data-set="theme"] button').forEach(b => b.addEve
 setTheme(store("ddx-theme"), false);
 /* ---------- Version check ----------
    Bump VERSION here and in version.json together (same text) on every release. */
-const VERSION = "2026-11-20.10";
+const VERSION = "2026-11-20.11";
 $("ver").textContent = "Version " + VERSION;
 let newVer = null;
 function checkVersion() {
