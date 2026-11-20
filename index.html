@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
 <link rel="manifest" href="manifest.webmanifest">
-<script>try{var t=localStorage.getItem("ddx-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script>try{var t=localStorage.getItem("ddx-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <meta name="theme-color" content="#1C1C1C">
 <meta name="apple-mobile-web-app-title" content="Drip Docx">
 <meta name="mobile-web-app-capable" content="yes">
@@ -60,6 +60,7 @@
   color-scheme: dark;
 }
 html { -webkit-text-size-adjust: 100%; background: var(--bg); }
+:root { --bw: 1px; }
 .num { font-family: var(--font-num); font-variant-numeric: lining-nums tabular-nums; }
 .topbar { background: var(--band); padding: calc(12px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 12px max(16px, env(safe-area-inset-left, 0px)); }
 .topbar-in { max-width: 720px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
@@ -71,7 +72,7 @@ html { -webkit-text-size-adjust: 100%; background: var(--bg); }
 body {
   background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5;
   margin: 0;
-  padding: 0 0 40px;
+  padding: 0 0 calc(96px + env(safe-area-inset-bottom, 0px));
 }
 .wrap { max-width: 720px; margin: 0 auto; padding: 24px max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px)); }
 header h1 { font-family: var(--font-display); font-weight: 500; font-size: 36px; line-height: 1.1; margin: 0 0 8px; letter-spacing: -0.01em; text-wrap: balance; }
@@ -82,35 +83,29 @@ header p { margin: 0; color: var(--muted); font-size: 14px; }
 .before ul { margin: 0; padding-left: 18px; }
 .bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding: 8px 0 10px; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--band); }
-#q { width: 100%; font: inherit; padding: 11px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+#q { width: 100%; font: inherit; padding: 11px 14px; border-radius: 10px; border: var(--bw) solid var(--line); background: var(--surface); color: var(--ink); }
 #q:focus-visible, .chip:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .chips { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
-.chip { font: inherit; font-size: 13px; font-weight: 500; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.chip { font: inherit; font-size: 13px; font-weight: 500; padding: 6px 12px; border-radius: 999px; border: var(--bw) solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
 .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .count { font-size: 12px; color: var(--muted); margin: 0 2px; }
-.theme { display: inline-flex; gap: 2px; padding: 3px; background: var(--accent-soft); border-radius: 999px; }
-.theme button { font: inherit; font-size: 12px; font-weight: 600; padding: 6px 12px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; }
-.theme button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,0.25); }
-.theme button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.update { position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 50; max-width: 696px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border-radius: 14px; background: var(--band); color: var(--band-ink); box-shadow: 0 6px 20px rgba(0,0,0,0.35); font-size: 14px; font-weight: 600; }
+.seg { display: inline-flex; gap: 2px; padding: 3px; background: var(--accent-soft); border-radius: 999px; }
+.seg button { font: inherit; font-size: 12px; font-weight: 600; padding: 6px 12px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,0.25); }
+.seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.update { position: fixed; left: 12px; right: 12px; bottom: calc(84px + env(safe-area-inset-bottom, 0px)); z-index: 50; max-width: 696px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border-radius: 14px; background: var(--band); color: var(--band-ink); box-shadow: 0 6px 20px rgba(0,0,0,0.35); font-size: 14px; font-weight: 600; }
 .update button { font: inherit; font-size: 14px; font-weight: 700; padding: 8px 14px; border: 0; border-radius: 999px; background: #CCB094; color: #000; cursor: pointer; white-space: nowrap; }
-.theme-row { display: flex; justify-content: flex-end; margin-top: 10px; }
-.tabs { display: flex; gap: 4px; margin-top: 8px; padding: 4px; background: var(--accent-soft); border-radius: 12px; }
-.tab { flex: 1; min-width: 0; font: inherit; font-size: 14px; font-weight: 600; padding: 9px 6px; border: 0; border-radius: 9px; background: transparent; color: var(--muted); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
-.tab[aria-selected="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12); }
-.tab .n { font-size: 12px; color: var(--muted); }
-.tabs.searching .tab { opacity: 0.55; }
-.tab:focus-visible, .field input:focus-visible, .field select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.nav-btn:focus-visible, .star:focus-visible, .field input:focus-visible, .field select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .subbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 8px; flex-wrap: wrap; min-height: 32px; }
 .calc { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
-.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.panel { background: var(--surface); border: var(--bw) solid var(--line); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .panel h2 { font-family: var(--font-display); font-weight: 600; font-size: 20px; line-height: 1.2; margin: 0; }
 .sub { font-size: 13px; color: var(--muted); margin: 0; }
 .fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .field { display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); min-width: 0; }
 .field input[type="time"] { -webkit-appearance: none; appearance: none; display: block; height: 46px; line-height: 1.2; text-align: left; box-sizing: border-box; }
 .field input[type="time"]::-webkit-date-and-time-value { text-align: left; min-height: 1.2em; margin: 0; }
-.field input, .field select { font: inherit; font-family: var(--font-num); font-size: 17px; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; width: 100%; min-width: 0; }
+.field input, .field select { font: inherit; font-family: var(--font-num); font-size: 17px; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--ink); background: var(--bg); border: var(--bw) solid var(--line); border-radius: 10px; padding: 10px 12px; width: 100%; min-width: 0; }
 .presets { display: flex; flex-wrap: wrap; gap: 6px; }
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
 .stat { background: var(--bg); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
@@ -123,7 +118,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .flag.slow { background: var(--warn-soft); color: var(--warn); }
 .stat .val small { font-size: 14px; font-weight: 500; color: var(--muted); }
 .list { display: flex; flex-direction: column; gap: 10px; }
-details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+details { background: var(--surface); border: var(--bw) solid var(--line); border-radius: 12px; }
 summary { list-style: none; cursor: pointer; padding: 13px 14px; display: flex; flex-direction: column; gap: 4px; }
 summary::-webkit-details-marker { display: none; }
 .top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
@@ -135,7 +130,7 @@ details[open] .chev { transform: rotate(-135deg); }
 .tag { font-size: 11.5px; font-weight: 600; letter-spacing: 0.03em; padding: 2px 8px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); text-transform: uppercase; }
 .tag.price { background: var(--ink); color: var(--bg); }
 .tag.fridge { background: var(--fridge-soft); color: var(--fridge); }
-.body { padding: 2px 14px 14px; display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--line); margin-top: 0; }
+.body { padding: 2px 14px 14px; display: flex; flex-direction: column; gap: 12px; border-top: var(--bw) solid var(--line); margin-top: 0; }
 .row { padding-top: 10px; }
 .row h3 { font-family: var(--font-body); font-size: 12px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin: 0 0 4px; font-weight: 600; }
 .row p, .row ul { margin: 0; }
@@ -147,12 +142,35 @@ details[open] .chev { transform: rotate(-135deg); }
 .note { border-left: 3px solid var(--accent); padding-left: 10px; margin-top: 10px; color: var(--muted); font-size: 14px; }
 .note b { color: var(--ink); }
 table { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
-th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); }
+th, td { text-align: left; padding: 5px 8px; border-bottom: var(--bw) solid var(--line); }
 th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
 .scroll { overflow-x: auto; max-width: 100%; }
 .screen { margin-bottom: 14px; }
 .empty { padding: 24px 8px; text-align: center; color: var(--muted); }
 footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
+.nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: var(--surface); border-top: var(--bw) solid var(--line); padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px)); }
+.nav-in { max-width: 720px; margin: 0 auto; display: flex; gap: 2px; }
+.nav-btn { flex: 1; min-width: 0; font: inherit; font-size: 11px; font-weight: 600; border: 0; background: transparent; color: var(--muted); padding: 6px 2px; border-radius: 10px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; position: relative; }
+.nav-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.nav-btn[aria-selected="true"] { color: var(--ink); background: var(--accent-soft); }
+.nav.searching .nav-btn[data-tab] { opacity: 0.55; }
+.badge { position: absolute; top: 5px; left: calc(50% + 8px); width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+.bigchip { font-size: 15px; padding: 10px 16px; }
+.right { display: flex; align-items: center; gap: 8px; flex: none; }
+.star { flex: none; border: 0; background: transparent; padding: 4px; margin: -4px 0; cursor: pointer; color: var(--muted); line-height: 0; border-radius: 8px; }
+.star svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linejoin: round; }
+.star[aria-pressed="true"] { color: var(--accent); }
+.star[aria-pressed="true"] svg { fill: currentColor; }
+.track { height: 8px; border-radius: 4px; background: var(--accent-soft); overflow: hidden; }
+.fill { height: 100%; background: var(--accent); border-radius: 4px; }
+.tcard .name { font-size: 18px; }
+.tact { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-end; }
+.tap { width: 100%; min-height: 128px; border-radius: 16px; border: var(--bw) solid var(--line); background: var(--bg); color: var(--ink); font: 700 48px/1 var(--font-num); cursor: pointer; touch-action: manipulation; user-select: none; -webkit-user-select: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
+.tap small { font: 600 13px var(--font-body); letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+.tap.live { background: var(--accent-soft); }
+.tap:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.good { background: var(--accent-soft); color: var(--ink); }
+.theme-row { display: flex; justify-content: flex-end; margin-top: 10px; }
 @media (prefers-reduced-motion: reduce) { .chev { transition: none; } }
 </style>
 </head>
@@ -163,10 +181,10 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
   <header>
     <h1>Nurse <em>Guide</em></h1>
     <p>IV drips and injections: draw-up, bag, add-ons, cautions.</p>
-    <div class="theme-row"><div class="theme" id="theme" role="group" aria-label="Appearance">
-      <button type="button" data-theme="light" aria-pressed="false">Light</button>
-      <button type="button" data-theme="dark" aria-pressed="false">Dark</button>
-      <button type="button" data-theme="auto" aria-pressed="true">Auto</button>
+    <div class="theme-row"><div class="seg" data-set="theme" role="group" aria-label="Appearance">
+      <button type="button" data-v="light" aria-pressed="false">Light</button>
+      <button type="button" data-v="dark" aria-pressed="false">Dark</button>
+      <button type="button" data-v="auto" aria-pressed="true">Auto</button>
     </div></div>
   </header>
 
@@ -211,13 +229,9 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
   <div id="bar-anchor"></div>
   <div class="bar">
     <input id="q" type="search" placeholder="Search drips, ingredients, add-ons" aria-label="Search" autocomplete="off">
-    <div class="tabs" id="tabs" role="tablist" aria-label="Sections">
-      <button class="tab" role="tab" id="tab-iv" data-tab="iv" aria-selected="true">IV drips <span class="n" id="n-iv"></span></button>
-      <button class="tab" role="tab" id="tab-inj" data-tab="inj" aria-selected="false">Injections <span class="n" id="n-inj"></span></button>
-      <button class="tab" role="tab" id="tab-calc" data-tab="calc" aria-selected="false">Calculator</button>
-    </div>
     <div class="subbar" id="subbar">
       <span class="count" id="count"></span>
+      <button class="chip" id="starfilter" aria-pressed="false">Starred <span id="n-star"></span></button>
     </div>
   </div>
   <div class="list" id="list"></div>
@@ -259,10 +273,40 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
 
 
     <div class="panel">
+      <h2>Count the drops</h2>
+      <p class="sub" id="dc-target">Set a rate above first.</p>
+      <button class="tap" id="dc-tap" type="button"><span id="dc-num">Tap</span><small id="dc-hint">Tap once for each drop</small></button>
+      <div id="dc-out"></div>
+      <div class="presets"><button class="chip" id="dc-reset">Start over</button></div>
+    </div>
+
+    <div class="panel">
       <h2>IV push times</h2>
       <div class="scroll"><table id="push-table"></table></div>
       <p class="sub">From the manufacturer labels, not the Drip Docx guide. Confirm with Narges. Flush before and after every push.</p>
     </div>
+  </section>
+
+  <section class="calc" id="timers" hidden aria-label="Infusion timer">
+    <p class="sub">Times the infusion that is running. One at a time. It stays on this phone only.</p>
+    <div class="panel" id="t-form">
+      <h2>Start the infusion</h2>
+      <div class="fields">
+        <label class="field" for="t-vol"><span>Bag size (mL)</span><input id="t-vol" type="number" inputmode="decimal" min="1" value="500"></label>
+        <label class="field" for="t-min"><span>Run time (minutes)</span><input id="t-min" type="number" inputmode="decimal" min="1" value="45"></label>
+      </div>
+      <div class="presets">
+        <button class="chip" data-tvol="250">250 mL</button>
+        <button class="chip" data-tvol="500">500 mL</button>
+        <button class="chip" data-tvol="1000">1 L</button>
+        <button class="chip" data-tmin="30">30 min</button>
+        <button class="chip" data-tmin="45">45 min</button>
+        <button class="chip" data-tmin="60">60 min</button>
+        <button class="chip" data-tmin="90">90 min</button>
+      </div>
+      <button class="chip bigchip" id="t-start" style="align-self:flex-start">Start timer</button>
+    </div>
+    <div id="t-list" class="calc"></div>
   </section>
 
   <footer>
@@ -272,6 +316,12 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
     <span id="ver"></span>
   </footer>
 </div>
+<nav class="nav" id="nav" aria-label="Sections"><div class="nav-in">
+  <button class="nav-btn" id="tab-iv" data-tab="iv" aria-selected="true"><svg viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Drips</button>
+  <button class="nav-btn" id="tab-inj" data-tab="inj" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M15 4l5 5M13 6l5 5M3 21l4-4M7 17l9-9 3 3-9 9z"/></svg>Shots</button>
+  <button class="nav-btn" id="tab-calc" data-tab="calc" aria-selected="false"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M8 16h2M12 16h2"/></svg>Calculator</button>
+  <button class="nav-btn" id="tab-timers" data-tab="timers" aria-selected="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 3h6"/></svg>Timer<span class="badge" id="t-badge" hidden></span></button>
+</div></nav>
 <div class="update" id="update" hidden><span>A new version is available.</span><button type="button" id="update-btn">Update</button></div>
 
 <script>
@@ -502,7 +552,7 @@ const PUSH = {
   zofran: "Over 2 to 5 minutes. The label minimum is 30 seconds.",
   toradol: "Over at least 1 minute, because it burns. The label minimum is 15 seconds.",
   famotidine: "Over at least 2 minutes. The label says to dilute to 5 or 10 mL with normal saline before pushing.",
-  glutathione: "Over 1 to 5 minutes. The slower the better, per Narges. It is compounded, so there is no FDA label time.",
+  glutathione: "Over 3 to 5 minutes. The slower the better, per Narges. It is compounded, so there is no FDA label time.",
   hangover: "Toradol push, if given: over at least 1 minute, because it burns. The label minimum is 15 seconds."
 };
 D.forEach(d => { if (PUSH[d.id]) d.push = PUSH[d.id]; });
@@ -511,13 +561,16 @@ const PUSH_TABLE = [
   ["Ondansetron (Zofran)", "2 to 5 minutes", "At least 30 seconds"],
   ["Ketorolac (Toradol)", "At least 1 minute (it burns)", "At least 15 seconds"],
   ["Famotidine (Pepcid)", "At least 2 minutes", "At least 2 minutes, diluted to 5 or 10 mL"],
-  ["Glutathione", "1 to 5 minutes, slower is better", "No FDA label (compounded)"],
+  ["Glutathione", "3 to 5 minutes, slower is better", "No FDA label (compounded)"],
   ["Benadryl 25 mg (emergency)", "At least 1 minute", "No faster than 25 mg per minute"]
 ];
 
 function store(key, val) { try { if (val === undefined) return localStorage.getItem(key); localStorage.setItem(key, val); } catch (e) { return null; } }
 let tab = store("ddx-tab") || "iv";
-if (!["iv", "inj", "calc"].includes(tab)) tab = "iv";
+if (!["iv", "inj", "calc", "timers"].includes(tab)) tab = "iv";
+let stars = [];
+try { stars = JSON.parse(store("ddx-stars") || "[]"); if (!Array.isArray(stars)) stars = []; } catch (e) { stars = []; }
+let starOnly = false;
 
 function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
 function ul(arr) { return "<ul>" + arr.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul>"; }
@@ -527,7 +580,7 @@ function card(d) {
   if (PRICE[d.id] != null) tags.push(`<span class="tag price">$${PRICE[d.id]}</span>`);
   tags.push(`<span class="tag">${d.kind === "iv" ? "IV drip" : (d.push ? "IV push" : "Injection")}</span>`);
   if (d.fridge) tags.push('<span class="tag fridge">Refrigerated</span>');
-  let h = `<details id="${d.id}"><summary><div class="top"><span class="name">${esc(d.name)}</span><span class="chev"></span></div><div class="quick">${esc(d.quick)}</div><div class="tags">${tags.join("")}</div></summary><div class="body">`;
+  let h = `<details id="${d.id}"><summary><div class="top"><span class="name">${esc(d.name)}</span><span class="right"><button class="star" type="button" data-star="${d.id}" aria-pressed="${stars.includes(d.id)}" aria-label="Star ${esc(d.name)}"><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z"/></svg></button><span class="chev"></span></span></div><div class="quick">${esc(d.quick)}</div><div class="tags">${tags.join("")}</div></summary><div class="body">`;
   h += `<div class="row"><h3>What it does</h3><p>${esc(d.does)}</p></div>`;
   h += `<div class="row"><h3>Ingredients</h3>${ul(d.ingredients)}</div>`;
   h += `<div class="row"><h3>Draw-up</h3>${ul(d.draw)}</div>`;
@@ -584,26 +637,33 @@ function wrapNums(root) {
 function render() {
   const q = els.q.value.trim().toLowerCase();
   const searching = q.length > 0;
-  const calc = document.getElementById("calc");
-  document.getElementById("tabs").classList.toggle("searching", searching);
-  document.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-selected", String(!searching && b.dataset.tab === tab)));
-  const onCalc = !searching && tab === "calc";
-  document.getElementById("before").hidden = onCalc;
-  document.getElementById("screening").hidden = onCalc;
+  const calc = document.getElementById("calc"), tim = document.getElementById("timers");
+  document.getElementById("nav").classList.toggle("searching", searching);
+  document.querySelectorAll(".nav-btn[data-tab]").forEach(b => b.setAttribute("aria-selected", String(!searching && b.dataset.tab === tab)));
+  const onTool = !searching && (tab === "calc" || tab === "timers");
+  document.getElementById("before").hidden = onTool;
+  document.getElementById("screening").hidden = onTool;
+  document.querySelector(".bar").classList.toggle("tool", onTool);
+  els.q.hidden = false;
+  $("n-star").textContent = stars.length ? stars.length : "";
+  $("starfilter").setAttribute("aria-pressed", String(starOnly));
 
-  if (!searching && tab === "calc") {
-    els.list.hidden = true; calc.hidden = false; $("subbar").hidden = true; els.count.textContent = "";
+  if (onTool) {
+    els.list.hidden = true; $("subbar").hidden = true; els.count.textContent = "";
+    calc.hidden = tab !== "calc"; tim.hidden = tab !== "timers";
+    if (tab === "timers") renderTimers();
     return;
   }
-  calc.hidden = true; els.list.hidden = false; $("subbar").hidden = false;
+  calc.hidden = true; tim.hidden = true; els.list.hidden = false; $("subbar").hidden = false;
   const rows = D.filter(d => {
     if (!searching) {
-      if (d.kind !== tab) return false;
+      if (starOnly) { if (!stars.includes(d.id)) return false; }
+      else if (d.kind !== tab) return false;
     }
     return !searching || haystack(d).includes(q);
   });
-  els.count.textContent = searching ? rows.length + " found in all sections" : rows.length + " shown";
-  els.list.innerHTML = rows.length ? rows.map(card).join("") : '<div class="empty">Nothing matches. Try a shorter search.</div>';
+  els.count.textContent = searching ? rows.length + " found in all sections" : starOnly ? rows.length + " starred" : rows.length + " shown";
+  els.list.innerHTML = rows.length ? rows.map(card).join("") : '<div class="empty">' + (starOnly && !searching ? "Nothing starred yet. Tap the star on a card to keep it here." : "Nothing matches. Try a shorter search.") + '</div>';
   if (searching && rows.length === 1) { const el = els.list.querySelector("details"); if (el) el.open = true; }
   wrapNums(els.count);
   wrapNums(els.list);
@@ -655,8 +715,8 @@ function calcRunning() {
     "</div>";
   if (set) {
     const diff = Math.round((mlhr / set - 1) * 100);
-    if (diff >= 15) html += `<div class="flag fast">Running about ${diff}% faster than the set rate of ${Math.round(set)} mL/hr. Recount the drops and slow it down.</div>`;
-    else if (diff <= -15) html += `<div class="flag slow">Running about ${Math.abs(diff)}% slower than the set rate of ${Math.round(set)} mL/hr. Check the clamp, the site and the bag height.</div>`;
+    if (diff >= 15) html += `<div class="flag fast">Running about ${diff}% faster than the set rate of ${Math.round(set)} mL/hr. Slow it down.</div>`;
+    else if (diff <= -15) html += `<div class="flag slow">Running about ${Math.abs(diff)}% slower than the set rate of ${Math.round(set)} mL/hr.</div>`;
   }
   out.innerHTML = html;
   wrapNums(out);
@@ -677,28 +737,121 @@ document.querySelectorAll("[data-min]").forEach(b => b.addEventListener("click",
 $("r-nowbtn").addEventListener("click", () => { $("r-now").value = hhmm(new Date()); calcRunning(); });
 $("r-now").value = hhmm(new Date());
 
-/* ---------- Tabs, search and filter ---------- */
-$("n-iv").textContent = D.filter(d => d.kind === "iv").length;
-$("n-inj").textContent = D.filter(d => d.kind === "inj").length;
+/* ---------- Tabs, search and stars ---------- */
 els.q.addEventListener("input", render);
-document.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => {
+document.querySelectorAll(".nav-btn[data-tab]").forEach(b => b.addEventListener("click", () => {
   tab = b.dataset.tab; store("ddx-tab", tab);
   if (els.q.value) els.q.value = "";
+  if (tab === "iv" || tab === "inj") starOnly = false;
   render();
   const top = document.getElementById("bar-anchor").getBoundingClientRect().top + window.scrollY;
-  if (tab === "calc" || window.scrollY > top) window.scrollTo(0, Math.max(0, top));
+  if (tab === "calc" || tab === "timers" || window.scrollY > top) window.scrollTo(0, Math.max(0, top));
 }));
+$("starfilter").addEventListener("click", () => { starOnly = !starOnly; render(); });
+els.list.addEventListener("click", e => {
+  const b = e.target.closest(".star");
+  if (!b) return;
+  e.preventDefault(); e.stopPropagation();
+  const id = b.dataset.star, i = stars.indexOf(id);
+  if (i >= 0) stars.splice(i, 1); else stars.push(id);
+  store("ddx-stars", JSON.stringify(stars));
+  if (starOnly && !els.q.value) render(); else { b.setAttribute("aria-pressed", String(i < 0)); $("n-star").textContent = stars.length ? stars.length : ""; }
+});
+
+/* ---------- Count the drops ---------- */
+const DC = { taps: 0, t0: 0, running: false, done: false, iv: null };
+function dcTarget() { const v = num("c-vol"), m = num("c-min"); return v && m ? v * 20 / m / 6 : null; }
+function dcRefresh() {
+  const t = dcTarget();
+  $("dc-target").innerHTML = t ? "Target from Set a rate: <b>" + Math.round(t) + "</b> drops in 10 seconds. Tap once for each drop. It counts for 10 seconds from your first tap." : "Enter a bag size and run time in Set a rate first.";
+  wrapNums($("dc-target"));
+}
+function dcShow() {
+  const secs = DC.running ? Math.max(0, 10 - (Date.now() - DC.t0) / 1000) : 10;
+  $("dc-num").textContent = DC.taps || "Tap";
+  $("dc-hint").textContent = DC.done ? "Finished" : DC.running ? secs.toFixed(1) + " sec left" : "Tap once for each drop";
+  $("dc-tap").classList.toggle("live", DC.running);
+}
+function dcFinish() {
+  clearInterval(DC.iv); DC.running = false; DC.done = true; dcShow();
+  const t = dcTarget();
+  const mlhr = Math.round(DC.taps * 18);
+  let msg = "Counted <b>" + DC.taps + "</b> drops in 10 seconds, about <b>" + mlhr + "</b> mL/hr.";
+  if (t) {
+    const diff = Math.round((DC.taps / t - 1) * 100);
+    if (Math.abs(diff) <= 10) msg += '<div class="flag good">On target. Within 10% of ' + Math.round(t) + " drops.</div>";
+    else if (diff > 0) msg += '<div class="flag fast">About ' + diff + "% fast against a target of " + Math.round(t) + ". Close the clamp a little and count again.</div>";
+    else msg += '<div class="flag slow">About ' + Math.abs(diff) + "% slow against a target of " + Math.round(t) + ". Open the clamp a little and count again.</div>";
+  }
+  $("dc-out").innerHTML = msg; wrapNums($("dc-out"));
+}
+function dcReset() { clearInterval(DC.iv); DC.taps = 0; DC.running = false; DC.done = false; $("dc-out").innerHTML = ""; dcShow(); }
+$("dc-tap").addEventListener("click", () => {
+  if (DC.done) return;
+  if (!DC.running) { DC.running = true; DC.t0 = Date.now(); DC.iv = setInterval(() => { if (Date.now() - DC.t0 >= 10000) dcFinish(); else dcShow(); }, 100); }
+  DC.taps++; dcShow();
+  if (navigator.vibrate) { try { navigator.vibrate(8); } catch (e) {} }
+});
+$("dc-reset").addEventListener("click", dcReset);
+["c-vol", "c-min"].forEach(id => $(id).addEventListener("input", dcRefresh));
+document.querySelectorAll("[data-vol],[data-min]").forEach(b => b.addEventListener("click", dcRefresh));
+dcRefresh(); dcShow();
+
+/* ---------- Infusion timer (one at a time, saved on this phone only) ---------- */
+let timer = null;
+try { timer = JSON.parse(store("ddx-timer") || "null"); if (!timer || !timer.vol || !timer.min || !timer.start) timer = null; } catch (e) { timer = null; }
+function saveTimer() { store("ddx-timer", JSON.stringify(timer)); updateBadge(); }
+function updateBadge() { $("t-badge").hidden = !timer; }
+function fmtMin(m) { m = Math.max(0, Math.round(m)); return m < 60 ? m + " min" : Math.floor(m / 60) + " hr " + (m % 60) + " min"; }
+function renderTimers() {
+  updateBadge();
+  $("t-form").hidden = !!timer;
+  const box = $("t-list");
+  if (!timer) { box.innerHTML = ""; return; }
+  const now = Date.now(), t = timer;
+  const rate = t.vol / t.min * 60;
+  const infused = Math.min(t.vol, t.vol * ((now - t.start) / 60000) / t.min);
+  const left = Math.max(0, t.vol - infused), done = left < 0.5;
+  const minsLeft = left / rate * 60;
+  const pct = Math.round(infused / t.vol * 100);
+  box.innerHTML = '<div class="panel tcard"><div class="top"><span class="name">' + (done ? "Time is up" : "Running") + '</span><span class="tag">' + Math.round(t.vol) + " mL · " + Math.round(rate) + " mL/hr</span></div>" +
+    '<div class="track" role="progressbar" aria-valuenow="' + pct + '" aria-valuemin="0" aria-valuemax="100"><div class="fill" style="width:' + pct + '%"></div></div>' +
+    '<div class="stats">' +
+    stat("Infused", "~" + Math.round(infused) + " <small>mL</small>", pct + "% done") +
+    stat("Left", Math.round(left) + " <small>mL</small>", "Drops per 10 sec: " + Math.round(rate * 20 / 60 / 6)) +
+    stat(done ? "Finished" : "Time left", done ? "Now" : fmtMin(minsLeft), done ? "" : "Done by " + clock(new Date(now + minsLeft * 60000)), !done) +
+    stat("Started", clock(new Date(t.start))) +
+    '</div><div class="tact"><button class="chip" data-act="done">' + (done ? "Finish" : "Stop timer") + "</button></div></div>";
+  wrapNums(box);
+}
+$("t-start").addEventListener("click", () => {
+  const vol = num("t-vol"), min = num("t-min");
+  if (!vol || !min) { $("t-vol").focus(); return; }
+  timer = { vol, min, start: Date.now() };
+  saveTimer(); renderTimers();
+});
+document.querySelectorAll("[data-tvol]").forEach(b => b.addEventListener("click", () => { $("t-vol").value = b.dataset.tvol; }));
+document.querySelectorAll("[data-tmin]").forEach(b => b.addEventListener("click", () => { $("t-min").value = b.dataset.tmin; }));
+$("t-list").addEventListener("click", e => {
+  if (!e.target.closest("[data-act=done]")) return;
+  timer = null; saveTimer(); renderTimers();
+});
+setInterval(() => { if (tab === "timers" && !els.q.value && !document.hidden) renderTimers(); }, 15000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden && tab === "timers" && !els.q.value) renderTimers(); });
+updateBadge();
+
+/* ---------- Theme ---------- */
 function setTheme(m, save) {
   const root = document.documentElement;
   if (m === "light" || m === "dark") root.setAttribute("data-theme", m); else { m = "auto"; root.removeAttribute("data-theme"); }
-  document.querySelectorAll("#theme button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.theme === m)));
+  document.querySelectorAll('.seg[data-set="theme"] button').forEach(b => b.setAttribute("aria-pressed", String(b.dataset.v === m)));
   if (save) store("ddx-theme", m);
 }
-document.querySelectorAll("#theme button").forEach(b => b.addEventListener("click", () => setTheme(b.dataset.theme, true)));
+document.querySelectorAll('.seg[data-set="theme"] button').forEach(b => b.addEventListener("click", () => setTheme(b.dataset.v, true)));
 setTheme(store("ddx-theme"), false);
 /* ---------- Version check ----------
    Bump VERSION here and in version.json together (same text) on every release. */
-const VERSION = "2026-11-20.2";
+const VERSION = "2026-11-20.6";
 $("ver").textContent = "Version " + VERSION;
 let newVer = null;
 function checkVersion() {

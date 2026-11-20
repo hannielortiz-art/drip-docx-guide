@@ -1,6 +1,14 @@
 # Drip Docx Nurse Guide
 
-A phone-friendly reference for every Drip Docx IV drip and injection: ingredients, draw-up volumes and needles, bag or route, IV push times, prices, suggested add-ons, and cautions. It has three tabs: IV drips, Injections, and a drip Calculator (set a rate, check a running drip, and IV push times). Search looks across both drug tabs.
+A phone-friendly reference for every Drip Docx IV drip and injection: ingredients, draw-up volumes and needles, bag or route, IV push times, prices, suggested add-ons, and cautions. A bottom tab bar switches between Drips, Shots, Calculator and Timer. Search looks across both drug tabs.
+
+## What it does
+
+- **Starred cards:** tap the star on any drip or injection to keep it handy, then use the Starred button to see only those. Stars stay on that phone.
+- **Calculator:** set a rate, check a running drip, count the drops, and IV push times. The drop counter has you tap once for each drop for 10 seconds and compares the count to the target.
+- **Timer:** times the one infusion that is running, with a progress bar, time left and done-by time. It stays on that phone.
+- **Theme:** a Light, Dark or Auto switch under the page title.
+- **Updates:** the app offers an Update banner when a newer version is published.
 
 It is one static page with no build step and no dependencies other than Google Fonts.
 
@@ -37,7 +45,7 @@ All drug data lives in the `D` array in the `<script>` block of `index.html`. Ea
 | `table` | Optional label strengths table |
 | `notes` | Not shown in the app. Leave it empty and put anything important in `cautions` |
 
-Prices live in the `PRICE` list and IV push times in the `PUSH` and `PUSH_TABLE` lists, just below the drug data. The push times come from the manufacturer labels, not the guide, and should be approved by Narges. Glutathione is 1 to 5 minutes and the slower the better, per Narges. Only glutathione, famotidine, Toradol and Zofran are IV pushes; the other injections are IM.
+Prices live in the `PRICE` list and IV push times in the `PUSH` and `PUSH_TABLE` lists, just below the drug data. The push times come from the manufacturer labels, not the guide, and should be approved by Narges. Glutathione is 3 to 5 minutes and the slower the better, per Narges. Only glutathione, famotidine, Toradol and Zofran are IV pushes; the other injections are IM.
 
 Copy an existing entry, change the text, and reload the page.
 
