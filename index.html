@@ -558,15 +558,16 @@ D.forEach(d => { if (PUSH[d.id]) d.push = PUSH[d.id]; });
 
 /* Vial strengths and sources, as confirmed by the clinic. Add more drugs here as they are confirmed. */
 const MINERAL = "Mineral blend, 30 mL vial, per mL: magnesium chloride 80 mg, zinc sulfate 1 mg, copper gluconate 0.2 mg, manganese 20 mcg.";
+const VITA = "Vita Complex: 30 mL multi-dose vial. Per mL: thiamine HCl 100 mg, niacinamide 100 mg, riboflavin 5\u2019-phosphate 2 mg, dexpanthenol 2 mg, pyridoxine HCl 2 mg. 5 cc is thiamine 500 mg, niacinamide 500 mg, riboflavin 10 mg, dexpanthenol 10 mg, pyridoxine 10 mg.";
 const VIAL = {
-  beauty: ["Biotin: 10 mg/mL, 10 mL vial. 5 cc is 50 mg."],
-  immunity: ["Zinc sulfate: 10 mg/mL, 1 mL vial. 1 cc is 10 mg."],
+  beauty: [VITA, "Biotin: 10 mg/mL, 10 mL vial. 5 cc is 50 mg."],
+  immunity: [VITA, "Zinc sulfate: 10 mg/mL, 1 mL vial. 1 cc is 10 mg."],
   covid: ["Zinc sulfate: 10 mg/mL, 1 mL vial. 1 cc is 10 mg.", "Vitamin D3: 50,000 IU/mL (1.25 mg/mL), 30 mL vial. 1 cc is 50,000 IU."],
-  morelife: ["Taurine: 50 mg/mL, 30 mL vial.", "Methylcobalamin B12: 5 mg/mL, 30 mL vial."],
-  fatburn: ["Taurine: 50 mg/mL, 30 mL vial. 5 cc is 250 mg.", "Methylcobalamin B12: 5 mg/mL, 30 mL vial. 5 cc is 25 mg."],
-  hangover: ["Ondansetron: 1 mg/mL, 30 mL vial. 5 cc is 5 mg, 2 cc is 2 mg.", MINERAL + " 5 cc is magnesium chloride 400 mg, zinc 5 mg, copper 1 mg, manganese 100 mcg.", "Ketorolac: 30 mg/mL, 1 mL vial. 1 cc is 30 mg."],
-  recharge: [MINERAL + " 5 cc is magnesium chloride 400 mg, zinc 5 mg, copper 1 mg, manganese 100 mcg."],
-  sports: ["Amino blend: 30 mL multi-dose vial. Per mL: L-arginine HCl 100 mg, levocarnitine 100 mg, L-lysine HCl 50 mg, L-proline 50 mg. 5 cc is arginine 500 mg, levocarnitine 500 mg, lysine 250 mg, proline 250 mg.", MINERAL + " 5 cc is magnesium chloride 400 mg, zinc 5 mg, copper 1 mg, manganese 100 mcg."],
+  morelife: [VITA, "Taurine: 50 mg/mL, 30 mL vial.", "Methylcobalamin B12: 5 mg/mL, 30 mL vial."],
+  fatburn: [VITA, "Taurine: 50 mg/mL, 30 mL vial. 5 cc is 250 mg.", "Methylcobalamin B12: 5 mg/mL, 30 mL vial. 5 cc is 25 mg."],
+  hangover: [VITA, "Ondansetron: 1 mg/mL, 30 mL vial. 5 cc is 5 mg, 2 cc is 2 mg.", MINERAL + " 5 cc is magnesium chloride 400 mg, zinc 5 mg, copper 1 mg, manganese 100 mcg.", "Ketorolac: 30 mg/mL, 1 mL vial. 1 cc is 30 mg."],
+  recharge: [VITA, MINERAL + " 5 cc is magnesium chloride 400 mg, zinc 5 mg, copper 1 mg, manganese 100 mcg."],
+  sports: [VITA, "Amino blend: 30 mL multi-dose vial. Per mL: L-arginine HCl 100 mg, levocarnitine 100 mg, L-lysine HCl 50 mg, L-proline 50 mg. 5 cc is arginine 500 mg, levocarnitine 500 mg, lysine 250 mg, proline 250 mg.", MINERAL + " 5 cc is magnesium chloride 400 mg, zinc 5 mg, copper 1 mg, manganese 100 mcg."],
   biotin: ["Biotin: 10 mg/mL, 10 mL vial. 1 cc is 10 mg."],
   b12: ["Methylcobalamin B12: 5 mg/mL, 30 mL vial. 1 cc is 5 mg."],
   vitd: ["Vitamin D3: 50,000 IU/mL (1.25 mg/mL), 30 mL vial. 1 cc is 50,000 IU."],
@@ -574,6 +575,8 @@ const VIAL = {
   iron: ["Venofer: 20 mg/mL, 5 mL single-dose vial. Each vial is 100 mg elemental iron."],
   vitc: ["Preserved ascorbic acid: 500 mg/mL, 30 mL vial. 1 cc is 500 mg."],
   nad: ["NAD+: 100 mg/mL, 10 mL multi-dose vial. 1 mL is 100 mg."],
+  rehydrate: ["Normal saline 0.9%: 1 L bag."],
+  glutathione: ["Glutathione: 200 mg/mL, 30 mL multi-dose vial. 1 cc is 200 mg, 5 cc is 1,000 mg."],
   famotidine: ["Famotidine: 10 mg/mL, 2 mL single-dose vial (20 mg per vial). Store refrigerated. 1 cc is 10 mg."],
   triimmune: ["Tri-Immune Boost: 30 mL multi-dose vial. 1 cc is glutathione 200 mg, ascorbic acid 200 mg, zinc sulfate 2.5 mg."],
   lipomino: ["Lipo-Mino-Mix-C: 10 mL multi-dose vial. Per mL: levocarnitine 125 mg, methionine 12.4 mg, inositol 25 mg, choline chloride 25 mg, thiamine HCl 50 mg, riboflavin 5\u2019-phosphate 5 mg, pyridoxine HCl 2 mg, cyanocobalamin 1 mg."],
@@ -879,7 +882,7 @@ document.querySelectorAll('.seg[data-set="theme"] button').forEach(b => b.addEve
 setTheme(store("ddx-theme"), false);
 /* ---------- Version check ----------
    Bump VERSION here and in version.json together (same text) on every release. */
-const VERSION = "2026-11-22.19";
+const VERSION = "2026-11-22.21";
 $("ver").textContent = "Version " + VERSION;
 let newVer = null;
 function checkVersion() {
