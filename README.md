@@ -74,7 +74,7 @@ Sampled from dripdocx.com. The page is light by default and follows the phone's 
 | Accent | `#7D6E63` | `#CCB094` |
 | Header band and tab bar | `#1C1C1C` | `#1C1C1C` |
 
-Fonts: Playfair Display for headings, Montserrat for body text, and Atkinson Hyperlegible for every number. All three are stored in the `fonts` folder (upload the whole folder) so they look the same on every device and work offline.
+Fonts match dripdocx.com: Playfair Display (regular, italic and bold) for headings and Montserrat (regular and bold) for text. Atkinson Hyperlegible is used for every number. All three are stored in the `fonts` folder (upload the whole folder) so they look the same on every device and work offline.
 
 ## Offline use
 

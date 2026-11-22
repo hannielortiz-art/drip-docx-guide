@@ -1,8 +1,8 @@
 /* Drip Docx Nurse Guide: keeps a copy of the app so it opens without signal.
    Pages and files load from the network first (so updates arrive right away) and fall back to the saved copy. */
-const CACHE = "ddx-shell-2";
+const CACHE = "ddx-shell-3";
 const SHELL = ["./", "index.html", "logo.jpg", "manifest.webmanifest", "icon-192.png?v=4", "icon-512.png", "apple-touch-icon.png?v=4",
-  "fonts/montserrat-latin-400-normal.woff2", "fonts/montserrat-latin-500-normal.woff2", "fonts/montserrat-latin-600-normal.woff2", "fonts/playfair-display-latin-500-normal.woff2", "fonts/playfair-display-latin-600-normal.woff2", "fonts/playfair-display-latin-500-italic.woff2", "fonts/atkinson-hyperlegible-latin-400-normal.woff2", "fonts/atkinson-hyperlegible-latin-700-normal.woff2"];
+  "fonts/montserrat-latin-400-normal.woff2", "fonts/montserrat-latin-700-normal.woff2", "fonts/playfair-display-latin-400-normal.woff2", "fonts/playfair-display-latin-400-italic.woff2", "fonts/playfair-display-latin-700-normal.woff2", "fonts/atkinson-hyperlegible-latin-400-normal.woff2", "fonts/atkinson-hyperlegible-latin-700-normal.woff2"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => Promise.all(SHELL.map(u => c.add(u).catch(() => {})))).then(() => self.skipWaiting()));
