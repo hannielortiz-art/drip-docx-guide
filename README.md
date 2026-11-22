@@ -27,9 +27,9 @@ Open `index.html` in a browser. Nothing else is needed.
 
 ## Sharing
 
-This repository is public and published with GitHub Pages, with Narges Najmyar's approval. Share the Pages link with the Drip Docx nurses. The page asks search engines not to list it, but anyone who has the link can open it.
+This app is meant to be private. The Access tab holds door codes, the office computer and iPad logins, and the Wi-Fi passwords, with Narges's approval. GitHub Pages is public by default, so confirm the page is actually locked down before sharing the link, and never share it outside the Drip Docx nurses.
 
-The content comes from Narges's Drip Docx Nurse Reference Guide plus details from the vial labels. Menu prices are included. Pay rates, door codes, passwords and payment handles are intentionally not in this app. Do not add them.
+The content comes from Narges's Drip Docx Nurse Reference Guide plus details from the vial labels. Menu prices are included. Pay rates and payment handles are intentionally not in this app. Do not add them.
 
 ## Edit the content
 
@@ -54,7 +54,7 @@ Copy an existing entry, change the text, and reload the page.
 
 Based on the guide and what Narges has said since.
 
-- Refrigeration: Narges says B12 and Famotidine are not refrigerated and Lipo-Mino is. The guide still says the opposite on those slides.
+- Refrigeration: Narges says B12 and Famotidine are not refrigerated and Lipo-Mino-Mix-C is. The guide still says the opposite on those slides.
 - NAD+: the guide gives the 100 mg dose but not the draw-up volume. The vial label read 100 mg/mL when checked earlier, so confirm with Narges before the first dose.
 - Myers: the label lists calcium chloride dihydrate, while the guide says calcium gluconate. The hydroxocobalamin strength was not readable in the label photos.
 - Glutathione strength is not in the guide. Read it from the vial.
@@ -76,6 +76,14 @@ Sampled from dripdocx.com. The page is light by default and follows the phone's 
 
 Fonts: Playfair Display for headings, Montserrat for body text, and Atkinson Hyperlegible for numbers. All three load from Google Fonts.
 
+## Offline use
+
+`sw.js` must sit next to `index.html` in the repo. It saves a copy of the app on each phone so it opens without signal. The app and its files load from the network first, so updates still arrive right away, and the saved copy is used only when the network fails or is slow. `version.json` is never cached. Icons and `manifest.webmanifest` should be in the same folder.
+
+## Timer alerts
+
+When a timer finishes, the page plays a chime, vibrates (Android) and shows a notification if the nurse allowed notifications. The screen is kept on while a timer runs. A phone can pause a web page while it is locked, so the alert may come when the phone is next opened.
+
 ## Disclaimer
 
 For internal reference only. Always confirm doses and orders with Narges and follow the order and protocols in place for each patient.
@@ -84,6 +92,6 @@ For internal reference only. Always confirm doses and orders with Narges and fol
 
 1. Change `VERSION` in `index.html` (search for `const VERSION`) to a new value, for example `2026-12-01.1`.
 2. Put the same text in `version.json`, like `{"version":"2026-12-01.1"}`.
-3. Upload both files to GitHub.
+3. Upload both files to GitHub (and `sw.js` the first time).
 
 Phones that open the app check `version.json`. If it differs from the version they are running, a banner appears with an Update button. The version also shows at the bottom of the page.

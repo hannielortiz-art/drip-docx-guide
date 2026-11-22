@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Drip Docx Nurse Guide</title>
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=3">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=4">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=4">
 <link rel="manifest" href="manifest.webmanifest">
+<script>try{var z=localStorage.getItem("ddx-text");if(z==="1.12"||z==="1.25")document.documentElement.style.setProperty("--tz",z);}catch(e){}</script>
 <script>try{var t=localStorage.getItem("ddx-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
-<meta name="theme-color" content="#1C1C1C">
+<meta name="theme-color" content="#000000">
 <meta name="apple-mobile-web-app-title" content="Drip Docx">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -30,7 +31,9 @@
   --accent-soft: #E7DCCF;
   --on-accent: #FFFFFF;
   --taupe: #9B8B7F;
-  --band: #1C1C1C;
+  --band: #000000;
+  --price-bg: #1C1C1C; --price-ink: #E5DED5;
+  --seg-on-bg: #FFFFFF; --seg-on-ink: #1C1C1C;
   --band-ink: #F2EAE2;
   --fridge: #0D4A73;
   --fridge-soft: #DCEBF8;
@@ -45,18 +48,20 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #000000; --surface: #1B1816; --ink: #F2EAE2; --muted: #B3A394; --line: #4A4037;
-    --accent: #CCB094; --accent-soft: #2A2119; --on-accent: #000000; --taupe: #B8A594;
-    --fridge: #9CC8EC; --fridge-soft: #14222E; --warn: #E8C98C; --warn-soft: #2B2210;
-    --stop: #F2A8A8; --stop-soft: #3F1616;
+    --bg: #0E0C0B; --surface: #28231F; --ink: #EDE4DA; --muted: #A99B8D; --line: #4A4037;
+    --accent: #CDB397; --accent-soft: #352E27; --on-accent: #17130F; --taupe: #B8A594;
+    --fridge: #9CC8EC; --fridge-soft: #1B2B38; --warn: #E2CBA6; --warn-soft: #33291F;
+    --stop: #F2A8A8; --stop-soft: #3A1B1B;
+    --price-bg: #CDB397; --price-ink: #17130F; --seg-on-bg: #CDB397; --seg-on-ink: #17130F; --card-shadow: none;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #000000; --surface: #1B1816; --ink: #F2EAE2; --muted: #B3A394; --line: #4A4037;
-  --accent: #CCB094; --accent-soft: #2A2119; --on-accent: #000000; --taupe: #B8A594;
-  --fridge: #9CC8EC; --fridge-soft: #14222E; --warn: #E8C98C; --warn-soft: #2B2210;
-  --stop: #F2A8A8; --stop-soft: #3F1616;
+  --bg: #0E0C0B; --surface: #28231F; --ink: #EDE4DA; --muted: #A99B8D; --line: #4A4037;
+  --accent: #CDB397; --accent-soft: #352E27; --on-accent: #17130F; --taupe: #B8A594;
+  --fridge: #9CC8EC; --fridge-soft: #1B2B38; --warn: #E2CBA6; --warn-soft: #33291F;
+  --stop: #F2A8A8; --stop-soft: #3A1B1B;
+  --price-bg: #CDB397; --price-ink: #17130F; --seg-on-bg: #CDB397; --seg-on-ink: #17130F; --card-shadow: none;
   color-scheme: dark;
 }
 html { -webkit-text-size-adjust: 100%; background: var(--bg); min-height: 100%; }
@@ -66,7 +71,7 @@ html { -webkit-text-size-adjust: 100%; background: var(--bg); min-height: 100%; 
 .topbar-in { max-width: 720px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .rn { font-family: var(--font-body); font-weight: 600; font-size: 13px; letter-spacing: 0.14em; padding: 4px 11px 4px 13px; border: 1.5px solid #CCB094; border-radius: 999px; color: #CCB094; }
 .logo-crop { position: relative; width: 150px; height: 46px; overflow: hidden; }
-.logo-crop img { position: absolute; width: 175px; max-width: none; left: -14px; top: -53px; mix-blend-mode: lighten; }
+.logo-crop img { position: absolute; width: 175px; max-width: none; left: -14px; top: -53px; }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 body {
@@ -85,14 +90,22 @@ header p { margin: 0; color: var(--muted); font-size: 14px; }
 .bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding: 8px 0 10px; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--band); }
 #q { box-shadow: 0 1px 3px rgba(40, 25, 10, 0.10); width: 100%; font: inherit; padding: 11px 14px; border-radius: 10px; border: var(--bw) solid var(--line); background: var(--surface); color: var(--ink); }
-#q:focus-visible, .chip:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.qwrap { position: relative; }
+#q { padding-right: 44px; -webkit-appearance: none; appearance: none; }
+#q::-webkit-search-cancel-button, #q::-webkit-search-decoration { -webkit-appearance: none; display: none; }
+.qclear { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); width: 38px; height: 38px; border: 0; background: transparent; color: var(--muted); display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 50%; }
+.qclear[hidden] { display: none; }
+.qclear svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+.qclear:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; }
+#q:focus-visible, .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; border-radius: 12px; }
 .chips { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
 .chip { font: inherit; font-size: 13px; font-weight: 500; padding: 6px 12px; border-radius: 999px; border: var(--bw) solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
 .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .count { font-size: 12px; color: var(--muted); margin: 0 2px; }
 .seg { display: inline-flex; gap: 2px; padding: 3px; background: var(--accent-soft); border-radius: 999px; }
 .seg button { font: inherit; font-size: 12px; font-weight: 600; padding: 6px 12px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; }
-.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,0.25); }
+.seg button[aria-pressed="true"] { background: var(--seg-on-bg); color: var(--seg-on-ink); box-shadow: 0 1px 3px rgba(0,0,0,0.25); }
 .seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .update { position: fixed; left: 12px; right: 12px; bottom: calc(112px + env(safe-area-inset-bottom, 0px)); z-index: 50; max-width: 696px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border-radius: 14px; background: var(--band); color: var(--band-ink); box-shadow: 0 6px 20px rgba(0,0,0,0.35); font-size: 14px; font-weight: 600; }
 .update button { font: inherit; font-size: 14px; font-weight: 700; padding: 8px 14px; border: 0; border-radius: 999px; background: #CCB094; color: #000; cursor: pointer; white-space: nowrap; }
@@ -102,6 +115,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .panel { box-shadow: 0 1px 3px rgba(40, 25, 10, 0.10); background: var(--surface); border: var(--bw) solid var(--line); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .panel h2 { font-family: var(--font-display); font-weight: 600; font-size: 20px; line-height: 1.2; margin: 0; }
 .sub { font-size: 13px; color: var(--muted); margin: 0; }
+.ci { display: inline-block; width: 0.5em; height: 0.727em; overflow: hidden; white-space: nowrap; text-indent: 1em; vertical-align: baseline;
+  background: linear-gradient(currentColor, currentColor) center / 0.15em 100% no-repeat,
+              linear-gradient(currentColor, currentColor) top / 100% 0.13em no-repeat,
+              linear-gradient(currentColor, currentColor) bottom / 100% 0.13em no-repeat; }
 .fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .field { display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); min-width: 0; }
 .field input[type="time"] { -webkit-appearance: none; appearance: none; display: block; height: 46px; line-height: 1.2; text-align: left; box-sizing: border-box; }
@@ -119,7 +136,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .flag.slow { background: var(--warn-soft); color: var(--warn); }
 .stat .val small { font-size: 14px; font-weight: 500; color: var(--muted); }
 .list { display: flex; flex-direction: column; gap: 10px; }
-details { box-shadow: 0 1px 3px rgba(40, 25, 10, 0.10); background: var(--surface); border: var(--bw) solid var(--line); border-radius: 12px; }
+details { box-shadow: var(--card-shadow, 0 1px 3px rgba(40, 25, 10, 0.10)); background: var(--surface); border: var(--bw) solid var(--line); border-radius: 12px; }
 summary { list-style: none; cursor: pointer; padding: 13px 14px; display: flex; flex-direction: column; gap: 4px; }
 summary::-webkit-details-marker { display: none; }
 .top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
@@ -129,7 +146,7 @@ details[open] .chev { transform: rotate(-135deg); }
 .quick { font-size: 13px; color: var(--muted); }
 .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 2px; }
 .tag { font-size: 11.5px; font-weight: 600; letter-spacing: 0.03em; padding: 2px 8px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); text-transform: uppercase; }
-.tag.price { background: var(--ink); color: var(--bg); }
+.tag.price { background: var(--price-bg); color: var(--price-ink); }
 .tag.fridge { background: var(--fridge-soft); color: var(--fridge); }
 .body { padding: 2px 14px 14px; display: flex; flex-direction: column; gap: 12px; border-top: var(--bw) solid var(--line); margin-top: 0; }
 .row { padding-top: 10px; }
@@ -175,18 +192,46 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
 .bar.tool { display: none; }
 .cdrop .name { font-size: 20px; }
 .cbody { padding-top: 12px; }
-.theme-row { display: flex; justify-content: flex-end; margin-top: 10px; }
+.theme-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: 10px; }
+.wrap { zoom: var(--tz, 1); }
+.tb-right { display: flex; align-items: center; gap: 10px; }
+.emg { font: inherit; font-weight: 700; font-size: 13px; letter-spacing: 0.04em; padding: 6px 13px; border-radius: 999px; border: 0; background: #C0392B; color: #fff; cursor: pointer; min-height: 32px; }
+.emg:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.emgdlg { border: 0; padding: 0; width: min(560px, calc(100% - 24px)); max-height: 88vh; border-radius: 16px; background: var(--surface); color: var(--ink); overflow: auto; }
+.emgdlg::backdrop { background: rgba(0, 0, 0, 0.6); }
+.emgin { padding: 16px 18px 20px; }
+.emghead { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+.emghead h2 { margin: 0; font-size: 22px; color: #C0392B; }
+.emgx { font: inherit; font-weight: 600; border: var(--bw) solid var(--line); background: transparent; color: var(--ink); border-radius: 999px; padding: 6px 14px; min-height: 36px; cursor: pointer; }
+.emgdlg h3 { margin: 16px 0 4px; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; }
+.emgdlg ul { margin: 4px 0 0; padding-left: 20px; }
+.emgdlg li { margin: 4px 0; }
+.call911 { display: block; text-align: center; margin: 12px 0 2px; padding: 13px; border-radius: 12px; background: #C0392B; color: #fff; font-weight: 700; text-decoration: none; font-size: 17px; }
+.cv { font-weight: 700; margin-right: 6px; overflow-wrap: anywhere; }
+.copy { font: inherit; color: var(--ink); background: var(--accent-soft); border: var(--bw) solid var(--line); border-radius: 8px; width: 36px; height: 36px; padding: 0; vertical-align: middle; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+.copy svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.copy:active { transform: scale(0.98); }
+.copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.acc ul { list-style: none; padding: 0; margin: 8px 0 0; }
+.acc li { display: flex; align-items: center; justify-content: space-between; gap: 8px 12px; flex-wrap: nowrap; padding: 9px 0; border-top: var(--bw) solid var(--line); }
+.acc li:first-child { border-top: 0; }
+.lb { flex: 1 1 auto; min-width: 0; }
+.vg { flex: 0 0 auto; max-width: 62%; display: inline-flex; align-items: center; gap: 8px; margin-left: auto; }
+.cv { margin-right: 0; }
+.toast { position: fixed; left: 50%; bottom: calc(86px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: #1C1C1C; color: #fff; padding: 9px 16px; border-radius: 999px; font-weight: 600; font-size: 14px; z-index: 30; pointer-events: none; }
+.toast[hidden] { display: none; }
+.tcard.alarm { outline: 3px solid #C0392B; }
 @media (prefers-reduced-motion: reduce) { .chev { transition: none; } }
 </style>
 </head>
 <body>
-<div class="topbar"><div class="topbar-in"><div class="logo-crop"><img src="logo.jpg" alt="Drip Docx Wellness and Aesthetics" width="175" height="175"></div><span class="rn" aria-label="For registered nurses">RN</span></div></div>
+<div class="topbar"><div class="topbar-in"><div class="logo-crop"><img src="logo.jpg" alt="Drip Docx Wellness and Aesthetics" width="175" height="175"></div><div class="tb-right"><button type="button" class="emg" id="emg">Emergency</button><span class="rn" aria-label="For registered nurses">RN</span></div></div></div>
 
 <div class="wrap">
   <header>
     <h1>Nurse <em>Guide</em></h1>
     <p>IV drips and injections: draw-up, bag, add-ons, cautions.</p>
-    <div class="theme-row"><div class="seg" data-set="theme" role="group" aria-label="Appearance">
+    <div class="theme-row"><div class="seg" data-set="text" role="group" aria-label="Text size"><button type="button" data-v="1" aria-pressed="true">Normal</button><button type="button" data-v="1.12" aria-pressed="false">Large</button><button type="button" data-v="1.25" aria-pressed="false">Larger</button></div><div class="seg" data-set="theme" role="group" aria-label="Appearance">
       <button type="button" data-v="light" aria-pressed="false">Light</button>
       <button type="button" data-v="dark" aria-pressed="false">Dark</button>
       <button type="button" data-v="auto" aria-pressed="true">Auto</button>
@@ -222,18 +267,21 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
           <li>Pregnant or breastfeeding: confirm which treatments are excluded.</li>
           <li>Kidney disease: no Toradol, in any drip.</li>
           <li>NSAID allergy, ulcer or GI bleed: no Toradol.</li>
-          <li>On warfarin or Coumadin: no Ultimate Drip (vitamin K interferes with INR).</li>
+          <li>On warfarin (Coumadin): no Ultimate Drip (vitamin K interferes with INR).</li>
           <li>Arrhythmia or heart problems: no Pepcid as a routine add-on.</li>
-          <li>G6PD deficiency: raise with Narges before high-dose vitamin C or glutathione.</li>
+          <li>G6PD deficiency: call or text Narges before giving glutathione.</li>
         </ul>
       </div>
-      <div class="caution stop row"><h3>Stop</h3><p>If anything is unclear, or the patient’s history does not fit the treatment they booked, stop and call Narges before you start.</p></div>
+      <div class="caution stop row"><h3>Stop</h3><p>If anything is unclear, or the patient’s history does not fit the treatment they booked, stop and call or text Narges before you start.</p></div>
     </div>
   </details>
 
   <div id="bar-anchor"></div>
   <div class="bar">
-    <input id="q" type="search" placeholder="Search drips, ingredients, add-ons" aria-label="Search" autocomplete="off">
+    <div class="qwrap">
+      <input id="q" type="search" placeholder="Search drips, ingredients, add-ons" aria-label="Search" autocomplete="off">
+      <button type="button" id="qclear" class="qclear" aria-label="Clear search" hidden><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
     <div class="subbar" id="subbar">
       <span class="count" id="count"></span>
       <button class="chip" id="starfilter" aria-pressed="false">Starred <span id="n-star"></span></button>
@@ -242,7 +290,7 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
   <div class="list" id="list"></div>
 
   <section class="calc" id="calc" hidden aria-label="Drip calculator">
-    <p class="sub">All drop counts are for our 20 gtt/mL tubing. This only does the math. The rate comes from the order. For older or cardiac patients, call Narges first.</p>
+    <p class="sub">All drop counts are for our 20 gtt/mL tubing. This only does the math. The rate comes from the order. For older or cardiac patients, call or text Narges first.</p>
 
     <details class="cdrop" open><summary><div class="top"><span class="name">Set a rate</span><span class="chev"></span></div><div class="quick">Enter the volume and run time to get the drops to count.</div></summary><div class="body cbody">
       <div class="fields">
@@ -284,7 +332,7 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
 
     <details class="cdrop"><summary><div class="top"><span class="name">IV push times</span><span class="chev"></span></div><div class="quick">How slowly to push each medication.</div></summary><div class="body cbody">
       <div class="scroll"><table id="push-table"></table></div>
-      <p class="sub">From the manufacturer labels, not the Drip Docx guide. Confirm with Narges. Flush before and after every push.</p>
+      <p class="sub">From the manufacturer labels, not the Drip Docx guide. Call or text Narges to confirm. Flush before and after every push.</p>
     </div></details>
   </section>
 
@@ -310,16 +358,69 @@ footer { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
     <div id="t-list" class="calc"></div>
   </section>
 
+  <section class="calc acc" id="accesspane" hidden aria-label="Office access">
+    <div class="panel">
+      <h2>Codes</h2>
+      <ul>
+        <li><span class="lb">Building entry:</span><span class="vg"><span class="cv">4242</span></span></li>
+        <li><span class="lb">Studio entry:</span><span class="vg"><span class="cv">0025</span></span></li>
+        <li><span class="lb">Small medication refrigerator lock:</span><span class="vg"><span class="cv">025</span></span></li>
+      </ul>
+      <p class="sub">Before leaving the building, press the lock icon on the digital lock key panel. Do this at both the building entry and the studio entry.</p>
+    </div>
+    <div class="panel">
+      <h2>Office computer and iPad</h2>
+      <ul>
+        <li><span class="lb">Office computer profile:</span><span class="vg"><span class="cv">IV Drip Docx Staff</span></span></li>
+        <li><span class="lb">Office computer password:</span><span class="vg"><span class="cv"><span class="ci">I</span>vdrip2021</span></span></li>
+        <li><span class="lb">iPad passcode:</span><span class="vg"><span class="cv">2021</span></span></li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h2>Wi-Fi</h2>
+      <ul>
+        <li><span class="lb">Network:</span><span class="vg"><span class="cv">2102 Gallows</span><button type="button" class="copy" data-copy="2102 Gallows" aria-label="Copy 2102 Gallows"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg></button></span></li>
+        <li><span class="lb">Password:</span><span class="vg"><span class="cv">brick6164chores</span><button type="button" class="copy" data-copy="brick6164chores" aria-label="Copy brick6164chores"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg></button></span></li>
+        <li><span class="lb">Guest network:</span><span class="vg"><span class="cv">2102 Gallows Guest</span><button type="button" class="copy" data-copy="2102 Gallows Guest" aria-label="Copy 2102 Gallows Guest"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg></button></span></li>
+        <li><span class="lb">Guest password:</span><span class="vg"><span class="cv">guest12345</span><button type="button" class="copy" data-copy="guest12345" aria-label="Copy guest12345"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg></button></span></li>
+      </ul>
+    </div>
+  </section>
+
   <footer>
     &copy; 2026 Drip Docx, PLLC. All rights reserved.<br>
     <span id="ver"></span>
   </footer>
 </div>
+<dialog class="emgdlg" id="emgdlg" aria-labelledby="emgtitle"><div class="emgin">
+  <div class="emghead"><h2 id="emgtitle">Emergency</h2><button type="button" class="emgx" id="emgx">Close</button></div>
+  <a class="call911" href="tel:911">Call 911</a>
+  <h3>Anaphylaxis</h3>
+  <p class="sub">Shortness of breath, swelling of the tongue or throat, red eyes or skin, anxiety (sometimes with flushing), rapid pulse with falling blood pressure.</p>
+  <ul>
+    <li>Stop the infusion. Keep the IV in.</li>
+    <li>Call 911.</li>
+    <li>First line: epinephrine 0.3 mg IM, the preferred route. That is 0.3 cc of the 1 mg/mL ampule.</li>
+    <li>Repeat every 5 minutes, up to three times.</li>
+    <li>Adjunct: Benadryl 25 mg IV push.</li>
+    <li>Adjunct: Pepcid 20 mg IV push.</li>
+  </ul>
+  <h3>Vasovagal response</h3>
+  <ul>
+    <li>Stop the infusion. Keep the IV in.</li>
+    <li>Raise the legs and lay the patient flat on their back.</li>
+    <li>Have them sniff alcohol or a nasal inhalant.</li>
+    <li>Put an ice pack on the back of the neck.</li>
+    <li>Give juice from the fridge.</li>
+  </ul>
+</div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <nav class="nav" id="nav" aria-label="Sections"><div class="nav-in">
   <button class="nav-btn" id="tab-iv" data-tab="iv" aria-selected="true"><svg viewBox="0 0 24 24"><path d="M12 2.5C12.8 5 17.5 9.5 17.5 14a5.5 5.5 0 0 1-11 0C6.5 9.5 11.2 5 12 2.5z"/><path d="M14.9 14.6a3 3 0 0 1-2.3 2.7"/></svg>Drips</button>
-  <button class="nav-btn" id="tab-inj" data-tab="inj" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M15 4l5 5M13 6l5 5M3 21l4-4M7 17l9-9 3 3-9 9z"/></svg>Shots</button>
+  <button class="nav-btn" id="tab-inj" data-tab="inj" aria-selected="false"><svg viewBox="0 0 24 24"><g transform="rotate(45 12 12)"><path d="M12 1.5v3.5"/><path d="M10.4 5h3.2v1.6h-3.2z"/><rect x="8.6" y="6.6" width="6.8" height="10" rx="1.2"/><rect x="9.8" y="11" width="4.4" height="4.4" rx="0.4" fill="currentColor"/><path d="M7.2 17.2h9.6"/><path d="M12 17.2v4.2"/><path d="M9 22h6"/></g></svg>Shots</button>
   <button class="nav-btn" id="tab-calc" data-tab="calc" aria-selected="false"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M8 16h2M12 16h2"/></svg>Calculator</button>
   <button class="nav-btn" id="tab-timers" data-tab="timers" aria-selected="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 3h6"/></svg>Timer<span class="badge" id="t-badge" hidden></span></button>
+  <button class="nav-btn" id="tab-access" data-tab="access" aria-selected="false"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Access</button>
 </div></nav>
 <div class="update" id="update" hidden><span>A new version is available.</span><button type="button" id="update-btn">Update</button></div>
 
@@ -358,7 +459,7 @@ const D = [
   ingredients:["B complex (Vita Complex)","Methylcobalamin (B12)","L-taurine"],
   draw:["Vita Complex: 5 cc","L-taurine: 5 cc","Methylcobalamin (B12): 5 cc","Each with a 20 gauge needle and alcohol wipe."],
   bag:"Add all three to a 500 mL bag once IV access is obtained.",
-  addons:["Lipo-Mino","Vitamin D"],
+  addons:["Lipo-Mino-Mix-C","Vitamin D"],
   cautions:["Remind the patient to drink water. They may go through a detox, and water reduces side effects."],
   notes:[] },
 
@@ -406,7 +507,7 @@ const D = [
   draw:["Nothing to draw up."],
   bag:"Administer one 1 L normal saline bag.",
   addons:["Vitamin B12"],
-  cautions:["If the patient wants 1 L plus a few add-ons, the 1 L can be split into two 500 mL bags with the ingredients divided between them, to stay within the osmolarity range. Call Narges before doing this."],
+  cautions:["If the patient wants 1 L plus a few add-ons, the 1 L can be split into two 500 mL bags with the ingredients divided between them, to stay within the osmolarity range. Call or text Narges before doing this."],
   notes:[] },
 
 { id:"sports", kind:"iv", name:"Sports Recovery and Performance IV", quick:"500 mL bag", fridge:false,
@@ -424,7 +525,7 @@ const D = [
   draw:["Two 5 cc vials in the fridge labeled Infuvite (one white top, one blue top).","Draw each into its own 5 cc syringe."],
   bag:"Add both to a 500 mL bag once IV access is obtained.",
   addons:["Glutathione"],
-  cautions:["Start very, very slow. The mix of vitamins can trigger a vasovagal response.","Do not give to patients on Coumadin or warfarin. Vitamin K can interfere with INR."],
+  cautions:["Start very, very slow. The mix of vitamins can trigger a vasovagal response.","Do not give to patients on warfarin (Coumadin). Vitamin K can interfere with INR."],
   notes:[] },
 
 { id:"covid", kind:"iv", name:"COVID Recovery IV", quick:"Immunity IV + Tri-Immune + Vitamin D", fridge:true,
@@ -455,7 +556,16 @@ const D = [
   cautions:["Dose: 1 cc once a week.","Tell the patient their urine may be pink or red the first time. That is normal."],
   notes:[] },
 
-{ id:"vitc", kind:"inj", name:"Vitamin C (injection)", quick:"1 cc IM · once a week as needed", fridge:false,
+{ id:"magnesium", kind:"inj", name:"Magnesium Chloride", quick:"1 cc IM", fridge:false,
+  does:"Supports muscle relaxation, sleep, nerve function and energy production.",
+  ingredients:["Magnesium chloride"],
+  draw:["Draw up 1 cc in a 3 cc syringe with a 20 gauge needle.","Change to a 25 gauge needle for the injection."],
+  bag:"Deltoid or dorsolateral glute.",
+  addons:[],
+  cautions:["Dose: 1 cc."],
+  notes:[] },
+
+{ id:"vitc", kind:"inj", name:"Vitamin C (ascorbic acid)", quick:"1 cc IM · once a week as needed", fridge:false,
   does:"Antioxidant for immune response; supports skin, bone, cartilage and blood vessels.",
   ingredients:["Ascorbic acid (vitamin C)"],
   draw:["Draw up 1 cc in a 3 cc syringe with a 20 gauge needle.","Change to a 25 gauge needle for the injection."],
@@ -464,7 +574,7 @@ const D = [
   cautions:["Dose: 1 cc once a week, as needed."],
   notes:[] },
 
-{ id:"vitd", kind:"inj", name:"Vitamin D", quick:"1 cc IM · 21 gauge", fridge:false,
+{ id:"vitd", kind:"inj", name:"Vitamin D3", quick:"1 cc IM · 21 gauge", fridge:false,
   does:"Supports bone and muscle strength and mineral balance; helps fight disease.",
   ingredients:["Vitamin D"],
   draw:["Draw up 1 cc in a 3 cc syringe with a 20 gauge needle.","Change to a 21 gauge needle for the injection."],
@@ -473,7 +583,7 @@ const D = [
   cautions:["Vitamin D is very oily. Use a 21 gauge, since a 23 gauge or smaller makes it harder and slower to inject.","Dose: 1 cc once a week for the first month, then every 1 to 2 months as needed."],
   notes:[] },
 
-{ id:"lipomino", kind:"inj", name:"Lipo-Mino", quick:"1 cc IM · once a week", fridge:true,
+{ id:"lipomino", kind:"inj", name:"Lipo-Mino-Mix-C", quick:"1 cc IM · once a week", fridge:true,
   does:"Fat-burning, energy and appetite-suppressing mix: methionine, inositol, choline, carnitine, B1, B2, B6 and B12.",
   ingredients:["Methionine","Inositol","Choline","Carnitine","B1, B2, B6, B12"],
   draw:["Draw up 1 cc in a 3 cc syringe with a 20 gauge needle.","Change to a 25 gauge needle for the injection."],
@@ -485,7 +595,7 @@ const D = [
 { id:"nad", kind:"inj", name:"NAD+", quick:"100 mg IM \u00B7 inject slowly", fridge:true,
   does:"A 100 mg intramuscular injection to support cellular energy, mental clarity, metabolism, recovery from fatigue or stress, healthy aging and cellular repair. It complements a healthy lifestyle and medical care and does not replace them.",
   ingredients:["NAD+ 100 mg"],
-  draw:["Draw up with a 20 gauge needle, then change to a 25 gauge needle to inject.","Confirm the draw-up volume with Narges before your first dose. The vial label reads 100 mg/mL, so 100 mg is 1 mL."],
+  draw:["Draw up with a 20 gauge needle, then change to a 25 gauge needle to inject.","Call or text Narges to confirm the draw-up volume before your first dose. The vial label reads 100 mg/mL, so 100 mg is 1 mL."],
   bag:"IM, deltoid or dorsolateral glute. Chart the site, volume and lot number. IM only for now; it is not offered as an IV drip.",
   addons:[],
   cautions:["NAD+ stings and can cause brief flushing or chest tightness if given too fast. Inject slowly and tell the patient to expect it.","Dose: 100 mg IM. How often is set by the provider, based on the patient\u2019s goals, history and response."],
@@ -501,13 +611,13 @@ const D = [
   table:{ title:"Strengths on the label", rows:[["Glutathione","200 mg/mL",""],["Ascorbic acid","200 mg/mL",""],["Zinc sulfate","2.5 mg/mL",""]] },
   notes:[] },
 
-{ id:"glutathione", kind:"inj", name:"Glutathione", quick:"5 cc vial · slow IV push", fridge:true,
+{ id:"glutathione", kind:"inj", name:"Glutathione", quick:"5 cc dose · slow IV push", fridge:true,
   does:"Energy, sleep, aging, muscle and joint discomfort, immune support, liver and cell detox, brighter skin, mental clarity.",
-  ingredients:["Glutathione (5 cc vial, refrigerated)"],
-  draw:["Draw up the 5 cc vial in a 5 cc syringe with a 20 gauge needle."],
+  ingredients:["Glutathione (refrigerated)"],
+  draw:["Draw up 5 cc from the 30 mL vial in a 5 cc syringe with a 20 gauge needle."],
   bag:"IV push. Flush before and after.",
   addons:[],
-  cautions:["Push slowly. It can burn.","Dose: up to 5 cc once a week.","G6PD deficiency: raise with Narges before giving."],
+  cautions:["Push slowly. It can burn.","Dose: up to 5 cc once a week.","G6PD deficiency: call or text Narges before giving."],
   notes:[] },
 
 { id:"famotidine", kind:"inj", name:"Famotidine (Pepcid)", quick:"1 cc IV push · once a week max", fridge:true,
@@ -535,7 +645,35 @@ const D = [
   bag:"IV push before the IV. Flush before and after.",
   addons:[],
   cautions:["Dose: 1 cc can be given as needed.","In the Hangover IV it goes in the bag at 5 cc, or 2 cc if the patient is not nauseous."],
+  notes:[] },
+
+{ id:"dexamethasone", kind:"inj", name:"Dexamethasone", quick:"10 mg/mL · 1 mL vial · IV or IM", fridge:false,
+  does:"Corticosteroid. Reduces inflammation and allergic reactions.",
+  ingredients:["Dexamethasone sodium phosphate"],
+  draw:["Draw up from the 1 mL vial. 1 cc is 10 mg."],
+  bag:"IV or IM only, per the vial label.",
+  addons:[],
+  cautions:["For IV or IM use only.","Protect from light."],
+  notes:[] },
+
+{ id:"lidocaine", kind:"inj", name:"Lidocaine 1%", quick:"10 mg/mL · 5 mL ampule", fridge:false,
+  does:"Local numbing medicine.",
+  ingredients:["Lidocaine HCl 1%, preservative free"],
+  draw:["Draw up the amount you need from the 5 mL ampule. 1 cc is 10 mg."],
+  bag:"For infiltration and nerve block, per the label.",
+  addons:[],
+  cautions:["Not for inhalation.","Single-dose ampule. Discard what is left over."],
+  notes:[] },
+
+{ id:"epinephrine", kind:"inj", name:"Epinephrine", quick:"0.3 mg IM · emergency only", fridge:false,
+  does:"Emergency treatment for anaphylaxis.",
+  ingredients:["Epinephrine 1 mg/mL"],
+  draw:["Draw up 0.3 cc (0.3 mg) from the 1 mL ampule."],
+  bag:"IM is the preferred route. Repeat every 5 minutes, up to three times. Call 911.",
+  addons:[],
+  cautions:["Emergency use only. The steps are under the Emergency button at the top.","The label says to dilute before intravenous use."],
   notes:[] }
+
 ];
 
 /* Menu prices from the guide (match dripdocx.com as of August 2026). Add-ons are charged on top of the drip price. */
@@ -573,6 +711,7 @@ const VIAL = {
   vitd: ["Vitamin D3: 50,000 IU/mL (1.25 mg/mL), 30 mL vial. 1 cc is 50,000 IU."],
   toradol: ["Ketorolac tromethamine: 30 mg/mL, 1 mL vial. 1 cc is 30 mg."],
   iron: ["Venofer: 20 mg/mL, 5 mL single-dose vial. Each vial is 100 mg elemental iron."],
+  magnesium: ["Magnesium chloride: 300 mg/mL, 30 mL vial. 1 cc is 300 mg."],
   vitc: ["Preserved ascorbic acid: 500 mg/mL, 30 mL vial. 1 cc is 500 mg."],
   nad: ["NAD+: 100 mg/mL, 10 mL multi-dose vial. 1 mL is 100 mg."],
   rehydrate: ["Normal saline 0.9%: 1 L bag."],
@@ -582,7 +721,10 @@ const VIAL = {
   lipomino: ["Lipo-Mino-Mix-C: 10 mL multi-dose vial. Per mL: levocarnitine 125 mg, methionine 12.4 mg, inositol 25 mg, choline chloride 25 mg, thiamine HCl 50 mg, riboflavin 5\u2019-phosphate 5 mg, pyridoxine HCl 2 mg, cyanocobalamin 1 mg."],
   ultimate: ["Infuvite Adult, vial 1 (5 mL): vitamin C 200 mg, vitamin A 3,300 IU, vitamin D3 200 IU, thiamine 6 mg, riboflavin 3.6 mg, pyridoxine 6 mg, niacinamide 40 mg, dexpanthenol 15 mg, vitamin E 10 IU, vitamin K1 150 mcg.","Infuvite Adult, vial 2 (5 mL): folic acid 600 mcg, biotin 60 mcg, vitamin B12 5 mcg."],
   myers: ["Myers Cocktail: 10 mL single-dose vial. Strengths are in the table below."],
-  zofran: ["Ondansetron: 1 mg/mL, 30 mL vial. 1 to 4 cc is 1 to 4 mg."]
+  zofran: ["Ondansetron: 1 mg/mL, 30 mL vial. 1 to 4 cc is 1 to 4 mg."],
+  dexamethasone: ["Dexamethasone sodium phosphate: 10 mg/mL, 1 mL vial. 1 cc is 10 mg."],
+  lidocaine: ["Lidocaine HCl 1%: 10 mg/mL, 5 mL single-dose ampule (50 mg per ampule). 1 cc is 10 mg."],
+  epinephrine: ["Epinephrine: 1 mg/mL, 1 mL single-use ampule. 0.3 cc is 0.3 mg."]
 };
 D.forEach(d => { d.vial = VIAL[d.id] || []; });
 
@@ -596,7 +738,7 @@ const PUSH_TABLE = [
 
 function store(key, val) { try { if (val === undefined) return localStorage.getItem(key); localStorage.setItem(key, val); } catch (e) { return null; } }
 let tab = store("ddx-tab") || "iv";
-if (!["iv", "inj", "calc", "timers"].includes(tab)) tab = "iv";
+if (!["iv", "inj", "calc", "timers", "access"].includes(tab)) tab = "iv";
 let stars = [];
 try { stars = JSON.parse(store("ddx-stars") || "[]"); if (!Array.isArray(stars)) stars = []; } catch (e) { stars = []; }
 let starOnly = false;
@@ -667,10 +809,10 @@ function wrapNums(root) {
 function render() {
   const q = els.q.value.trim().toLowerCase();
   const searching = q.length > 0;
-  const calc = document.getElementById("calc"), tim = document.getElementById("timers");
+  const calc = document.getElementById("calc"), tim = document.getElementById("timers"), acc = document.getElementById("accesspane");
   document.getElementById("nav").classList.toggle("searching", searching);
   document.querySelectorAll(".nav-btn[data-tab]").forEach(b => b.setAttribute("aria-selected", String(!searching && b.dataset.tab === tab)));
-  const onTool = !searching && (tab === "calc" || tab === "timers");
+  const onTool = !searching && (tab === "calc" || tab === "timers" || tab === "access");
   document.querySelector("header").hidden = onTool;
   document.getElementById("before").hidden = onTool;
   document.getElementById("screening").hidden = onTool;
@@ -680,11 +822,11 @@ function render() {
 
   if (onTool) {
     els.list.hidden = true; $("subbar").hidden = true; els.count.textContent = "";
-    calc.hidden = tab !== "calc"; tim.hidden = tab !== "timers";
+    calc.hidden = tab !== "calc"; tim.hidden = tab !== "timers"; acc.hidden = tab !== "access";
     if (tab === "timers") renderTimers();
     return;
   }
-  calc.hidden = true; tim.hidden = true; els.list.hidden = false; $("subbar").hidden = false;
+  calc.hidden = true; tim.hidden = true; acc.hidden = true; els.list.hidden = false; $("subbar").hidden = false;
   const rows = D.filter(d => {
     if (!searching) {
       if (starOnly) { if (!stars.includes(d.id)) return false; }
@@ -692,6 +834,8 @@ function render() {
     }
     return !searching || haystack(d).includes(q);
   });
+  const byName = (x, y) => x.name.localeCompare(y.name, undefined, { ignorePunctuation: true, sensitivity: "base" });
+  rows.sort((x, y) => (!searching && !starOnly ? (stars.includes(y.id) ? 1 : 0) - (stars.includes(x.id) ? 1 : 0) : 0) || byName(x, y));
   els.count.textContent = searching ? rows.length + " found in all sections" : starOnly ? rows.length + " starred" : rows.length + " shown";
   els.list.innerHTML = rows.length ? rows.map(card).join("") : '<div class="empty">' + (starOnly && !searching ? "Nothing starred yet. Tap the star on a card to keep it here." : "Nothing matches. Try a shorter search.") + '</div>';
   if (searching && rows.length === 1) { const el = els.list.querySelector("details"); if (el) el.open = true; }
@@ -768,14 +912,15 @@ $("r-nowbtn").addEventListener("click", () => { $("r-now").value = hhmm(new Date
 $("r-now").value = hhmm(new Date());
 
 /* ---------- Tabs, search and stars ---------- */
-els.q.addEventListener("input", render);
+els.q.addEventListener("input", () => { $("qclear").hidden = !els.q.value; render(); });
+$("qclear").addEventListener("click", () => { els.q.value = ""; $("qclear").hidden = true; render(); els.q.focus(); });
 document.querySelectorAll(".nav-btn[data-tab]").forEach(b => b.addEventListener("click", () => {
   tab = b.dataset.tab; store("ddx-tab", tab);
-  if (els.q.value) els.q.value = "";
+  if (els.q.value) { els.q.value = ""; $("qclear").hidden = true; }
   if (tab === "iv" || tab === "inj") starOnly = false;
   render();
   const top = document.getElementById("bar-anchor").getBoundingClientRect().top + window.scrollY;
-  if (tab === "calc" || tab === "timers") window.scrollTo(0, 0);
+  if (tab === "calc" || tab === "timers" || tab === "access") window.scrollTo(0, 0);
   else if (window.scrollY > top) window.scrollTo(0, Math.max(0, top));
 }));
 $("starfilter").addEventListener("click", () => { starOnly = !starOnly; render(); });
@@ -845,31 +990,102 @@ function renderTimers() {
   const left = Math.max(0, t.vol - infused), done = left < 0.5;
   const minsLeft = left / rate * 60;
   const pct = Math.round(infused / t.vol * 100);
-  box.innerHTML = '<div class="panel tcard"><div class="top"><span class="name">' + (done ? "Time is up" : "Running") + '</span><span class="tag">' + Math.round(t.vol) + " mL · " + Math.round(rate) + " mL/hr</span></div>" +
+  box.innerHTML = '<div class="panel tcard' + (alarmOn ? " alarm" : "") + '"><div class="top"><span class="name">' + (done ? "Time is up" : "Running") + '</span><span class="tag">' + Math.round(t.vol) + " mL · " + Math.round(rate) + " mL/hr</span></div>" +
     '<div class="track" role="progressbar" aria-valuenow="' + pct + '" aria-valuemin="0" aria-valuemax="100"><div class="fill" style="width:' + pct + '%"></div></div>' +
     '<div class="stats">' +
     stat("Infused", "~" + Math.round(infused) + " <small>mL</small>", pct + "% done") +
     stat("Left", Math.round(left) + " <small>mL</small>", "Drops per 10 sec: " + Math.round(rate * 20 / 60 / 6)) +
     stat(done ? "Finished" : "Time left", done ? "Now" : fmtMin(minsLeft), done ? "" : "Done by " + clock(new Date(now + minsLeft * 60000)), !done) +
     stat("Started", clock(new Date(t.start))) +
-    '</div><div class="tact"><button class="chip" data-act="done">' + (done ? "Finish" : "Stop timer") + "</button></div></div>";
+    '</div><div class="tact">' + (alarmOn ? '<button class="chip primary" data-act="silence">Silence alarm</button>' : "") + '<button class="chip" data-act="done">' + (done ? "Finish" : "Stop timer") + "</button></div></div>";
   wrapNums(box);
 }
 $("t-start").addEventListener("click", () => {
   const vol = num("t-vol"), min = num("t-min");
   if (!vol || !min) { $("t-vol").focus(); return; }
   timer = { vol, min, start: Date.now() };
-  saveTimer(); renderTimers();
+  saveTimer(); prepAlerts(); renderTimers();
 });
 document.querySelectorAll("[data-tvol]").forEach(b => b.addEventListener("click", () => { $("t-vol").value = b.dataset.tvol; }));
 document.querySelectorAll("[data-tmin]").forEach(b => b.addEventListener("click", () => { $("t-min").value = b.dataset.tmin; }));
 $("t-list").addEventListener("click", e => {
+  if (e.target.closest("[data-act=silence]")) { stopAlarm(); renderTimers(); return; }
   if (!e.target.closest("[data-act=done]")) return;
-  timer = null; saveTimer(); renderTimers();
+  stopAlarm(); releaseWake(); timer = null; saveTimer(); renderTimers();
 });
+/* Alerts: a chime, vibration and a notification when the volume is done. A phone can pause a web page while it is locked,
+   so the screen is kept on while a timer runs. The chime repeats until it is silenced. */
+let actx = null, alarmIv = null, alarmOn = false, wake = null;
+function prepAlerts() {
+  try { const AC = window.AudioContext || window.webkitAudioContext; if (AC) { actx = actx || new AC(); if (actx.state === "suspended") actx.resume(); } } catch (e) {}
+  try { if ("Notification" in window && Notification.permission === "default") Notification.requestPermission(); } catch (e) {}
+  getWake();
+}
+function getWake() {
+  try { if (navigator.wakeLock && timer && !wake) navigator.wakeLock.request("screen").then(w => { wake = w; w.addEventListener("release", () => { wake = null; }); }).catch(() => {}); } catch (e) {}
+}
+function releaseWake() { try { if (wake) wake.release(); } catch (e) {} wake = null; }
+function chime() {
+  try {
+    if (actx) { if (actx.state === "suspended") actx.resume();
+      [0, 0.35].forEach(dt => { const o = actx.createOscillator(), g = actx.createGain(); o.type = "sine"; o.frequency.value = 880; o.connect(g); g.connect(actx.destination);
+        const t0 = actx.currentTime + dt; g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(0.5, t0 + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.28); o.start(t0); o.stop(t0 + 0.3); }); }
+  } catch (e) {}
+  try { if (navigator.vibrate) navigator.vibrate([300, 150, 300]); } catch (e) {}
+}
+function startAlarm() {
+  if (alarmOn) return;
+  alarmOn = true; chime(); let n = 0;
+  alarmIv = setInterval(() => { if (++n > 30) { stopAlarm(); renderTimers(); } else chime(); }, 2000);
+  try {
+    if ("Notification" in window && Notification.permission === "granted") {
+      const o = { body: "The volume is done. Open the timer.", tag: "ddx-timer", requireInteraction: true };
+      if (navigator.serviceWorker && navigator.serviceWorker.ready) navigator.serviceWorker.ready.then(r => r.showNotification("Infusion done", o)).catch(() => { try { new Notification("Infusion done", o); } catch (e) {} });
+      else new Notification("Infusion done", o);
+    }
+  } catch (e) {}
+}
+function stopAlarm() { alarmOn = false; if (alarmIv) { clearInterval(alarmIv); alarmIv = null; } }
+function checkTimerDone() {
+  if (!timer || timer.alerted) return;
+  if (Date.now() - timer.start >= timer.min * 60000) {
+    timer.alerted = true; saveTimer(); releaseWake(); startAlarm();
+    if (tab === "timers" && !els.q.value) renderTimers();
+  }
+}
+setInterval(checkTimerDone, 1000);
 setInterval(() => { if (tab === "timers" && !els.q.value && !document.hidden) renderTimers(); }, 15000);
-document.addEventListener("visibilitychange", () => { if (!document.hidden && tab === "timers" && !els.q.value) renderTimers(); });
+document.addEventListener("visibilitychange", () => { if (!document.hidden) { checkTimerDone(); getWake(); if (tab === "timers" && !els.q.value) renderTimers(); } });
 updateBadge();
+
+/* ---------- Text size, copy buttons, emergency sheet ---------- */
+function setTextSize(v, save) {
+  if (v !== "1.12" && v !== "1.25") v = "1";
+  document.documentElement.style.setProperty("--tz", v);
+  document.querySelectorAll('.seg[data-set="text"] button').forEach(b => b.setAttribute("aria-pressed", String(b.dataset.v === v)));
+  if (save) store("ddx-text", v);
+}
+document.querySelectorAll('.seg[data-set="text"] button').forEach(b => b.addEventListener("click", () => setTextSize(b.dataset.v, true)));
+setTextSize(store("ddx-text"), false);
+
+let toastT = null;
+function toast(msg) { const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 1600); }
+function copyText(txt) {
+  const fallback = () => { const ta = document.createElement("textarea"); ta.value = txt; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;opacity:0;top:0"; document.body.appendChild(ta); ta.select(); let ok = false; try { ok = document.execCommand("copy"); } catch (e) {} ta.remove(); return ok; };
+  if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(txt).then(() => true, () => fallback());
+  return Promise.resolve(fallback());
+}
+document.getElementById("accesspane").addEventListener("click", e => {
+  const b = e.target.closest(".copy"); if (!b) return;
+  copyText(b.dataset.copy).then(ok => toast(ok ? "Copied" : "Could not copy"));
+});
+const emgdlg = $("emgdlg");
+$("emg").addEventListener("click", () => { if (emgdlg.showModal) emgdlg.showModal(); else emgdlg.setAttribute("open", ""); });
+$("emgx").addEventListener("click", () => { if (emgdlg.close) emgdlg.close(); else emgdlg.removeAttribute("open"); });
+emgdlg.addEventListener("click", e => { if (e.target === emgdlg) emgdlg.close(); });
+
+/* Offline: sw.js keeps a copy of the app so it opens without signal. */
+if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) { window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(() => {}); }); }
 
 /* ---------- Theme ---------- */
 function setTheme(m, save) {
@@ -882,7 +1098,7 @@ document.querySelectorAll('.seg[data-set="theme"] button').forEach(b => b.addEve
 setTheme(store("ddx-theme"), false);
 /* ---------- Version check ----------
    Bump VERSION here and in version.json together (same text) on every release. */
-const VERSION = "2026-11-22.21";
+const VERSION = "2026-11-22.45";
 $("ver").textContent = "Version " + VERSION;
 let newVer = null;
 function checkVersion() {
