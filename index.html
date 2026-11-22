@@ -510,10 +510,10 @@ const D = [
   cautions:["Push slowly. It can burn.","Dose: up to 5 cc once a week.","G6PD deficiency: raise with Narges before giving."],
   notes:[] },
 
-{ id:"famotidine", kind:"inj", name:"Famotidine (Pepcid)", quick:"1 cc IV push · once a week max", fridge:false,
+{ id:"famotidine", kind:"inj", name:"Famotidine (Pepcid)", quick:"1 cc IV push · once a week max", fridge:true,
   does:"Antihistamine and antacid for allergic reactions, stomach ulcers, erosive esophagitis, heartburn and GERD.",
   ingredients:["Famotidine"],
-  draw:["Draw up the 1 cc vial in a 3 cc syringe with a 20 gauge needle."],
+  draw:["Draw up 1 cc from the 2 mL vial in a 3 cc syringe with a 20 gauge needle."],
   bag:"IV push before the IV. Flush before and after.",
   addons:[],
   cautions:["Do not give to people with arrhythmia or heart problems.","Dose: 1 cc as needed, no more than once a week.","Also used for anaphylaxis, at 20 mg IV push. A standard vial is 10 mg/mL, so 20 mg is 2 mL. Read your vial to confirm."],
@@ -566,7 +566,7 @@ const VIAL = {
   fatburn: ["Taurine: 50 mg/mL, 30 mL vial. 5 cc is 250 mg.", "Methylcobalamin B12: 5 mg/mL, 30 mL vial. 5 cc is 25 mg."],
   hangover: ["Ondansetron: 1 mg/mL, 30 mL vial. 5 cc is 5 mg, 2 cc is 2 mg.", MINERAL + " 5 cc is magnesium chloride 400 mg, zinc 5 mg, copper 1 mg, manganese 100 mcg.", "Ketorolac: 30 mg/mL, 1 mL vial. 1 cc is 30 mg."],
   recharge: [MINERAL + " 5 cc is magnesium chloride 400 mg, zinc 5 mg, copper 1 mg, manganese 100 mcg."],
-  sports: [MINERAL + " 5 cc is magnesium chloride 400 mg, zinc 5 mg, copper 1 mg, manganese 100 mcg."],
+  sports: ["Amino blend: 30 mL multi-dose vial. Per mL: L-arginine HCl 100 mg, levocarnitine 100 mg, L-lysine HCl 50 mg, L-proline 50 mg. 5 cc is arginine 500 mg, levocarnitine 500 mg, lysine 250 mg, proline 250 mg.", MINERAL + " 5 cc is magnesium chloride 400 mg, zinc 5 mg, copper 1 mg, manganese 100 mcg."],
   biotin: ["Biotin: 10 mg/mL, 10 mL vial. 1 cc is 10 mg."],
   b12: ["Methylcobalamin B12: 5 mg/mL, 30 mL vial. 1 cc is 5 mg."],
   vitd: ["Vitamin D3: 50,000 IU/mL (1.25 mg/mL), 30 mL vial. 1 cc is 50,000 IU."],
@@ -574,7 +574,11 @@ const VIAL = {
   iron: ["Venofer: 20 mg/mL, 5 mL single-dose vial. Each vial is 100 mg elemental iron."],
   vitc: ["Preserved ascorbic acid: 500 mg/mL, 30 mL vial. 1 cc is 500 mg."],
   nad: ["NAD+: 100 mg/mL, 10 mL multi-dose vial. 1 mL is 100 mg."],
-  famotidine: ["Famotidine: 10 mg/mL, 2 mL vial. 1 cc is 10 mg."],
+  famotidine: ["Famotidine: 10 mg/mL, 2 mL single-dose vial (20 mg per vial). Store refrigerated. 1 cc is 10 mg."],
+  triimmune: ["Tri-Immune Boost: 30 mL multi-dose vial. 1 cc is glutathione 200 mg, ascorbic acid 200 mg, zinc sulfate 2.5 mg."],
+  lipomino: ["Lipo-Mino-Mix-C: 10 mL multi-dose vial. Per mL: levocarnitine 125 mg, methionine 12.4 mg, inositol 25 mg, choline chloride 25 mg, thiamine HCl 50 mg, riboflavin 5\u2019-phosphate 5 mg, pyridoxine HCl 2 mg, cyanocobalamin 1 mg."],
+  ultimate: ["Infuvite Adult, vial 1 (5 mL): vitamin C 200 mg, vitamin A 3,300 IU, vitamin D3 200 IU, thiamine 6 mg, riboflavin 3.6 mg, pyridoxine 6 mg, niacinamide 40 mg, dexpanthenol 15 mg, vitamin E 10 IU, vitamin K1 150 mcg.","Infuvite Adult, vial 2 (5 mL): folic acid 600 mcg, biotin 60 mcg, vitamin B12 5 mcg."],
+  myers: ["Myers Cocktail: 10 mL single-dose vial. Strengths are in the table below."],
   zofran: ["Ondansetron: 1 mg/mL, 30 mL vial. 1 to 4 cc is 1 to 4 mg."]
 };
 D.forEach(d => { d.vial = VIAL[d.id] || []; });
@@ -875,7 +879,7 @@ document.querySelectorAll('.seg[data-set="theme"] button').forEach(b => b.addEve
 setTheme(store("ddx-theme"), false);
 /* ---------- Version check ----------
    Bump VERSION here and in version.json together (same text) on every release. */
-const VERSION = "2026-11-20.17";
+const VERSION = "2026-11-22.19";
 $("ver").textContent = "Version " + VERSION;
 let newVer = null;
 function checkVersion() {
