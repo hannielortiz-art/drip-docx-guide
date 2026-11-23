@@ -25,6 +25,11 @@
 @font-face { font-family: "Playfair Display"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/playfair-display-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "Playfair Display"; font-style: italic; font-weight: 400; font-display: swap; src: url("fonts/playfair-display-latin-400-italic.woff2") format("woff2"); }
 @font-face { font-family: "Playfair Display"; font-style: normal; font-weight: 700; font-display: swap; src: url("fonts/playfair-display-latin-700-normal.woff2") format("woff2"); }
+/* "Atk Digits" is Atkinson limited to the digits 0-9. It goes first in every font stack, so any number anywhere
+   (headings, buttons, the search box, typed input, placeholders) shows in Atkinson while letters keep the site fonts. */
+@font-face { font-family: "Atk Digits"; font-style: normal; font-weight: 100 500; font-display: swap; src: url("fonts/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2"); unicode-range: U+0030-0039; }
+@font-face { font-family: "Atk Digits"; font-style: normal; font-weight: 600 900; font-display: swap; src: url("fonts/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2"); unicode-range: U+0030-0039; }
+@font-face { font-family: "Atk Digits"; font-style: italic; font-weight: 100 900; font-display: swap; src: url("fonts/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2"); unicode-range: U+0030-0039; }
 @font-face { font-family: "Atkinson Hyperlegible"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "Atkinson Hyperlegible"; font-style: normal; font-weight: 700; font-display: swap; src: url("fonts/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2"); }
 </style>
@@ -51,8 +56,8 @@
   --warn-soft: #FFF0D2;
   --stop: #7A1F1F;
   --stop-soft: #FBE1E1;
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-body: "Montserrat", system-ui, sans-serif;
+  --font-display: "Atk Digits", "Playfair Display", Georgia, serif;
+  --font-body: "Atk Digits", "Montserrat", system-ui, sans-serif;
   --font-num: "Atkinson Hyperlegible", "Montserrat", system-ui, sans-serif;
   color-scheme: light;
 }
@@ -101,7 +106,7 @@ header p { margin: 0; color: var(--muted); font-size: 14px; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--band); }
 #q { box-shadow: 0 1px 3px rgba(40, 25, 10, 0.10); width: 100%; font: inherit; padding: 11px 14px; border-radius: 10px; border: var(--bw) solid var(--line); background: var(--surface); color: var(--ink); }
 .qwrap { position: relative; }
-#q { padding-right: 44px; -webkit-appearance: none; appearance: none; }
+#q { font-family: var(--font-body); padding-right: 44px; -webkit-appearance: none; appearance: none; }
 #q::-webkit-search-cancel-button, #q::-webkit-search-decoration { -webkit-appearance: none; display: none; }
 .qclear { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); width: 38px; height: 38px; border: 0; background: transparent; color: var(--muted); display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 50%; }
 .qclear[hidden] { display: none; }
@@ -1109,7 +1114,7 @@ document.querySelectorAll('.seg[data-set="theme"] button').forEach(b => b.addEve
 setTheme(store("ddx-theme"), false);
 /* ---------- Version check ----------
    Bump VERSION here and in version.json together (same text) on every release. */
-const VERSION = "2026-11-22.49";
+const VERSION = "2026-11-22.50";
 $("ver").textContent = "Version " + VERSION;
 let newVer = null;
 function checkVersion() {
